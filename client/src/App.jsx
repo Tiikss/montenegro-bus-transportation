@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import RedVoznje from "./pages/RedVoznje";
 
 const Layout = () => {
   return (
@@ -22,9 +23,13 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-      }
-    ]
-  }
+      },
+      {
+        path: "/red-voznje",
+        element: <RedVoznje />,
+      },
+    ],
+  },
 ]);
 
 function App() {
