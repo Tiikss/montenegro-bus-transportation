@@ -6,7 +6,11 @@ const PrevoznikPanel = () => {
     return (
         <main className="prevoznik-body">
             <h1>Ime prevoznika</h1>
-            <TabelaRedVoznje />
+            <h2>Aktivne linije</h2>
+            <TabelaRedVoznje isEdit={true} />
+
+            <h2>Linije na cekanju</h2>
+            <TabelaRedVoznje isEdit={true} />
         </main>
     );
 };
