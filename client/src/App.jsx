@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import RedVoznje from "./pages/RedVoznje";
+import PrevoznikPanel from "./pages/PrevoznikPanel";
 
 const Layout = () => {
   return (
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/red-voznje",
         element: <RedVoznje />,
+      },
+      {
+        path: "/prevoznik-panel",
+        element: <PrevoznikPanel />,
       },
     ],
   },
