@@ -45,3 +45,25 @@
     left: -39px;
     border: 3px solid #ba0c0e;
 }
+
+.line-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.line-button {
+    background-color: #e4e4e7;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.line-button:hover {
+    color: #ba0c0e;
+}
+
+.line-icon {
+    width: 32px;
+    height: 32px;
+}
