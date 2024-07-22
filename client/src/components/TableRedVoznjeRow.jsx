@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TableRedVoznjeRow = ({isEdit}) => {
+const TableRedVoznjeRow = ({departure, isEdit}) => {
     const handleClick = (e) => {
         const content = e.target.parentElement.parentElement.nextElementSibling;
         if (content.style.maxHeight) {
@@ -18,16 +18,18 @@ const TableRedVoznjeRow = ({isEdit}) => {
         }
     };
 
+    console.log(departure);
+
     return(
         <li className="red-voznje-table-row red-voznje-row-hover">
-                {isEdit && <div className="col col-0">Podgorica</div>}
-                <div className="col col-1">Beograd</div>
-                <div className="col col-2">1</div>
-                <div className="col col-3">9:00</div>
-                <div className="col col-4">2h: 30min</div>
-                <div className="col col-5">11:30</div>
-                {!isEdit && <div className="col col-6">Autoprevoz</div>}
-                <div className="col col-7">10€</div>
+                {isEdit && <div className="col col-0">{departure.startingPoint}</div>}
+                <div className="col col-1">{departure.destination}</div>
+                <div className="col col-2">{departure.busID}</div>
+                <div className="col col-3">{departure.departureTime}</div>
+                <div className="col col-4">{departure.travelTime}</div>
+                <div className="col col-5">{departure.arrivalTime}</div>
+                {!isEdit && <div className="col col-6">{departure.carrier}</div>}
+                <div className="col col-7">{departure.price}</div>
                 <div className="col col-8">
                     <input
                         type="checkbox"
