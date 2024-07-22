@@ -61,6 +61,7 @@ const DodajLiniju = () => {
 
     const handleAddStation = (e) => {
         e.preventDefault();
+        setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
 
         if (isEditLine) {
             let newStations = JSON.parse(JSON.stringify(stations));
