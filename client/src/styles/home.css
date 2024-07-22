@@ -4,3 +4,8 @@
 	display: flex;
 	justify-content: center;
 }
+
+.home-img {
+	margin-top: 50px;
+	border-radius: 20px;
+}
