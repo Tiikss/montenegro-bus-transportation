@@ -154,14 +154,36 @@ const DodajLiniju = () => {
     }, [stations]);
 
     useEffect(() => {
-        setPolazistaLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        setOdredisteLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-    }, []);
+        const filteredPolazista = polazistaLista.filter((item) =>
+            item.toLowerCase().includes(polaziste.toLowerCase())
+        );
+        setPolazistaLista(filteredPolazista);
+        if(polaziste===""){
+            setPolazistaLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        }
+    },[polaziste]);
+    
+    useEffect(() => {
+        const filteredOdrediste = odredisteLista.filter((item) =>
+            item.toLowerCase().includes(odrediste.toLowerCase())
+        );
+        setOdredisteLista(filteredOdrediste);
+        if(odrediste===""){
+            setOdredisteLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        }
+    },[odrediste]);
 
-    console.log(polazistaLista);
-    console.log(odrediste);
-    console.log(nazivStanice);
+    useEffect(() => {
+        const filteredSveStanice = sveStanice.filter((item) =>
+            item.toLowerCase().includes(nazivStanice.toLowerCase())
+        );
+        setSveStanice(filteredSveStanice);
+        if(nazivStanice===""){
+            setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        }
+    },[nazivStanice]);
+
+    console.log(polazistaLista)
 
     return (
         <main className="addline-body">
