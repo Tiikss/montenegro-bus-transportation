@@ -1,43 +1,29 @@
-const TableRedVoznjeContent = () => {
-    return (
-        <li className="col-content">
-                <div className="col">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Aspernatur quae repellendus quos non, hic aut eveniet
-                        recusandae, ducimus repudiandae quibusdam similique,
-                        officia ullam unde! Necessitatibus facilis officia modi
-                        quibusdam ab! Lorem ipsum, dolor sit amet consectetur
-                        adipisicing elit. Modi deserunt et expedita omnis,
-                        magnam facilis ad quaerat unde beatae corporis,
-                        consequatur sunt dicta ipsam ducimus, nemo cupiditate?
-                        Odit, accusamus laborum? Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Aspernatur quae
-                        repellendus quos non, hic aut eveniet recusandae,
-                        ducimus repudiandae quibusdam similique, officia ullam
-                        unde! Necessitatibus facilis officia modi quibusdam ab!
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Modi deserunt et expedita omnis, magnam facilis ad
-                        quaerat unde beatae corporis, consequatur sunt dicta
-                        ipsam ducimus, nemo cupiditate? Odit, accusamus laborum?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Aspernatur quae repellendus quos non, hic aut eveniet
-                        recusandae, ducimus repudiandae quibusdam similique,
-                        officia ullam unde! Necessitatibus facilis officia modi
-                        quibusdam ab! Lorem ipsum, dolor sit amet consectetur
-                        adipisicing elit. Modi deserunt et expedita omnis,
-                        magnam facilis ad quaerat unde beatae corporis,
-                        consequatur sunt dicta ipsam ducimus, nemo cupiditate?
-                        Odit, accusamus laborum? Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Aspernatur quae
-                        repellendus quos non, hic aut eveniet recusandae,
-                        ducimus repudiandae quibusdam similique, officia ullam
-                        unde! Necessitatibus facilis officia modi quibusdam ab!
-                        Lorem ipsum, dolor sit amet consectetur
-                    </p>
-                </div>
-            </li>
-    )
-}
+import "../styles/tableredvoznjecontent.css";
+import Linija from "./Linija";
+
+const TableRedVoznjeContent = ({ departure }) => {
+  console.log(departure.stations);
+  return (
+    <li className="col-content">
+      <div className="col table-row-description">
+        <h3>Broj autobusa: {departure.busID}</h3>
+        <h4>
+          {departure.startingPoint}-{departure.destination}
+          <br></br>
+          <br></br>
+          {departure.departureTime}-{departure.arrivalTime}
+        </h4>
+        <div className="table-line-container">
+          <Linija
+            stations={departure.stations}
+            isEdit={true}
+            handleEditClick={() => {}}
+            handleDeleteClick={() => {}}
+          />
+        </div>
+      </div>
+    </li>
+  );
+};
 
 export default TableRedVoznjeContent;
