@@ -4,9 +4,9 @@ import Linija from "../components/Linija";
 import DropDownCard from "../components/DropdownCard";
 
 const DodajLiniju = () => {
-    const [polazistaLista, setPolazistaLista] = useState([]);
-    const [odredisteLista, setOdredisteLista] = useState([]);
-    const [sveStanice, setSveStanice] = useState([]);
+    const [polazistaLista, setPolazistaLista] = useState(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    const [odredisteLista, setOdredisteLista] = useState(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    const [sveStanice, setSveStanice] = useState(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
 
     const [stations, setStations] = useState([]);
 
@@ -149,6 +149,21 @@ const DodajLiniju = () => {
         setStations(newStations);
     };
 
+    const handleSetPolaziste = (e) =>{
+        setPolaziste(e.target.innerText);
+        setPolazistaLista([]);
+    }
+
+    const handleSetOdrediste = (e) =>{
+        setOdrediste(e.target.innerText);
+        setOdredisteLista([]);
+    }
+
+    const handleSetNazivStanice = (e) =>{
+        setNazivStanice(e.target.innerText);
+        setSveStanice([]);
+    }
+
     useEffect(() => {
         console.log(stations);
     }, [stations]);
@@ -209,7 +224,7 @@ const DodajLiniju = () => {
                         <div id="filter-polaziste-container" className="add-line-filter-container">
                             {polaziste !== ""
                                 ? polazistaLista.map((item) => (
-                                    <DropDownCard item={item} key={item.item_name} />
+                                    <DropDownCard onClick={handleSetPolaziste} item={item} key={item.item_name} />
                                 ))
                                 : null}
                         </div>
@@ -233,7 +248,7 @@ const DodajLiniju = () => {
                         <div id="filter-odrediste-container" className="add-line-filter-container">
                             {odrediste !== ""
                                 ? odredisteLista.map((item) => (
-                                    <DropDownCard item={item} key={item.item_name} />
+                                    <DropDownCard onClick={handleSetOdrediste} item={item} key={item.item_name} />
                                 ))
                                 : null}
                         </div>
@@ -291,7 +306,7 @@ const DodajLiniju = () => {
                         <div id="filter-polaziste-container" className="add-line-filter-container">
                             {nazivStanice !== ""
                                 ? sveStanice.map((item) => (
-                                    <DropDownCard item={item} key={item.item_name} />
+                                    <DropDownCard onClick={handleSetNazivStanice} item={item} key={item.item_name} />
                                 ))
                                 : null}
                         </div>
