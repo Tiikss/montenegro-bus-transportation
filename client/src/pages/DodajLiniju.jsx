@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../styles/dodaj-liniju.css";
 import Linija from "../components/Linija";
+import DropDownCard from "../components/DropdownCard";
 
 const DodajLiniju = () => {
+    const [polazistaLista, setPolazistaLista] = useState([]);
+    const [odredisteLista, setOdredisteLista] = useState([]);
+    const [sveStanice, setSveStanice] = useState([]);
+
     const [stations, setStations] = useState([]);
 
     const [polaziste, setPolaziste] = useState("");
@@ -148,33 +153,69 @@ const DodajLiniju = () => {
         console.log(stations);
     }, [stations]);
 
+    useEffect(() => {
+        setPolazistaLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        setOdredisteLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    }, []);
+
+    console.log(polazistaLista);
+    console.log(odrediste);
+    console.log(nazivStanice);
+
     return (
         <main className="addline-body">
             <h1>Dodaj liniju</h1>
             <div className="addline-forms">
                 <form className="addline-form">
                     <label htmlFor="polaziste">Polazište:</label>
-                    <input
-                        className="addline-input"
-                        type="text"
-                        id="polaziste"
-                        name="polaziste"
-                        required
-                        value={polaziste}
-                        onChange={handleChange}
-                    />{" "}
-                    {/* Search dropdown*/}
+                    <div className="add-line-input-container">
+                        <input
+                            className="addline-input"
+                            type="text"
+                            id="polaziste"
+                            name="polaziste"
+                            required
+                            value={polaziste}
+                            onChange={handleChange}
+                            style={
+                                polaziste === "" || polazistaLista.length === 0
+                                  ? { borderRadius: "10px" }
+                                  : { borderRadius: "10px 10px 0 0" }
+                              }
+                        />{" "}
+                        <div id="filter-polaziste-container" className="add-line-filter-container">
+                            {polaziste !== ""
+                                ? polazistaLista.map((item) => (
+                                    <DropDownCard item={item} key={item.item_name} />
+                                ))
+                                : null}
+                        </div>
+                    </div>
                     <label htmlFor="odrediste">Odredište:</label>
-                    <input
-                        className="addline-input"
-                        type="text"
-                        id="odrediste"
-                        name="odrediste"
-                        required
-                        value={odrediste}
-                        onChange={handleChange}
-                    />{" "}
-                    {/* Search dropdown*/}
+                    <div className="add-line-input-container">
+                        <input
+                            className="addline-input"
+                            type="text"
+                            id="odrediste"
+                            name="odrediste"
+                            required
+                            value={odrediste}
+                            onChange={handleChange}
+                            style={
+                                odrediste === "" || odredisteLista.length === 0
+                                  ? { borderRadius: "10px" }
+                                  : { borderRadius: "10px 10px 0 0" }
+                              }
+                        />{" "}
+                        <div id="filter-odrediste-container" className="add-line-filter-container">
+                            {odrediste !== ""
+                                ? odredisteLista.map((item) => (
+                                    <DropDownCard item={item} key={item.item_name} />
+                                ))
+                                : null}
+                        </div>
+                    </div>
                     <label htmlFor="vrijemePolaska">Vrijeme polaska:</label>
                     <input
                         className="addline-input"
@@ -210,16 +251,29 @@ const DodajLiniju = () => {
                 <form className="addstation-form">
                     <label htmlFor="prevoznik">Stanica:</label>
                     <label htmlFor="nazivStanice">Naziv stanice:</label>
-                    <input
-                        className="addline-input"
-                        type="text"
-                        id="nazivStanice"
-                        name="nazivStanice"
-                        required
-                        value={nazivStanice}
-                        onChange={handleChange}
-                    />{" "}
-                    {/* Search dropdown*/}
+                    <div className="add-line-input-container">
+                        <input
+                            className="addline-input"
+                            type="text"
+                            id="nazivStanice"
+                            name="nazivStanice"
+                            required
+                            value={nazivStanice}
+                            onChange={handleChange}
+                            style={
+                                nazivStanice === "" || sveStanice.length === 0
+                                  ? { borderRadius: "10px" }
+                                  : { borderRadius: "10px 10px 0 0" }
+                              }
+                        />{" "}
+                        <div id="filter-polaziste-container" className="add-line-filter-container">
+                            {nazivStanice !== ""
+                                ? sveStanice.map((item) => (
+                                    <DropDownCard item={item} key={item.item_name} />
+                                ))
+                                : null}
+                        </div>
+                    </div>
                     <label htmlFor="vrijemeDolaskaStanica">
                         Vrijeme dolaska:
                     </label>
