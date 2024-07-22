@@ -1,0 +1,7 @@
+.table-row-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  height: 100%;
+}
