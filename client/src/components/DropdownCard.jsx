@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import "../styles/dropdowncard.css";
 
-const DropDownCard = ({ item, key }) => {
+const DropDownCard = ({ item, key, onClick }) => {
   return (
-    <Link to={`./`} className="dropdown-card" key={key}>
-      <div>{item}</div>
-    </Link>
+    <div onClick={onClick} className="dropdown-card" key={key}>
+      <p>{item}</p>
+    </div>
   );
 };
 
