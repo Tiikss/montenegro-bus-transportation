@@ -2,34 +2,9 @@ import React from "react";
 import "../styles/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import Mapa from "../components/Mapa";
 import slika1 from "../images/young-girl-bus.jpg";
 
-const libraries = ['places'];
-const mapContainerStyle = {
-    width: '100vw',
-    height: '100vh',
-};
-const center = {
-    lat: 42.5,
-    lng: 19.3,
-};
-
 const Home = () => {
-    const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyByhANtjCtr6kXzO0gSJKVW1oR2qzR46Nw',
-        libraries,
-    });
-    
-    if (loadError) {
-        return <div>Error loading maps</div>;
-    }
-
-    if (!isLoaded) {
-        return <div>Loading maps</div>;
-    }
-
     return (
         <main className="home-body">
             <div className="welcome-div">
