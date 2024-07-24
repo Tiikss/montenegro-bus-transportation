@@ -1,10 +1,16 @@
-import {
-    APIProvider,
-    Map,
-    Marker,
-    AdvancedMarker,
-    Pin,
-} from "@vis.gl/react-google-maps";
+function DeckGLOverlay({ layers }) {
+    const map = useMap();
+    const overlay = useMemo(() => new DeckOverlay({ layers }), [layers]);
+
+    useEffect(() => {
+        if (map) {
+            overlay.setMap(map);
+        }
+        return () => overlay.setMap(null);
+    }, [map, overlay]);
+
+    return null;
+}
 
 const MapWrapper = () => {
     return (
