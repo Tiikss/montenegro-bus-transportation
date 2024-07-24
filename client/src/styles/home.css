@@ -1,6 +1,92 @@
-.home-body {
-	height: 100vh;
-	margin: 0;
+.welcome-div {
+	margin-top: 30px;
+	background-image: url("../images/group-buses-driving-along-road-sunset.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 600px;
+
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+
+.welcome-ttl {
+	font-size: 72px;
+	background: linear-gradient(to right, #ba0c0e 10%, #FFDB15 50%, #eee 60%);
+	background-size: auto auto;
+	background-clip: border-box;
+	background-size: 200% auto;
+	color: #fff;
+	background-clip: text;
+	text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: textclip 1.5s linear infinite;
+}
+
+@keyframes textclip {
+	to {
+		background-position: 200% center;
+	}
+}
+
+.red-div {
+	margin-top: 40px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.red-div h1 {
+	font-size: 36px;
+	margin-bottom: 20px;
+	color: #ba0c0e;
+}
+
+.choose {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	padding: 80px;
+
+	gap: 15px;
+	font-size: 24px;
+
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.choose label {
+	width: 300px;
+	text-align: left;
+}
+
+.choose input {
+	width: 300px;
+	height: 50px;
+	font-size: 18px;
+
+	border-top: 0 solid black;
+	border-left: 0 solid black;
+	border-right: 0 solid black;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.choose button {
+	width: 300px;
+	height: 50px;
+	font-size: 18px;
+	background-color: #ba0c0e;
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
 }
