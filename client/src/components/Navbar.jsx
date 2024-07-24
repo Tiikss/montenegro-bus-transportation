@@ -8,7 +8,9 @@ const Navbar = () => {
             <div className="nav-content">
                 {/* <img src={logo} alt="Logo"></img> */}
                 <ul className="menu-bar">
-                    <li>Početna</li>
+                    <Link to={"/"}>
+                        <li>Početna</li>
+                    </Link>
                     <li>O nama</li>
                     <Link to={"/red-voznje"}>
                         <li>Red vožnje</li>
