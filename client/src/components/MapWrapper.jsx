@@ -1,3 +1,8 @@
+import React, { useState, useEffect, useMemo } from "react";
+import { APIProvider, Map, useMap } from "@vis.gl/react-google-maps";
+import { GoogleMapsOverlay as DeckOverlay } from "@deck.gl/google-maps";
+import { GeoJsonLayer } from "deck.gl";
+
 function DeckGLOverlay({ layers }) {
     const map = useMap();
     const overlay = useMemo(() => new DeckOverlay({ layers }), [layers]);
@@ -13,8 +18,59 @@ function DeckGLOverlay({ layers }) {
 }
 
 const MapWrapper = () => {
+    const [pathData, setPathData] = useState(null);
+
+    useEffect(() => {
+        if (!window.google) return;
+
+        const directionsService = new window.google.maps.DirectionsService();
+
+        const request = {
+            origin: { lat: 42.4413, lng: 19.2594 },
+            destination: { lat: 42.09807, lng: 19.09494 },
+            travelMode: window.google.maps.TravelMode.DRIVING,
+        };
+
+        directionsService.route(request, (result) => {
+            const route = result.routes[0].overview_path.map((p) => [
+                p.lng(),
+                p.lat(),
+            ]);
+            setPathData({
+                type: "FeatureCollection",
+                features: [
+                    {
+                        type: "Feature",
+                        geometry: {
+                            type: "LineString",
+                            coordinates: route,
+                        },
+                        properties: {},
+                    },
+                ],
+            });
+        });
+    }, []);
+
+    const layers = useMemo(() => {
+        if (!pathData) return [];
+        return [
+            new GeoJsonLayer({
+                id: "geojson-layer",
+                data: pathData,
+                pickable: true,
+                stroked: true,
+                filled: true,
+                lineWidthScale: 2,
+                lineWidthMinPixels: 2,
+                getLineColor: [255, 0, 0],
+                getLineWidth: 2,
+            }),
+        ];
+    }, [pathData]);
+
     return (
-        <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY}>
+        <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
             <Map
                 style={{ width: "700px", height: "500px" }}
                 defaultCenter={{ lat: 42.7044223, lng: 19.3957785 }}
@@ -23,14 +79,7 @@ const MapWrapper = () => {
                 disableDefaultUI={true}
                 mapId={"montenegro-bus-transportation"}
             >
-                <Marker position={{ lat: 42.44111, lng: 19.26361 }} />
-                <AdvancedMarker position={{ lat: 42.099998, lng: 19.1 }}>
-                    <Pin
-                        background={"#FBBC04"}
-                        glyphColor={"#000"}
-                        borderColor={"#000"}
-                    />
-                </AdvancedMarker>
+                <DeckGLOverlay layers={layers} />
             </Map>
         </APIProvider>
     );
