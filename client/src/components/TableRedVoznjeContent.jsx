@@ -1,8 +1,8 @@
 import "../styles/tableredvoznjecontent.css";
 import Linija from "./Linija";
+import MapWrapper from "./MapWrapper";
 
 const TableRedVoznjeContent = ({ departure, isEdit }) => {
-    console.log(departure.stations);
     return (
         <li className="col-content">
             <div className="col table-row-description">
@@ -20,6 +20,7 @@ const TableRedVoznjeContent = ({ departure, isEdit }) => {
                         handleEditClick={() => {}}
                         handleDeleteClick={() => {}}
                     />
+                    <MapWrapper />
                 </div>
             </div>
         </li>
