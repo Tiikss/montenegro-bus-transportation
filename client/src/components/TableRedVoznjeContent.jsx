@@ -20,7 +20,7 @@ const TableRedVoznjeContent = ({ departure, isEdit }) => {
                         handleEditClick={() => {}}
                         handleDeleteClick={() => {}}
                     />
-                    <MapWrapper />
+                    <MapWrapper stations={departure.stations} />
                 </div>
             </div>
         </li>
