@@ -1,3 +1,4 @@
+#ticket-reservation-modal.hidden,
 .hidden {
     display: none;
 }
@@ -13,19 +14,46 @@
     z-index: 5;
 }
 
+.ticket-reservation-close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 40px;
+}
+
 #ticket-reservation-modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
-    height: 50%;
+    height: 80%;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 10;
-    display: grid;
-    grid-template-columns: 28% 70%;
-    column-gap: 2%;
-    grid-template-rows: 15% 85%;
+}
+
+.ticket-reservation-container {
+    height: 100%;
+    padding: 8px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticket-reservation-info-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ticket-reservation-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
 }
