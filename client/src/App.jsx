@@ -7,6 +7,7 @@ import RedVoznje from "./pages/RedVoznje";
 import PrevoznikPanel from "./pages/PrevoznikPanel";
 import DodajLiniju from "./pages/DodajLiniju";
 import News from "./pages/News";
+import Cjenovnik from "./pages/Cjenovnik";
 
 const Layout = () => {
     return (
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "/news",
                 element: <News />,
+            },
+            {
+                path: "/cjenovnik",
+                element: <Cjenovnik />,
             }
         ],
     },
