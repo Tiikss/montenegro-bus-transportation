@@ -6,7 +6,10 @@ import TicketReservation from "./TicketReservation";
 
 const TableRedVoznjeRow = ({ departure, isEdit }) => {
     const handleClick = (e) => {
-        const content = e.target.parentElement.parentElement.nextElementSibling;
+        const content =
+            e.target.parentElement.parentElement.nextElementSibling
+                .nextElementSibling.nextElementSibling;
+        console.log(content);
         if (content.style.maxHeight) {
             content.style.padding = "0 24px";
             content.style.maxHeight = null;
