@@ -10,7 +10,7 @@ const TabelaRedVoznjeHeader = ({ isEdit }) => {
             {!isEdit && <div className="col col-6">Prevoznik</div>}
             <div className="col col-7">Cijena</div>
             <div className="col col-8"></div>
-            {isEdit && <div className="col col-9"></div>}
+            <div className="col col-9"></div>
         </li>
     );
 };
