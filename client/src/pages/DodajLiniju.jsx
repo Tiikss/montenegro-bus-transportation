@@ -3,6 +3,8 @@ import "../styles/dodaj-liniju.css";
 import Linija from "../components/Linija";
 import DropDownCard from "../components/DropdownCard";
 import DodajStanicuModal from "../components/DodajStanicuModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 const DodajLiniju = () => {
     const [polazistaLista, setPolazistaLista] = useState([
@@ -353,8 +355,8 @@ const DodajLiniju = () => {
                         value={cijena}
                         onChange={handleChange}
                     />
-                    <button onClick={openStationModal}>Dodaj stanicu</button>
-                    <button type="submit">Dodaj liniju</button>
+                    <button onClick={openStationModal}><FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu</button>
+                    <button type="submit"><FontAwesomeIcon icon={faCirclePlus} /> Dodaj liniju</button>
                 </form>
             </div>
             <DodajStanicuModal
