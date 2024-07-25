@@ -20,8 +20,6 @@ const TableRedVoznjeRow = ({ departure, isEdit }) => {
         }
     };
 
-    console.log(departure);
-
     return (
         <li className="red-voznje-table-row red-voznje-row-hover">
             {isEdit && (
