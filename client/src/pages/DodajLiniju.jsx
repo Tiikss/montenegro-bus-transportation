@@ -355,8 +355,12 @@ const DodajLiniju = () => {
                         value={cijena}
                         onChange={handleChange}
                     />
-                    <button onClick={openStationModal}><FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu</button>
-                    <button type="submit"><FontAwesomeIcon icon={faCirclePlus} /> Dodaj liniju</button>
+                    <button onClick={openStationModal}>
+                        <FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu
+                    </button>
+                    <button type="submit">
+                        <FontAwesomeIcon icon={faCirclePlus} /> Dodaj liniju
+                    </button>
                 </form>
             </div>
             <DodajStanicuModal
