@@ -18,8 +18,6 @@ const Navbar = () => {
                     <Link to={"/news"}>
                         <li>Novosti</li>
                     </Link>
-                    <li>Lokalni prevoz</li>
-                    <li>Međunarodni prevoz</li>
                     <li>Cjenovnik</li>
                 </ul>
             </div>
