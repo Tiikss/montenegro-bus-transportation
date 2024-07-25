@@ -1,0 +1,38 @@
+#o-nama-body {
+    color: #333;
+    padding: 20px;
+    background-color: #f5f5f5;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: #ba0c0e;
+    margin-bottom: 30px;
+}
+
+.about-section,
+.mission-vision-section,
+.history-section,
+.team-section,
+.contact-section {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #ba0c0e;
+}
+
+h2 {
+    color: #ba0c0e;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    line-height: 1.8;
+}
