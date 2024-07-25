@@ -97,27 +97,39 @@ const Home = () => {
             <div id="pom-div3">
                 <div className="novosti">
                     <div className="novost">
-                        <h1>Novost</h1>
+                        <div className="ttl-and-date">
+                            <h1>Novost</h1>
+                            <p>11.11.2024.</p>
+                        </div>
                         <p>Uveden je novi red vožnje za liniju Podgorica - Bar.</p>
-                        <button>Proširi</button>
+                        <button>Pročitaj više</button>
                     </div>
 
                     <div className="novost">
-                        <h1>Novost</h1>
+                        <div className="ttl-and-date">
+                            <h1>Novost</h1>
+                            <p>11.11.2024.</p>
+                        </div>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!</p>
-                        <button>Proširi</button>
+                        <button>Pročitaj više</button>
                     </div>
 
                     <div className="novost">
-                        <h1>Novost</h1>
+                        <div className="ttl-and-date">
+                            <h1>Novost</h1>
+                            <p>11.11.2024.</p>
+                        </div>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!</p>
-                        <button>Proširi</button>
+                        <button>Pročitaj više</button>
                     </div>
 
                     <div className="novost">
-                        <h1>Novost</h1>
+                        <div className="ttl-and-date">
+                            <h1>Novost</h1>
+                            <p>11.11.2024.</p>
+                        </div>
                         <p>Uveden je novi red vožnje za liniju Podgorica - Bar.</p>
-                        <button>Proširi</button>
+                        <button>Pročitaj više</button>
                     </div>
                 </div>
             </div>
