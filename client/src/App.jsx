@@ -8,6 +8,7 @@ import PrevoznikPanel from "./pages/PrevoznikPanel";
 import DodajLiniju from "./pages/DodajLiniju";
 import News from "./pages/News";
 import Cjenovnik from "./pages/Cjenovnik";
+import ONama from "./pages/ONama";
 
 const Layout = () => {
     return (
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: "/cjenovnik",
                 element: <Cjenovnik />,
+            },
+            {
+                path: "/onama",
+                element: <ONama />,
             }
         ],
     },
