@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import RedVoznje from "./pages/RedVoznje";
 import PrevoznikPanel from "./pages/PrevoznikPanel";
 import DodajLiniju from "./pages/DodajLiniju";
+import News from "./pages/News";
 
 const Layout = () => {
     return (
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
                 path: "/dodaj-liniju",
                 element: <DodajLiniju />,
             },
+            {
+                path: "/news",
+                element: <News />,
+            }
         ],
     },
 ]);

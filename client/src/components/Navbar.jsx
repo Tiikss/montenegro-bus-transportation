@@ -15,7 +15,9 @@ const Navbar = () => {
                     <Link to={"/red-voznje"}>
                         <li>Red vožnje</li>
                     </Link>
-                    <li>Novosti</li>
+                    <Link to={"/news"}>
+                        <li>Novosti</li>
+                    </Link>
                     <li>Lokalni prevoz</li>
                     <li>Međunarodni prevoz</li>
                     <li>Cjenovnik</li>
