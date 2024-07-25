@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/dodaj-liniju.css";
 import Linija from "../components/Linija";
 import DropDownCard from "../components/DropdownCard";
+import DodajStanicuModal from "../components/DodajStanicuModal";
 
 const DodajLiniju = () => {
     const [polazistaLista, setPolazistaLista] = useState([
@@ -40,6 +41,8 @@ const DodajLiniju = () => {
     const [cijenaStanica, setCijenaStanica] = useState(0);
 
     const [isEditLine, setIsEditLine] = useState(false);
+    const [editStationIndex, setEditStationIndex] = useState(-1);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -122,6 +125,7 @@ const DodajLiniju = () => {
             const endStation = {
                 odrediste,
                 vrijemeDolaska,
+                cijena,
             };
 
             const station = {
@@ -129,7 +133,6 @@ const DodajLiniju = () => {
                 vrijemeDolaskaStanica,
                 vrijemePolaskaStanica,
                 cijenaStanica,
-                cijena,
             };
 
             setStations([startStation, station, endStation]);
@@ -153,11 +156,13 @@ const DodajLiniju = () => {
     const handleEditClick = (e, index) => {
         e.preventDefault();
         const station = stations[index];
+        setEditStationIndex(index);
         setNazivStanice(station.nazivStanice);
         setVrijemeDolaskaStanica(station.vrijemeDolaskaStanica);
         setVrijemePolaskaStanica(station.vrijemePolaskaStanica);
         setCijenaStanica(station.cijenaStanica);
         setIsEditLine(true);
+        setIsModalOpen(true);
     };
 
     const handleDeleteClick = (e, index) => {
@@ -180,6 +185,11 @@ const DodajLiniju = () => {
     const handleSetNazivStanice = (e) => {
         setNazivStanice(e.target.innerText);
         setSveStanice([]);
+    };
+
+    const openStationModal = (e) => {
+        e.preventDefault();
+        setIsModalOpen(true);
     };
 
     useEffect(() => {
@@ -211,6 +221,40 @@ const DodajLiniju = () => {
             setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
         }
     }, [nazivStanice]);
+
+    useEffect(() => {
+        if (
+            !polaziste ||
+            !odrediste ||
+            !vrijemePolaska ||
+            !vrijemeDolaska ||
+            !cijena
+        )
+            return;
+
+        const tempStations = stations;
+
+        const startStation = {
+            polaziste,
+            vrijemePolaska,
+        };
+
+        const endStation = {
+            odrediste,
+            vrijemeDolaska,
+            cijena,
+        };
+
+        if (tempStations.length === 0) {
+            setStations([startStation, endStation]);
+            return;
+        }
+
+        tempStations[0] = startStation;
+        tempStations[tempStations.length - 1] = endStation;
+
+        setStations(tempStations);
+    }, [polaziste, odrediste, vrijemePolaska, vrijemeDolaska, cijena]);
 
     return (
         <main className="addline-body">
@@ -309,80 +353,22 @@ const DodajLiniju = () => {
                         value={cijena}
                         onChange={handleChange}
                     />
+                    <button onClick={openStationModal}>Dodaj stanicu</button>
                     <button type="submit">Dodaj liniju</button>
                 </form>
-                <form className="addstation-form">
-                    <label htmlFor="prevoznik">Stanica:</label>
-                    <label htmlFor="nazivStanice">Naziv stanice:</label>
-                    <div className="add-line-input-container">
-                        <input
-                            className="addline-input"
-                            type="text"
-                            id="nazivStanice"
-                            name="nazivStanice"
-                            required
-                            value={nazivStanice}
-                            onChange={handleChange}
-                            style={
-                                nazivStanice === "" || sveStanice.length === 0
-                                    ? { borderRadius: "10px" }
-                                    : { borderRadius: "10px 10px 0 0" }
-                            }
-                        />{" "}
-                        <div
-                            id="filter-polaziste-container"
-                            className="add-line-filter-container"
-                        >
-                            {nazivStanice !== ""
-                                ? sveStanice.map((item) => (
-                                      <DropDownCard
-                                          onClick={handleSetNazivStanice}
-                                          item={item}
-                                          key={item.item_name}
-                                      />
-                                  ))
-                                : null}
-                        </div>
-                    </div>
-                    <label htmlFor="vrijemeDolaskaStanica">
-                        Vrijeme dolaska:
-                    </label>
-                    <input
-                        className="addline-input"
-                        type="time"
-                        id="vrijemeDolaskaStanica"
-                        name="vrijemeDolaskaStanica"
-                        required
-                        value={vrijemeDolaskaStanica}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="vrijemePolaskaStanica">
-                        Vrijeme polaska:
-                    </label>
-                    <input
-                        className="addline-input"
-                        type="time"
-                        id="vrijemePolaskaStanica"
-                        name="vrijemePolaskaStanica"
-                        required
-                        value={vrijemePolaskaStanica}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="cijenaStanica">Cijena:</label>
-                    <input
-                        className="addline-input"
-                        type="number"
-                        id="cijenaStanica"
-                        name="cijenaStanica"
-                        required
-                        value={cijenaStanica}
-                        onChange={handleChange}
-                    />
-                    <button type="submit" onClick={handleAddStation}>
-                        Dodaj Stanicu
-                    </button>
-                </form>
             </div>
+            <DodajStanicuModal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
+                nazivStanice={nazivStanice}
+                handleChange={handleChange}
+                sveStanice={sveStanice}
+                handleSetNazivStanice={handleSetNazivStanice}
+                vrijemeDolaskaStanica={vrijemeDolaskaStanica}
+                vrijemePolaskaStanica={vrijemePolaskaStanica}
+                cijenaStanica={cijenaStanica}
+                handleAddStation={handleAddStation}
+            />
             <Linija
                 stations={stations}
                 isEdit={true}
