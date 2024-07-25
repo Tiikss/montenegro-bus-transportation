@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { APIProvider, Map, useMap } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, useMap, Marker } from "@vis.gl/react-google-maps";
 import { GoogleMapsOverlay as DeckOverlay } from "@deck.gl/google-maps";
 import { GeoJsonLayer } from "deck.gl";
 
@@ -17,7 +17,7 @@ function DeckGLOverlay({ layers }) {
     return null;
 }
 
-const MapWrapper = () => {
+const MapWrapper = ({ stations }) => {
     const [pathData, setPathData] = useState(null);
 
     useEffect(() => {
@@ -79,6 +79,15 @@ const MapWrapper = () => {
                 disableDefaultUI={true}
                 mapId={"montenegro-bus-transportation"}
             >
+                {stations.map((station) => (
+                    <Marker
+                        key={station.nazivStanice}
+                        position={{
+                            lat: Number(station.lat),
+                            lng: Number(station.lng),
+                        }}
+                    />
+                ))}
                 <DeckGLOverlay layers={layers} />
             </Map>
         </APIProvider>
