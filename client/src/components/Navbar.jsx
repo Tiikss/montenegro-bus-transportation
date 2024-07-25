@@ -18,7 +18,9 @@ const Navbar = () => {
                     <Link to={"/news"}>
                         <li>Novosti</li>
                     </Link>
-                    <li>Cjenovnik</li>
+                    <Link to={"/cjenovnik"}>
+                        <li>Cjenovnik</li>
+                    </Link>
                 </ul>
             </div>
         </main>
