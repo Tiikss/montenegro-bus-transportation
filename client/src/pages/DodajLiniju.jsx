@@ -4,9 +4,27 @@ import Linija from "../components/Linija";
 import DropDownCard from "../components/DropdownCard";
 
 const DodajLiniju = () => {
-    const [polazistaLista, setPolazistaLista] = useState(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-    const [odredisteLista, setOdredisteLista] = useState(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-    const [sveStanice, setSveStanice] = useState(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    const [polazistaLista, setPolazistaLista] = useState([
+        "Podgorica",
+        "Niksic",
+        "Bar",
+        "Budva",
+        "Kotor",
+    ]);
+    const [odredisteLista, setOdredisteLista] = useState([
+        "Podgorica",
+        "Niksic",
+        "Bar",
+        "Budva",
+        "Kotor",
+    ]);
+    const [sveStanice, setSveStanice] = useState([
+        "Podgorica",
+        "Niksic",
+        "Bar",
+        "Budva",
+        "Kotor",
+    ]);
 
     const [stations, setStations] = useState([]);
 
@@ -86,7 +104,6 @@ const DodajLiniju = () => {
                 }
                 return station;
             });
-            console.log(newStations);
             setStations(newStations);
             setIsEditLine(false);
             setNazivStanice("");
@@ -150,56 +167,50 @@ const DodajLiniju = () => {
         setStations(newStations);
     };
 
-    const handleSetPolaziste = (e) =>{
+    const handleSetPolaziste = (e) => {
         setPolaziste(e.target.innerText);
         setPolazistaLista([]);
-    }
+    };
 
-    const handleSetOdrediste = (e) =>{
+    const handleSetOdrediste = (e) => {
         setOdrediste(e.target.innerText);
         setOdredisteLista([]);
-    }
+    };
 
-    const handleSetNazivStanice = (e) =>{
+    const handleSetNazivStanice = (e) => {
         setNazivStanice(e.target.innerText);
         setSveStanice([]);
-    }
-
-    useEffect(() => {
-        console.log(stations);
-    }, [stations]);
+    };
 
     useEffect(() => {
         const filteredPolazista = polazistaLista.filter((item) =>
             item.toLowerCase().includes(polaziste.toLowerCase())
         );
         setPolazistaLista(filteredPolazista);
-        if(polaziste===""){
+        if (polaziste === "") {
             setPolazistaLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
         }
-    },[polaziste]);
-    
+    }, [polaziste]);
+
     useEffect(() => {
         const filteredOdrediste = odredisteLista.filter((item) =>
             item.toLowerCase().includes(odrediste.toLowerCase())
         );
         setOdredisteLista(filteredOdrediste);
-        if(odrediste===""){
+        if (odrediste === "") {
             setOdredisteLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
         }
-    },[odrediste]);
+    }, [odrediste]);
 
     useEffect(() => {
         const filteredSveStanice = sveStanice.filter((item) =>
             item.toLowerCase().includes(nazivStanice.toLowerCase())
         );
         setSveStanice(filteredSveStanice);
-        if(nazivStanice===""){
+        if (nazivStanice === "") {
             setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
         }
-    },[nazivStanice]);
-
-    console.log(polazistaLista)
+    }, [nazivStanice]);
 
     return (
         <main className="addline-body">
@@ -218,15 +229,22 @@ const DodajLiniju = () => {
                             onChange={handleChange}
                             style={
                                 polaziste === "" || polazistaLista.length === 0
-                                  ? { borderRadius: "10px" }
-                                  : { borderRadius: "10px 10px 0 0" }
-                              }
+                                    ? { borderRadius: "10px" }
+                                    : { borderRadius: "10px 10px 0 0" }
+                            }
                         />{" "}
-                        <div id="filter-polaziste-container" className="add-line-filter-container">
+                        <div
+                            id="filter-polaziste-container"
+                            className="add-line-filter-container"
+                        >
                             {polaziste !== ""
                                 ? polazistaLista.map((item) => (
-                                    <DropDownCard onClick={handleSetPolaziste} item={item} key={item.item_name} />
-                                ))
+                                      <DropDownCard
+                                          onClick={handleSetPolaziste}
+                                          item={item}
+                                          key={item.item_name}
+                                      />
+                                  ))
                                 : null}
                         </div>
                     </div>
@@ -242,15 +260,22 @@ const DodajLiniju = () => {
                             onChange={handleChange}
                             style={
                                 odrediste === "" || odredisteLista.length === 0
-                                  ? { borderRadius: "10px" }
-                                  : { borderRadius: "10px 10px 0 0" }
-                              }
+                                    ? { borderRadius: "10px" }
+                                    : { borderRadius: "10px 10px 0 0" }
+                            }
                         />{" "}
-                        <div id="filter-odrediste-container" className="add-line-filter-container">
+                        <div
+                            id="filter-odrediste-container"
+                            className="add-line-filter-container"
+                        >
                             {odrediste !== ""
                                 ? odredisteLista.map((item) => (
-                                    <DropDownCard onClick={handleSetOdrediste} item={item} key={item.item_name} />
-                                ))
+                                      <DropDownCard
+                                          onClick={handleSetOdrediste}
+                                          item={item}
+                                          key={item.item_name}
+                                      />
+                                  ))
                                 : null}
                         </div>
                     </div>
@@ -300,15 +325,22 @@ const DodajLiniju = () => {
                             onChange={handleChange}
                             style={
                                 nazivStanice === "" || sveStanice.length === 0
-                                  ? { borderRadius: "10px" }
-                                  : { borderRadius: "10px 10px 0 0" }
-                              }
+                                    ? { borderRadius: "10px" }
+                                    : { borderRadius: "10px 10px 0 0" }
+                            }
                         />{" "}
-                        <div id="filter-polaziste-container" className="add-line-filter-container">
+                        <div
+                            id="filter-polaziste-container"
+                            className="add-line-filter-container"
+                        >
                             {nazivStanice !== ""
                                 ? sveStanice.map((item) => (
-                                    <DropDownCard onClick={handleSetNazivStanice} item={item} key={item.item_name} />
-                                ))
+                                      <DropDownCard
+                                          onClick={handleSetNazivStanice}
+                                          item={item}
+                                          key={item.item_name}
+                                      />
+                                  ))
                                 : null}
                         </div>
                     </div>

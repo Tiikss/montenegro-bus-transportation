@@ -21,6 +21,8 @@ const TabelaRedVoznje = ({ isEdit }) => {
                 {
                     polaziste: "Podgorica",
                     vrijemePolaska: "12:00",
+                    lat: "42.44111",
+                    lng: "19.26361",
                 },
                 {
                     nazivStanice: "Danilovgrad",
@@ -28,10 +30,14 @@ const TabelaRedVoznje = ({ isEdit }) => {
                     vrijemePolaskaStanica: "12:35",
                     cijenaStanica: "5€",
                     cijena: "10€",
+                    lat: "42.44111",
+                    lng: "19.26361",
                 },
                 {
-                    odrediste: "Beograd",
+                    odrediste: "Bar",
                     vrijemeDolaska: "14:00",
+                    lat: "42.09807",
+                    lng: "19.09494",
                 },
             ],
         },
@@ -48,6 +54,8 @@ const TabelaRedVoznje = ({ isEdit }) => {
                 {
                     polaziste: "Podgorica",
                     vrijemePolaska: "12:00",
+                    lat: "42.44111",
+                    lng: "19.26361",
                 },
                 {
                     nazivStanice: "Danilovgrad",
@@ -55,10 +63,14 @@ const TabelaRedVoznje = ({ isEdit }) => {
                     vrijemePolaskaStanica: "12:35",
                     cijenaStanica: "5€",
                     cijena: "10€",
+                    lat: "42.44111",
+                    lng: "19.26361",
                 },
                 {
-                    odrediste: "Beograd",
+                    odrediste: "Bar",
                     vrijemeDolaska: "14:00",
+                    lat: "42.09807",
+                    lng: "19.09494",
                 },
             ],
         },
