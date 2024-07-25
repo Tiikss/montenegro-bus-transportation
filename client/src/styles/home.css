@@ -268,3 +268,19 @@
 	color: #ba0c0e;
 	border: 1px solid #ba0c0e;
 }
+
+.ttl-and-date {
+	display: flex;
+	flex-direction: column;
+}
+
+.ttl-and-date h1 {
+	font-size: 28px;
+	color: #ba0c0e;
+	margin: 0 0 10px 0;
+}
+
+.ndate {
+	font-size: 0.9em;
+	color: #777;
+}

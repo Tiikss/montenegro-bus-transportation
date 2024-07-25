@@ -99,7 +99,7 @@ const Home = () => {
                     <div className="novost">
                         <div className="ttl-and-date">
                             <h1>Novost</h1>
-                            <p>11.11.2024.</p>
+                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
                         </div>
                         <p>Uveden je novi red vožnje za liniju Podgorica - Bar.</p>
                         <button>Pročitaj više</button>
@@ -108,7 +108,7 @@ const Home = () => {
                     <div className="novost">
                         <div className="ttl-and-date">
                             <h1>Novost</h1>
-                            <p>11.11.2024.</p>
+                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
                         </div>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!</p>
                         <button>Pročitaj više</button>
@@ -117,7 +117,7 @@ const Home = () => {
                     <div className="novost">
                         <div className="ttl-and-date">
                             <h1>Novost</h1>
-                            <p>11.11.2024.</p>
+                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
                         </div>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!</p>
                         <button>Pročitaj više</button>
@@ -126,7 +126,7 @@ const Home = () => {
                     <div className="novost">
                         <div className="ttl-and-date">
                             <h1>Novost</h1>
-                            <p>11.11.2024.</p>
+                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
                         </div>
                         <p>Uveden je novi red vožnje za liniju Podgorica - Bar.</p>
                         <button>Pročitaj više</button>
