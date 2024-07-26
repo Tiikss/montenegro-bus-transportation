@@ -67,16 +67,6 @@
     position: relative;
 }
 
-.add-line-filter-container div {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.add-line-filter-container div:hover {
-    background-color: #f1f1f1;
-}
-
 #station-modal {
     background-color: #fff;
     padding: 20px;

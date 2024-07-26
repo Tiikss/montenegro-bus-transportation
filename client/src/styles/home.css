@@ -1,100 +1,100 @@
 .welcome-div {
-	margin-top: 30px;
-	background-image: url("../images/group-buses-driving-along-road-sunset.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	width: 100%;
-	height: 600px;
+    margin-top: 30px;
+    background-image: url("../images/group-buses-driving-along-road-sunset.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 600px;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .welcome-ttl {
-	font-size: 72px;
-	background: linear-gradient(to right, #ba0c0e 10%, #FFDB15 50%, #eee 60%);
-	background-size: auto auto;
-	background-clip: border-box;
-	background-size: 200% auto;
-	color: #fff;
-	background-clip: text;
-	text-fill-color: transparent;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	animation: textclip 1.5s linear infinite;
+    font-size: 72px;
+    background: linear-gradient(to right, #ba0c0e 10%, #ffdb15 50%, #eee 60%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 1.5s linear infinite;
 }
 
 @keyframes textclip {
-	to {
-		background-position: 200% center;
-	}
+    to {
+        background-position: 200% center;
+    }
 }
 
 .red-div {
-	margin-top: 40px;
+    margin-top: 40px;
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .red-div h1 {
-	font-size: 36px;
-	margin-bottom: 20px;
-	color: #ba0c0e;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #ba0c0e;
 }
 
 .choose {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
-	padding: 80px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 80px;
 
-	gap: 15px;
-	font-size: 24px;
+    gap: 15px;
+    font-size: 24px;
 
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .choose label {
-	width: 300px;
-	text-align: left;
+    width: 300px;
+    text-align: left;
 }
 
 .choose input {
-	width: 300px;
-	height: 50px;
-	font-size: 18px;
-
-	border-top: 0 solid black;
-	border-left: 0 solid black;
-	border-right: 0 solid black;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
+    padding: 4px 8px;
+    border-top: 0 solid black;
+    border-left: 0 solid black;
+    border-right: 0 solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .choose button {
-	width: 300px;
-	height: 50px;
-	font-size: 18px;
-	background-color: #ba0c0e;
-	color: white;
-	border: 0;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-top: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
+    background-color: #ba0c0e;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .choose button:hover {
-	background-color: #eee;
-	color: #ba0c0e;
-	border: 1px solid #ba0c0e;
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
 }
 
 #mapa {
@@ -103,9 +103,9 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
-	width: 90%;
+    width: 90%;
 }
 
 #mapa p {
@@ -115,9 +115,9 @@
 }
 
 #mapa h1 {
-	font-size: 2em;
-	margin-bottom: 20px;
-	color: #ba0c0e;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ba0c0e;
 }
 
 #mapa iframe {
@@ -128,86 +128,86 @@
 }
 
 #big-div-map {
-	display: grid;
+    display: grid;
     justify-content: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-	gap: 20px;
+    gap: 20px;
 }
 
 #pom-div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
 }
 
 .contact-div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
-	margin-top: 20px;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
-	width: max-content;
-	gap: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: max-content;
+    gap: 50px;
 }
 
 .contact-div img {
-	width: 300px;
-	border-radius: 10px 0 0 10px;
+    width: 300px;
+    border-radius: 10px 0 0 10px;
 }
 
 #pom-div2 {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
 }
 
 #contact-info h1 {
-	color: #ba0c0e;
-	margin-bottom: 20px;
+    color: #ba0c0e;
+    margin-bottom: 20px;
 }
 
 .contact {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
-	margin-right: 50px;
-	color: #ba0c0e;
-	width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 50px;
+    color: #ba0c0e;
+    width: 500px;
 }
 
 #contact-table {
-	border-collapse: collapse;
-	width: 100%;
-	font-size: 18px;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 18px;
 }
 
 #contact-table th {
-	background-color: #ba0c0e;
-	color: white;
-	text-align: left;
-	padding: 8px;
+    background-color: #ba0c0e;
+    color: white;
+    text-align: left;
+    padding: 8px;
 }
 
 #contact-table td {
-	border: 1px solid #ddd;
-	padding: 8px;
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
 #contact-table tr:nth-child(even) {
-	background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
 #contact-table tr:hover {
-	background-color: #ddd;
+    background-color: #ddd;
 }
 
 #pom-div3 {
@@ -217,8 +217,8 @@
     margin-top: 40px;
     margin-bottom: 40px;
     width: 100%;
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .novosti {
@@ -226,7 +226,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     color: #ba0c0e;
-	margin: 0 auto;
+    margin: 0 auto;
 }
 
 .novost {
@@ -238,49 +238,57 @@
 }
 
 .novost {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 16px;
-	padding: 30px;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-	height: 400px;
-	width: 250px;
-	gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    padding: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    height: 400px;
+    width: 250px;
+    gap: 20px;
+}
+
+.novost p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 8;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 
 .novost button {
-	width: 200px;
-	height: 50px;
-	font-size: 14px;
-	background-color: #ba0c0e;
-	color: white;
-	border: 0;
-	border-radius: 5px;
-	cursor: pointer;
+    width: 200px;
+    height: 50px;
+    font-size: 14px;
+    background-color: #ba0c0e;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .novost button:hover {
-	background-color: #eee;
-	color: #ba0c0e;
-	border: 1px solid #ba0c0e;
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
 }
 
 .ttl-and-date {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .ttl-and-date h1 {
-	font-size: 28px;
-	color: #ba0c0e;
-	margin: 0 0 10px 0;
+    font-size: 28px;
+    color: #ba0c0e;
+    margin: 0 0 10px 0;
 }
 
 .ndate {
-	font-size: 0.9em;
-	color: #777;
+    font-size: 0.9em;
+    color: #777;
 }

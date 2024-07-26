@@ -7,8 +7,17 @@
     background-color: #ba0c0f;
     z-index: 2;
     text-decoration: none;
-  }
-  
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dropdown-card:hover {
+    background-color: #f1f1f1;
+    color: black;
+    border: 1px solid black;
+    border-top: 0;
+}
+
 .dropdown-card:last-child {
-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
 }
