@@ -14,6 +14,20 @@ const DodajStanicuModal = ({
     cijenaStanica,
     handleAddStation,
 }) => {
+    const handleButtonClick = (e) => {
+        e.preventDefault();
+        if (
+            !nazivStanice ||
+            !vrijemeDolaskaStanica ||
+            !vrijemePolaskaStanica ||
+            !cijenaStanica
+        ) {
+            return;
+        }
+        handleAddStation(e);
+        setIsOpen(false);
+    };
+
     return (
         <div>
             <form className={"addstation-form" + (isOpen ? "" : " hidden")}>
@@ -79,14 +93,7 @@ const DodajStanicuModal = ({
                     value={cijenaStanica}
                     onChange={handleChange}
                 />
-                <button
-                    type="submit"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        handleAddStation(e);
-                        setIsOpen(false);
-                    }}
-                >
+                <button type="submit" onClick={handleButtonClick}>
                     Dodaj Stanicu
                 </button>
             </form>
