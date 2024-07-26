@@ -10,10 +10,6 @@ h1 {
     margin-bottom: 30px;
 }
 
-#search-container {
-    margin-bottom: 20px;
-}
-
 #search-prices {
     width: 100%;
     max-width: 400px;
@@ -25,7 +21,6 @@ h1 {
     outline: none;
     transition: border-color 0.3s ease;
     margin-top: 20px;
-    margin-bottom: 15px;
 }
 
 #search-prices:focus {
@@ -46,7 +41,8 @@ h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-#cjenovnik-table th, td {
+#cjenovnik-table th,
+td {
     padding: 15px;
     border: 1px solid #ddd;
     text-align: left;
@@ -62,5 +58,12 @@ h1 {
 }
 
 #cjenovnik-table tr:hover {
-	background-color: #dddddda7;
+    background-color: #dddddda7;
+}
+
+.stations-dropdown-container {
+    display: inline-flex;
+    justify-content: center;
+    width: 400px;
+    margin-bottom: 20px;
 }
