@@ -56,22 +56,12 @@
 
 .addline-form button:hover {
     background-color: #eee;
-	color: #ba0c0e;
-	border: 1px solid #ba0c0e;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
 }
 
 .add-line-input-container {
     position: relative;
-}
-
-.add-line-filter-container div {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.add-line-filter-container div:hover {
-    background-color: #f1f1f1;
 }
 
 #station-modal {
