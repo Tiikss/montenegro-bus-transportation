@@ -355,6 +355,27 @@ const DodajLiniju = () => {
                         value={cijena}
                         onChange={handleChange}
                     />
+                    <label htmlFor="dani">Dani vožnje:</label>
+                    <div className="days-container">
+                        <label htmlFor="monday">Ponedjeljak</label>
+                        <input type="checkbox" id="monday" name="monday" />
+                        <label htmlFor="tuesday">Utorak</label>
+                        <input type="checkbox" id="tuesday" name="tuesday" />
+                        <label htmlFor="wednesday">Srijeda</label>
+                        <input
+                            type="checkbox"
+                            id="wednesday"
+                            name="wednesday"
+                        />
+                        <label htmlFor="thursday">Četvrtak</label>
+                        <input type="checkbox" id="thursday" name="thursday" />
+                        <label htmlFor="friday">Petak</label>
+                        <input type="checkbox" id="friday" name="friday" />
+                        <label htmlFor="saturday">Subota</label>
+                        <input type="checkbox" id="saturday" name="saturday" />
+                        <label htmlFor="sunday">Nedjelja</label>
+                        <input type="checkbox" id="sunday" name="sunday" />
+                    </div>
 
                     <button onClick={openStationModal}>
                         <FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu
