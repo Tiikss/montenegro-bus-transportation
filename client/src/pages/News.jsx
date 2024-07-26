@@ -44,7 +44,7 @@ const News = () => {
                                 : { borderRadius: "10px 10px 0 0" }
                         }
                     />
-                    <div className="news-dropdown-container">
+                    <div className="dropdown-container">
                         {search !== ""
                             ? news.map((item) => (
                                   <DropDownCard

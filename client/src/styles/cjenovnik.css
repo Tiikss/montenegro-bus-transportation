@@ -17,7 +17,6 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box;
     outline: none;
     transition: border-color 0.3s ease;
     margin-top: 20px;
@@ -67,11 +66,4 @@ td {
     position: relative;
     width: 400px;
     margin-bottom: 20px;
-}
-
-.stations-dropdown-container {
-    position: absolute;
-    top: 100%;
-    z-index: 2;
-    width: 100%;
 }

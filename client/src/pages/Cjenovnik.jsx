@@ -48,7 +48,7 @@ const Cjenovnik = () => {
                             : { borderRadius: "10px 10px 0 0" }
                     }
                 />
-                <div className="stations-dropdown-container">
+                <div className="dropdown-container">
                     {currStation !== "" &&
                         stations.map((station) => (
                             <DropDownCard

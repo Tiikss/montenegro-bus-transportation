@@ -31,15 +31,8 @@
 .addline-input {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
     width: 100%;
-    box-sizing: border-box;
     transition: border-color 0.3s ease-in-out;
-}
-
-.addline-input:focus {
-    border-color: #ba0c0e;
-    outline: none;
 }
 
 .addline-form button {
@@ -62,13 +55,6 @@
 
 .add-line-input-container {
     position: relative;
-}
-
-.add-line-filter-container {
-    position: absolute;
-    top: 100%;
-    z-index: 2;
-    width: 100%;
 }
 
 #station-modal {
@@ -101,9 +87,7 @@
 #station-modal .modal-content select {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
     width: 100%;
-    box-sizing: border-box;
 }
 
 #station-modal .modal-actions {
