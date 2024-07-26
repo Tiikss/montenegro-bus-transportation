@@ -16,7 +16,6 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box;
     outline: none;
     transition: border-color 0.3s ease;
     margin-top: 20px;
@@ -60,9 +59,10 @@ td {
     background-color: #dddddda7;
 }
 
-.stations-dropdown-container {
+#search-container {
     display: inline-flex;
     justify-content: center;
+    position: relative;
     width: 400px;
     margin-bottom: 20px;
 }
