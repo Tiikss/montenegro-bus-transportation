@@ -3,7 +3,7 @@
     display: flex;
     padding: 16px;
     align-items: center;
-    color: #e4e4e4;
+    color: white;
     background-color: #ba0c0f;
     z-index: 2;
     text-decoration: none;
@@ -20,4 +20,8 @@
 
 .dropdown-card:last-child {
     border-radius: 0 0 10px 10px;
+}
+
+.ddcp {
+    margin-bottom: 0;
 }
