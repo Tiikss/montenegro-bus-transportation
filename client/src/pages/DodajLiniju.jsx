@@ -264,7 +264,7 @@ const DodajLiniju = () => {
             <div className="addline-forms">
                 <form className="addline-form">
                     <label htmlFor="polaziste">Polazište:</label>
-                    <div className="add-line-input-container">
+                    <div className="add-line-input-container dropdown-container">
                         <input
                             className="addline-input"
                             type="text"
@@ -281,7 +281,7 @@ const DodajLiniju = () => {
                         />{" "}
                         <div
                             id="filter-polaziste-container"
-                            className="add-line-filter-container"
+                            className="dropdown-container"
                         >
                             {polaziste !== ""
                                 ? polazistaLista.map((item) => (
@@ -312,7 +312,7 @@ const DodajLiniju = () => {
                         />{" "}
                         <div
                             id="filter-odrediste-container"
-                            className="add-line-filter-container"
+                            className="dropdown-container"
                         >
                             {odrediste !== ""
                                 ? odredisteLista.map((item) => (
