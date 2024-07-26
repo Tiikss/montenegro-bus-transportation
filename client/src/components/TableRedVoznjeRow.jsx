@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TicketReservation from "./TicketReservation";
 
-const TableRedVoznjeRow = ({ departure, isEdit }) => {
+const TableRedVoznjeRow = ({ departure, isEdit, handleDeleteClick }) => {
     const handleClick = (e) => {
         const content =
             e.target.parentElement.parentElement.nextElementSibling
@@ -56,7 +56,7 @@ const TableRedVoznjeRow = ({ departure, isEdit }) => {
                 </div>
                 {isEdit ? (
                     <div className="col col-9">
-                        <Link>
+                        <Link to="/dodaj-liniju">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -72,7 +72,7 @@ const TableRedVoznjeRow = ({ departure, isEdit }) => {
                                 />
                             </svg>
                         </Link>
-                        <Link>
+                        <Link onClick={handleDeleteClick}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"

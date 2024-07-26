@@ -35,11 +35,13 @@
     transition: border-color 0.3s ease-in-out;
 }
 
-.addline-form button {
+.addline-form button,
+.addstation-form button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
     color: white;
     cursor: pointer;
     font-size: 16px;
@@ -47,7 +49,8 @@
     margin-top: 10px;
 }
 
-.addline-form button:hover {
+.addline-form button:hover,
+.addstation-form button:hover {
     background-color: #eee;
     color: #ba0c0e;
     border: 1px solid #ba0c0e;
@@ -141,4 +144,34 @@
 
 .line-list li button:hover {
     background-color: #a00b0d;
+}
+
+.addstation-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.overlay-add-station {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display: none;
 }

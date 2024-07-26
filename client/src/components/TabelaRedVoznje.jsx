@@ -6,7 +6,7 @@ import TabelaRedVoznjeHeader from "./TableRedVoznjeHeader";
 import TableRedVoznjeRow from "./TableRedVoznjeRow";
 import TableRedVoznjeContent from "./TableRedVoznjeContent";
 
-const TabelaRedVoznje = ({ isEdit }) => {
+const TabelaRedVoznje = ({ isEdit, handleDeleteClick }) => {
     const [departures, setDepartures] = useState([
         {
             startingPoint: "Podgorica",
@@ -85,6 +85,7 @@ const TabelaRedVoznje = ({ isEdit }) => {
                           <TableRedVoznjeRow
                               departure={departure}
                               isEdit={isEdit}
+                              handleDeleteClick={handleDeleteClick}
                           />
                           <TableRedVoznjeContent
                               departure={departure}

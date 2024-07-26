@@ -9,6 +9,8 @@ import DodajLiniju from "./pages/DodajLiniju";
 import News from "./pages/News";
 import Cjenovnik from "./pages/Cjenovnik";
 import ONama from "./pages/ONama";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const Layout = () => {
     return (
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
             {
                 path: "/onama",
                 element: <ONama />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/register",
+                element: <Register />,
             }
         ],
     },

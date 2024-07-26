@@ -23,6 +23,9 @@ const Navbar = () => {
                     <Link to={"/cjenovnik"}>
                         <li>Cjenovnik</li>
                     </Link>
+                    <Link to={"/login"}>
+                        <li>Prijavi se</li>
+                    </Link>
                 </ul>
             </div>
         </main>
