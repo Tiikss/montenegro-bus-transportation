@@ -42,7 +42,8 @@
     outline: none;
 }
 
-.addline-form button {
+.addline-form button,
+.addstation-form button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -55,7 +56,8 @@
     margin-top: 10px;
 }
 
-.addline-form button:hover {
+.addline-form button:hover,
+.addstation-form button:hover {
     background-color: #eee;
     color: #ba0c0e;
     border: 1px solid #ba0c0e;
