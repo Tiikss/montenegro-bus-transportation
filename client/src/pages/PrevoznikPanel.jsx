@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/prevoznik-panel.css";
 import TabelaRedVoznje from "../components/TabelaRedVoznje";
 import ModalWindow from "../components/ModalWindow";
+import { Link } from "react-router-dom";
 
 const PrevoznikPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +25,9 @@ const PrevoznikPanel = () => {
     return (
         <main className="prevoznik-body">
             <h1>Ime prevoznika</h1>
+            <Link to="/dodaj-liniju" className="prevoznik-newline-button">
+                Nova linija
+            </Link>
             <h2>Aktivne linije</h2>
             <TabelaRedVoznje
                 isEdit={true}
