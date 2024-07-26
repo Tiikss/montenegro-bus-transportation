@@ -7,3 +7,22 @@
     align-items: center;
     gap: 30px;
 }
+
+.prevoznik-newline-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.prevoznik-newline-button:hover {
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+}
