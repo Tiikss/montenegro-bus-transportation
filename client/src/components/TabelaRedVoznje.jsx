@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/tabela-red-voznje.css";
+// import "../styles/tabela-red-voznje.css";
 import TabelaRedVoznjeHeader from "./TableRedVoznjeHeader";
 import TableRedVoznjeRow from "./TableRedVoznjeRow";
 import TableRedVoznjeContent from "./TableRedVoznjeContent";

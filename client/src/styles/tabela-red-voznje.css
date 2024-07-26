@@ -259,13 +259,3 @@
         background-position: 50% 50%;
     }
 }
-
-.admin-icon {
-    width: 40px;
-    height: 40px;
-    stroke: #1e2235;
-}
-
-.admin-icon:hover {
-    stroke: #e4e4e7;
-}

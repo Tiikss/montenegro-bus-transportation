@@ -355,6 +355,7 @@ const DodajLiniju = () => {
                         value={cijena}
                         onChange={handleChange}
                     />
+
                     <button onClick={openStationModal}>
                         <FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu
                     </button>
