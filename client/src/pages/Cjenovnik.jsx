@@ -48,17 +48,16 @@ const Cjenovnik = () => {
                             : { borderRadius: "10px 10px 0 0" }
                     }
                 />
-            </div>
-
-            <div className="stations-dropdown-container">
-                {currStation !== "" &&
-                    stations.map((station) => (
-                        <DropDownCard
-                            item={station}
-                            key={station}
-                            onClick={handleSetStation}
-                        />
-                    ))}
+                <div className="stations-dropdown-container">
+                    {currStation !== "" &&
+                        stations.map((station) => (
+                            <DropDownCard
+                                item={station}
+                                key={station}
+                                onClick={handleSetStation}
+                            />
+                        ))}
+                </div>
             </div>
 
             <div id="table-container">

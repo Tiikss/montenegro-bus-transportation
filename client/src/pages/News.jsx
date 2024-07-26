@@ -31,28 +31,30 @@ const News = () => {
         <main id="news-body">
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
-                <input
-                    type="text"
-                    placeholder="Pretraži objave"
-                    id="search-news"
-                    value={search}
-                    onChange={handleChangeSearch}
-                    style={
-                        search === "" || news.length === 0
-                            ? { borderRadius: "10px" }
-                            : { borderRadius: "10px 10px 0 0" }
-                    }
-                />
-                <div className="news-dropdown-container">
-                    {search !== ""
-                        ? news.map((item) => (
-                              <DropDownCard
-                                  item={item}
-                                  key={item}
-                                  onClick={handleSetSearch}
-                              />
-                          ))
-                        : null}
+                <div className="news-search-container">
+                    <input
+                        type="text"
+                        placeholder="Pretraži objave"
+                        id="search-news"
+                        value={search}
+                        onChange={handleChangeSearch}
+                        style={
+                            search === "" || news.length === 0
+                                ? { borderRadius: "10px" }
+                                : { borderRadius: "10px 10px 0 0" }
+                        }
+                    />
+                    <div className="news-dropdown-container">
+                        {search !== ""
+                            ? news.map((item) => (
+                                  <DropDownCard
+                                      item={item}
+                                      key={item}
+                                      onClick={handleSetSearch}
+                                  />
+                              ))
+                            : null}
+                    </div>
                 </div>
                 <div className="news-card">
                     <h2 className="news-title">Naslov</h2>
