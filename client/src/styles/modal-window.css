@@ -27,3 +27,29 @@
 .hidden {
     display: none;
 }
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+}
+
+.modal-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.modal-button:hover {
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+}
