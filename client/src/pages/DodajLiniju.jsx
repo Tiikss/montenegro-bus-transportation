@@ -234,7 +234,7 @@ const DodajLiniju = () => {
         )
             return;
 
-        const tempStations = stations;
+        const tempStations = JSON.parse(JSON.stringify(stations));
 
         const startStation = {
             polaziste,
