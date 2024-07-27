@@ -1,0 +1,64 @@
+.tabela-stanice {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-stanice th,
+td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.tabela-stanice th {
+    background-color: #ba0c0e;
+    color: #fff;
+}
+
+.tabela-stanice tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tabela-stanice tr:hover {
+    background-color: #dddddda7;
+}
+
+.tabela-stanice-roles {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-station-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.overlay-new-station {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display: none;
+}
