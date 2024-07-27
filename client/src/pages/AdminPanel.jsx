@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/admin-panel.css";
 import TabelaKorisnici from "../components/TabelaKorisnici";
 import TabelaRedVoznje from "../components/TabelaRedVoznje";
+import TabelaStanice from "../components/TabelaStanice";
 
 const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
@@ -69,6 +70,12 @@ const AdminPanel = () => {
                         />
                         <h2>Aktivne linije</h2>
                         <TabelaRedVoznje isEdit={true} isAdmin={true} />
+                    </>
+                )}
+                {selectedTab == "stanice" && (
+                    <>
+                        <h2>Stanice</h2>
+                        <TabelaStanice />
                     </>
                 )}
             </div>
