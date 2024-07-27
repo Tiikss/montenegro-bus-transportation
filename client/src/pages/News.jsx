@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/news.css";
 import DropDownCard from "../components/DropdownCard";
+import Modal from "../components/Modal";
 
 const News = () => {
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
@@ -26,6 +27,36 @@ const News = () => {
     }, [search]);
 
     console.log(search);
+
+    const newsData = [
+        {
+            title: "Naslov 1",
+            date: "21. jul 2024.",
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vehicula nisl vel lacus tincidunt, ut elementum neque ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+        },
+        {
+            title: "Naslov 2",
+            date: "22. jul 2024.",
+            content: "Curabitur quis nulla enim. Maecenas feugiat, odio a dignissim ullamcorper, sapien erat lacinia erat, non pharetra justo dolor at nisi. Proin tincidunt lectus sed metus tristique."
+        },
+        {
+            title: "Naslov 3",
+            date: "23. jul 2024.",
+            content: "Donec efficitur velit ac dolor sodales, ut fermentum odio pellentesque. Integer sed leo vitae nulla fringilla posuere. Integer sollicitudin mi vel nunc varius."
+        }
+    ];
+
+    const [showModal, setShowModal] = useState(false);
+    const [currentNews, setCurrentNews] = useState({ title: '', content: '' });
+
+    const handleOpenModal = (news) => {
+        setCurrentNews(news);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
     return (
         <main id="news-body">
@@ -56,42 +87,30 @@ const News = () => {
                             : null}
                     </div>
                 </div>
-                <div className="news-card">
-                    <h2 className="news-title">Naslov</h2>
-                    <p className="news-date">Objavljeno: 21. jul 2024.</p>
-                    <p className="news-content short-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        A ratione, odit eius quod nostrum, officiis impedit
-                        dolorum obcaecati, doloribus et explicabo mollitia
-                        suscipit illum consequatur pariatur quo perspiciatis
-                        odio consequuntur.
-                    </p>
-                    <button className="read-more-btn">Pročitaj više</button>
-                </div>
-                <div className="news-card">
-                    <h2 className="news-title">Naslov</h2>
-                    <p className="news-date">Objavljeno: 21. jul 2024.</p>
-                    <p className="news-content short-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        A ratione, odit eius quod nostrum, officiis impedit
-                        dolorum obcaecati, doloribus et explicabo mollitia
-                        suscipit illum consequatur pariatur quo perspiciatis
-                        odio consequuntur.
-                    </p>
-                    <button className="read-more-btn">Pročitaj više</button>
-                </div>
-                <div className="news-card">
-                    <h2 className="news-title">Naslov</h2>
-                    <p className="news-date">Objavljeno: 21. jul 2024.</p>
-                    <p className="news-content short-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        A ratione, odit eius quod nostrum, officiis impedit
-                        dolorum obcaecati, doloribus et explicabo mollitia
-                        suscipit illum consequatur pariatur quo perspiciatis
-                        odio consequuntur.
-                    </p>
-                    <button className="read-more-btn">Pročitaj više</button>
-                </div>
+                
+                
+                {newsData.map((news, index) => (
+                    <div key={index} className="news-card">
+                        <h2 className="news-title">{news.title}</h2>
+                        <p className="news-date">Objavljeno: {news.date}</p>
+                        <p className="news-content short-content">
+                            {news.content.slice(0, 100)}...
+                        </p>
+                        <button
+                          className="read-more-btn"
+                          onClick={() => handleOpenModal(news)}
+                        >
+                          Pročitaj više
+                        </button>
+                    </div>
+                ))}
+
+                <Modal
+                    show={showModal}
+                    handleClose={handleCloseModal}
+                    title={currentNews.title}
+                    content={currentNews.content}
+                />
             </div>
         </main>
     );
