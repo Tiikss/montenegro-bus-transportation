@@ -3,8 +3,46 @@ import "../styles/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import slika1 from "../images/young-girl-bus.jpg";
+import Modal from "../components/Modal";
+import { useState } from "react";
 
 const Home = () => {
+
+    const [showModal, setShowModal] = useState(false);
+    const [currentNews, setCurrentNews] = useState({ title: '', content: '' });
+
+    const newsData = [
+        {
+        title: 'Novost',
+        date: '21. jul 2024.',
+        content: 'Uveden je novi red vožnje za liniju Podgorica - Bar.'
+        },
+        {
+        title: 'Novost',
+        date: '21. jul 2024.',
+        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!'
+        },
+        {
+        title: 'Novost',
+        date: '21. jul 2024.',
+        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!'
+        },
+        {
+        title: 'Novost',
+        date: '21. jul 2024.',
+        content: 'Uveden je novi red vožnje za liniju Podgorica - Bar.'
+        }
+    ];
+
+    const handleOpenModal = (title, content) => {
+        setCurrentNews({ title, content });
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <main className="home-body">
             <div className="welcome-div">
@@ -96,43 +134,25 @@ const Home = () => {
 
             <div id="pom-div3">
                 <div className="novosti">
-                    <div className="novost">
+                    {newsData.map((news, index) => (
+                    <div className="novost" key={index}>
                         <div className="ttl-and-date">
-                            <h1>Novost</h1>
-                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
+                        <h1>{news.title}</h1>
+                        <p className="ndate">Objavljeno: {news.date}</p>
                         </div>
-                        <p>Uveden je novi red vožnje za liniju Podgorica - Bar.</p>
-                        <button>Pročitaj više</button>
+                        <p>{news.content.substring(0, 100)}...</p>
+                        <button onClick={() => handleOpenModal(news.title, news.content)}>Pročitaj više</button>
                     </div>
-
-                    <div className="novost">
-                        <div className="ttl-and-date">
-                            <h1>Novost</h1>
-                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
-                        </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!</p>
-                        <button>Pročitaj više</button>
-                    </div>
-
-                    <div className="novost">
-                        <div className="ttl-and-date">
-                            <h1>Novost</h1>
-                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
-                        </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!</p>
-                        <button>Pročitaj više</button>
-                    </div>
-
-                    <div className="novost">
-                        <div className="ttl-and-date">
-                            <h1>Novost</h1>
-                            <p className="ndate">Objavljeno: 21. jul 2024.</p>
-                        </div>
-                        <p>Uveden je novi red vožnje za liniju Podgorica - Bar.</p>
-                        <button>Pročitaj više</button>
-                    </div>
+                    ))}
                 </div>
             </div>
+
+            <Modal
+                show={showModal}
+                handleClose={handleCloseModal}
+                title={currentNews.title}
+                content={currentNews.content}
+            />
         </main>
     );
 }
