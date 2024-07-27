@@ -11,6 +11,7 @@ import Cjenovnik from "./pages/Cjenovnik";
 import ONama from "./pages/ONama";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profil from "./pages/Profil";
 import AdminPanel from "./pages/AdminPanel";
 
 const Layout = () => {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/profil",
+                element: <Profil />,
             },
         ],
     },
