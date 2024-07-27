@@ -11,6 +11,7 @@ import Cjenovnik from "./pages/Cjenovnik";
 import ONama from "./pages/ONama";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminPanel from "./pages/AdminPanel";
 
 const Layout = () => {
     return (
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
                 element: <PrevoznikPanel />,
             },
             {
+                path: "/admin-panel",
+                element: <AdminPanel />,
+            },
+            {
                 path: "/dodaj-liniju",
                 element: <DodajLiniju />,
             },
@@ -62,7 +67,7 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
-            }
+            },
         ],
     },
 ]);
