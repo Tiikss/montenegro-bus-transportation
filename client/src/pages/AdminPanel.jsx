@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/admin-panel.css";
 import TabelaKorisnici from "../components/TabelaKorisnici";
+import TabelaRedVoznje from "../components/TabelaRedVoznje";
 
 const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
+    const [response, setResponse] = useState(null);
 
     const handleTabClick = (e) => {
         e.preventDefault();
         setSelectedTab(e.target.textContent.toLowerCase());
     };
+    const handleSaveChanges = (e) => {
+        e.preventDefault();
+        console.log("Changes saved");
+    };
+
+    useEffect(() => {
+        if (response) {
+            if (response === "accept") {
+                console.log("Accepted");
+            } else if (response === "decline") {
+                console.log("Rejected");
+            }
+            setResponse(null);
+        }
+    }, [response]);
 
     return (
         <main className="adminpanel-body">
@@ -28,10 +45,32 @@ const AdminPanel = () => {
                 </button>
             </div>
             <div className="adminpanel-content">
-                <h2>Korisnici</h2>
-                <TabelaKorisnici isDriver={false} isEdit={true} />
-                <h2>Prevoznici</h2>
-                <TabelaKorisnici isDriver={true} isEdit={true} />
+                {selectedTab == "korisnici" && (
+                    <>
+                        <h2>Korisnici</h2>
+                        <TabelaKorisnici isDriver={false} isEdit={true} />
+                        <h2>Prevoznici</h2>
+                        <TabelaKorisnici isDriver={true} isEdit={true} />
+                        <button
+                            className="adminpanel-button"
+                            onClick={handleSaveChanges}
+                        >
+                            Sacuvaj izmjene
+                        </button>
+                    </>
+                )}
+                {selectedTab == "linije" && (
+                    <>
+                        <h2>Linije na cekanju</h2>
+                        <TabelaRedVoznje
+                            isEdit={true}
+                            isAdmin={true}
+                            handleResponse={setResponse}
+                        />
+                        <h2>Aktivne linije</h2>
+                        <TabelaRedVoznje isEdit={true} isAdmin={true} />
+                    </>
+                )}
             </div>
         </main>
     );
