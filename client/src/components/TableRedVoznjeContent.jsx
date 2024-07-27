@@ -2,7 +2,7 @@ import "../styles/tableredvoznjecontent.css";
 import Linija from "./Linija";
 import MapWrapper from "./MapWrapper";
 
-const TableRedVoznjeContent = ({ departure, isEdit }) => {
+const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
     return (
         <li className="col-content">
             <div className="col table-row-description">
@@ -17,6 +17,7 @@ const TableRedVoznjeContent = ({ departure, isEdit }) => {
                     <Linija
                         stations={departure.stations}
                         isEdit={isEdit}
+                        isAdmin={isAdmin}
                         handleEditClick={() => {}}
                         handleDeleteClick={() => {}}
                     />

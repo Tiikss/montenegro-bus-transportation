@@ -1,7 +1,13 @@
 import React from "react";
 import "../styles/linija.css";
 
-const Linija = ({ stations, isEdit, handleEditClick, handleDeleteClick }) => {
+const Linija = ({
+    stations,
+    isEdit,
+    handleEditClick,
+    handleDeleteClick,
+    isAdmin,
+}) => {
     return (
         <div class="timeline">
             <div class="outer">
@@ -45,6 +51,7 @@ const Linija = ({ stations, isEdit, handleEditClick, handleDeleteClick }) => {
                                 ))}
 
                             {isEdit &&
+                                !isAdmin &&
                                 index > 0 &&
                                 index < stations.length - 1 && (
                                     <div className="line-buttons">
