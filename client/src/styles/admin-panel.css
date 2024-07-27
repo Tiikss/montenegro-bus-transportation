@@ -1,0 +1,36 @@
+.adminpanel-body {
+    padding: 64px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+.adminpanel-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.adminpanel-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.adminpanel-button:hover {
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+}
