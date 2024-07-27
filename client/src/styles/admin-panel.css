@@ -34,3 +34,11 @@
     color: #ba0c0e;
     border: 1px solid #ba0c0e;
 }
+
+.adminpanel-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
