@@ -1,0 +1,183 @@
+.addline-body {
+    color: #333;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.addline-body h1 {
+    text-align: center;
+    color: #ba0c0e;
+    margin-bottom: 40px;
+}
+
+.addline-forms {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.addline-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.addline-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.addline-input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.addline-form button,
+.addstation-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.addline-form button:hover,
+.addstation-form button:hover {
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+}
+
+.add-line-input-container {
+    position: relative;
+}
+
+#station-modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+}
+
+#station-modal h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#station-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#station-modal .modal-content input,
+#station-modal .modal-content select {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#station-modal .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#station-modal .modal-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#station-modal .modal-actions button:hover {
+    background-color: #a00b0d;
+}
+
+.line-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.line-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.line-list li:last-child {
+    border-bottom: none;
+}
+
+.line-list li button {
+    background-color: #ba0c0e;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.line-list li button:hover {
+    background-color: #a00b0d;
+}
+
+.addstation-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.overlay-add-station {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display: none;
+}
+
+.days-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

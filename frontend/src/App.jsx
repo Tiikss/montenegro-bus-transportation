@@ -1,18 +1,18 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { Footer } from "./components/Footer";
-import { Navbar } from "./components/Navbar";
-import { Home } from "./pages/Home";
-import { RedVoznje } from "./pages/RedVoznje";
-import { PrevoznikPanel } from "./pages/PrevoznikPanel";
-import { DodajLiniju } from "./pages/DodajLiniju";
-import { News } from "./pages/News";
-import { Cjenovnik } from "./pages/Cjenovnik";
-import { ONama } from "./pages/ONama";
-import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
-import { Profil } from "./pages/Profil";
-import { AdminPanel } from "./pages/AdminPanel";
+import { Footer } from "./components/Footer/Footer";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Home } from "./pages/Home/Home";
+import { RedVoznje } from "./pages/Timetable/RedVoznje";
+import { PrevoznikPanel } from "./pages/CarrierPanel/PrevoznikPanel";
+import { DodajLiniju } from "./pages/AddLine/DodajLiniju";
+import { News } from "./pages/News/News";
+import { Cjenovnik } from "./pages/PriceList/Cjenovnik";
+import { ONama } from "./pages/AboutUs/ONama";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
+import { Profil } from "./pages/Profile/Profil";
+import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 
 const Layout = () => {
     return (
