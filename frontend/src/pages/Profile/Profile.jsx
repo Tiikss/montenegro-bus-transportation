@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./profil.css";
+import "./profile.css";
 import { Pagination } from "../../components/Pagination/Pagination";
 
 export const Profile = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./linija.css";
+import "./line.css";
 
 export const Line = ({
     stations,

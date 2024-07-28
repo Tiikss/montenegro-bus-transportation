@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./prevoznik-panel.css";
-import { TabelaRedVoznje } from "../../components/TableTimetable/TableTimetable";
+import "./carrier-panel.css";
+import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { Link } from "react-router-dom";
 
@@ -29,12 +29,12 @@ export const CarrierPanel = () => {
                 Nova linija
             </Link>
             <h2>Aktivne linije</h2>
-            <TabelaRedVoznje
+            <TableTimetable
                 isEdit={true}
                 handleDeleteClick={handleDeleteClick}
             />
             <h2>Linije na cekanju</h2>
-            <TabelaRedVoznje
+            <TableTimetable
                 isEdit={true}
                 handleDeleteClick={handleDeleteClick}
             />

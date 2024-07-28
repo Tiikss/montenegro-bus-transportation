@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./cjenovnik.css";
+import "./pricelist.css";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 
 export const PriceList = () => {

@@ -1,5 +1,5 @@
-import { TabelaRedVoznje } from "../../components/TableTimetable/TableTimetable";
-import "./redvoznje.css";
+import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
+import "./timetable.css";
 
 export const Timetable = () => {
     const handleClick = (e) => {
@@ -22,7 +22,7 @@ export const Timetable = () => {
         <div className="red-voznje-content">
             <h1>Red vožnje</h1>
             <h2>Polasci sa stanice Podgorica</h2>
-            <TabelaRedVoznje isEdit={false} />
+            <TableTimetable isEdit={false} />
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import "./dodaj-liniju.css";
+import "./add-line.css";
 import { DropDownCard } from "../DropdownCard/DropdownCard";
 
 export const AddLineStationModal = ({

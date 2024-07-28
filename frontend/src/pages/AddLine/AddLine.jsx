@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./dodaj-liniju.css";
-import { Linija } from "../../components/Line/Line";
+import "./add-line.css";
+import { Line } from "../../components/Line/Line";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
-import { DodajStanicuModal } from "../../components/AddStationModal/AddLineStationModal";
+import { AddLineStationModal } from "../../components/AddStationModal/AddLineStationModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -385,7 +385,7 @@ export const AddLine = () => {
                     </button>
                 </form>
             </div>
-            <DodajStanicuModal
+            <AddLineStationModal
                 isOpen={isModalOpen}
                 setIsOpen={setIsModalOpen}
                 nazivStanice={nazivStanice}
@@ -397,7 +397,7 @@ export const AddLine = () => {
                 cijenaStanica={cijenaStanica}
                 handleAddStation={handleAddStation}
             />
-            <Linija
+            <Line
                 stations={stations}
                 isEdit={true}
                 handleEditClick={handleEditClick}

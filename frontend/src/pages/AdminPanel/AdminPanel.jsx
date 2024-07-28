@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./admin-panel.css";
-import { TabelaKorisnici } from "../../components/TableUser/TableUsers";
-import { TabelaRedVoznje } from "../../components/TableTimetable/TableTimetable";
-import { TabelaStanice } from "../../components/TableStation/TableStations";
+import { TableUsers } from "../../components/TableUser/TableUsers";
+import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
+import { TableStations } from "../../components/TableStation/TableStations";
 
 export const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
@@ -49,9 +49,9 @@ export const AdminPanel = () => {
                 {selectedTab == "korisnici" && (
                     <>
                         <h2>Korisnici</h2>
-                        <TabelaKorisnici isDriver={false} isEdit={true} />
+                        <TableUsers isDriver={false} isEdit={true} />
                         <h2>Prevoznici</h2>
-                        <TabelaKorisnici isDriver={true} isEdit={true} />
+                        <TableUsers isDriver={true} isEdit={true} />
                         <button
                             className="adminpanel-button"
                             onClick={handleSaveChanges}
@@ -63,19 +63,19 @@ export const AdminPanel = () => {
                 {selectedTab == "linije" && (
                     <>
                         <h2>Linije na cekanju</h2>
-                        <TabelaRedVoznje
+                        <TableTimetable
                             isEdit={true}
                             isAdmin={true}
                             handleResponse={setResponse}
                         />
                         <h2>Aktivne linije</h2>
-                        <TabelaRedVoznje isEdit={true} isAdmin={true} />
+                        <TableTimetable isEdit={true} isAdmin={true} />
                     </>
                 )}
                 {selectedTab == "stanice" && (
                     <>
                         <h2>Stanice</h2>
-                        <TabelaStanice />
+                        <TableStations />
                     </>
                 )}
             </div>
