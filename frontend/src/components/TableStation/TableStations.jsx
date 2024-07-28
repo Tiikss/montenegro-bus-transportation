@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./table-stations.css";
 import { MapWrapper } from "../MapWrapper/MapWrapper";
+import { getAllStations, deleteStation } from "../../services/stations";
 
 export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [stations, setStations] = useState([]);
 
     const handleAddNewStation = (e) => {
         e.preventDefault();
         setIsModalOpen(true);
     };
+
+    const handleDeleteStation = async (e, id) => {
+        e.preventDefault();
+        try {
+            const response = deleteStation(id);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchStations = async () => {
+            try {
+                const response = await getAllStations();
+                setStations(response);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchStations();
+    }, []);
 
     return (
         <>
@@ -17,26 +41,44 @@ export const TableStations = () => {
             </button>
 
             <table className="tabela-stanice">
-                <tr>
-                    <th>ID</th>
-                    <th>Ime</th>
-                    <th>Drzava</th>
-                    <th>Grad</th>
-                    <th>Geografska sirina</th>
-                    <th>Geografska duzina</th>
-                    <th>Izbrisi</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Stanica 1</td>
-                    <td>Crna Gora</td>
-                    <td>Podgorica</td>
-                    <td>43.8563</td>
-                    <td>18.4131</td>
-                    <td>
-                        <button className="adminpanel-button">Izbrisi</button>
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ime</th>
+                        <th>Drzava</th>
+                        <th>Grad</th>
+                        <th>Geografska sirina</th>
+                        <th>Geografska duzina</th>
+                        <th>Izbrisi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {stations.map(
+                        (
+                            station,
+                            index // odje umjesto index trba station_id da stoji da se izmijeni obavezno!!!!
+                        ) => (
+                            <tr key={index}>
+                                <td>index</td>
+                                <td>{station.address}</td>
+                                <td>{station.country_name}</td>
+                                <td>{station.city_name}</td>
+                                <td>{station.latitude}</td>
+                                <td>{station.longitude}</td>
+                                <td>
+                                    <button
+                                        className="adminpanel-button"
+                                        onClick={(e) =>
+                                            handleDeleteStation(e, index)
+                                        }
+                                    >
+                                        Izbrisi
+                                    </button>
+                                </td>
+                            </tr>
+                        )
+                    )}
+                </tbody>
                 <tr>
                     <td>2</td>
                     <td>Stanica 2</td>
