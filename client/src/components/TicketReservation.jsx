@@ -1,6 +1,6 @@
 import "../styles/ticketreservation.css";
 
-const TicketReservation = () => {
+export const TicketReservation = () => {
     const handleModalClose = () => {
         document
             .getElementById("ticket-reservation-modal")
@@ -79,5 +79,3 @@ const TicketReservation = () => {
         </>
     );
 };
-
-export default TicketReservation;

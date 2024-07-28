@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../styles/cjenovnik.css";
-import DropDownCard from "../components/DropdownCard";
+import { DropDownCard } from "../components/DropdownCard";
 
-const Cjenovnik = () => {
+export const Cjenovnik = () => {
     const [stations, setStations] = useState([
         "Podgorica",
         "Niksic",
@@ -91,5 +91,3 @@ const Cjenovnik = () => {
         </main>
     );
 };
-
-export default Cjenovnik;

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 // import logo from "../images/buslogo2.png"
 
-const Navbar = () => {
+export const Navbar = () => {
     return (
         <main>
             <div className="nav-content">
@@ -31,5 +31,3 @@ const Navbar = () => {
         </main>
     );
 };
-
-export default Navbar;

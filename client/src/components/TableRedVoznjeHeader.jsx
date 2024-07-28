@@ -1,4 +1,4 @@
-const TabelaRedVoznjeHeader = ({ isEdit }) => {
+export const TabelaRedVoznjeHeader = ({ isEdit }) => {
     return (
         <li className="red-voznje-table-header">
             {isEdit && <div className="col col-0">Pocetna</div>}
@@ -14,5 +14,3 @@ const TabelaRedVoznjeHeader = ({ isEdit }) => {
         </li>
     );
 };
-
-export default TabelaRedVoznjeHeader;

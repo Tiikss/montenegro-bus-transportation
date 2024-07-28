@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../styles/tabela-stanice.css";
-import MapWrapper from "./MapWrapper";
+import { MapWrapper } from "./MapWrapper";
 
-const TabelaStanice = () => {
+export const TabelaStanice = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleAddNewStation = (e) => {
@@ -72,5 +72,3 @@ const TabelaStanice = () => {
         </>
     );
 };
-
-export default TabelaStanice;

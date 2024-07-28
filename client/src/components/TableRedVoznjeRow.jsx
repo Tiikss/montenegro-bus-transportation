@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTicket } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Link } from "react-router-dom";
-import TicketReservation from "./TicketReservation";
+import { TicketReservation } from "./TicketReservation";
 
-const TableRedVoznjeRow = ({
+export const TableRedVoznjeRow = ({
     departure,
     isEdit,
     handleDeleteClick,
@@ -150,5 +150,3 @@ const TableRedVoznjeRow = ({
         </>
     );
 };
-
-export default TableRedVoznjeRow;

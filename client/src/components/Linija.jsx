@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/linija.css";
 
-const Linija = ({
+export const Linija = ({
     stations,
     isEdit,
     handleEditClick,
@@ -106,5 +106,3 @@ const Linija = ({
         </div>
     );
 };
-
-export default Linija;

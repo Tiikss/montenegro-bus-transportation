@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styles/news.css";
-import DropDownCard from "../components/DropdownCard";
-import Modal from "../components/Modal";
+import { DropDownCard } from "../components/DropdownCard";
+import { Modal } from "../components/Modal";
 
-const News = () => {
+export const News = () => {
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
     const [search, setSearch] = useState("");
 
@@ -32,22 +32,25 @@ const News = () => {
         {
             title: "Naslov 1",
             date: "21. jul 2024.",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vehicula nisl vel lacus tincidunt, ut elementum neque ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+            content:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vehicula nisl vel lacus tincidunt, ut elementum neque ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
         },
         {
             title: "Naslov 2",
             date: "22. jul 2024.",
-            content: "Curabitur quis nulla enim. Maecenas feugiat, odio a dignissim ullamcorper, sapien erat lacinia erat, non pharetra justo dolor at nisi. Proin tincidunt lectus sed metus tristique."
+            content:
+                "Curabitur quis nulla enim. Maecenas feugiat, odio a dignissim ullamcorper, sapien erat lacinia erat, non pharetra justo dolor at nisi. Proin tincidunt lectus sed metus tristique.",
         },
         {
             title: "Naslov 3",
             date: "23. jul 2024.",
-            content: "Donec efficitur velit ac dolor sodales, ut fermentum odio pellentesque. Integer sed leo vitae nulla fringilla posuere. Integer sollicitudin mi vel nunc varius."
-        }
+            content:
+                "Donec efficitur velit ac dolor sodales, ut fermentum odio pellentesque. Integer sed leo vitae nulla fringilla posuere. Integer sollicitudin mi vel nunc varius.",
+        },
     ];
 
     const [showModal, setShowModal] = useState(false);
-    const [currentNews, setCurrentNews] = useState({ title: '', content: '' });
+    const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
 
     const handleOpenModal = (news) => {
         setCurrentNews(news);
@@ -87,8 +90,7 @@ const News = () => {
                             : null}
                     </div>
                 </div>
-                
-                
+
                 {newsData.map((news, index) => (
                     <div key={index} className="news-card">
                         <h2 className="news-title">{news.title}</h2>
@@ -97,10 +99,10 @@ const News = () => {
                             {news.content.slice(0, 100)}...
                         </p>
                         <button
-                          className="read-more-btn"
-                          onClick={() => handleOpenModal(news)}
+                            className="read-more-btn"
+                            onClick={() => handleOpenModal(news)}
                         >
-                          Pročitaj više
+                            Pročitaj više
                         </button>
                     </div>
                 ))}
@@ -115,5 +117,3 @@ const News = () => {
         </main>
     );
 };
-
-export default News;

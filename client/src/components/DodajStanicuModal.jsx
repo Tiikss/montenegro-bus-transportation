@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/dodaj-liniju.css";
-import DropDownCard from "./DropdownCard";
+import { DropDownCard } from "./DropdownCard";
 
-const DodajStanicuModal = ({
+export const DodajStanicuModal = ({
     isOpen,
     setIsOpen,
     nazivStanice,
@@ -104,5 +104,3 @@ const DodajStanicuModal = ({
         </div>
     );
 };
-
-export default DodajStanicuModal;

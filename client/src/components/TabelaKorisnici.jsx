@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styles/tabela-korisnici.css";
 import { Link } from "react-router-dom";
-import ModalWindow from "./ModalWindow";
+import { ModalWindow } from "./ModalWindow";
 
-const TabelaKorisnici = ({ isDriver, isEdit }) => {
+export const TabelaKorisnici = ({ isDriver, isEdit }) => {
     const [korisnici, setKorisnici] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
@@ -142,5 +142,3 @@ const TabelaKorisnici = ({ isDriver, isEdit }) => {
         </>
     );
 };
-
-export default TabelaKorisnici;

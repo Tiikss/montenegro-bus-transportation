@@ -1,8 +1,8 @@
 import "../styles/tableredvoznjecontent.css";
-import Linija from "./Linija";
-import MapWrapper from "./MapWrapper";
+import { Linija } from "./Linija";
+import { MapWrapper } from "./MapWrapper";
 
-const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
+export const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
     return (
         <li className="col-content">
             <div className="col table-row-description">
@@ -27,5 +27,3 @@ const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
         </li>
     );
 };
-
-export default TableRedVoznjeContent;

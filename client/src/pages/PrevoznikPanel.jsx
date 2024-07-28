@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/prevoznik-panel.css";
-import TabelaRedVoznje from "../components/TabelaRedVoznje";
-import ModalWindow from "../components/ModalWindow";
+import { TabelaRedVoznje } from "../components/TabelaRedVoznje";
+import { ModalWindow } from "../components/ModalWindow";
 import { Link } from "react-router-dom";
 
-const PrevoznikPanel = () => {
+export const PrevoznikPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const [modalResponse, setModalResponse] = useState(false);
@@ -51,5 +51,3 @@ const PrevoznikPanel = () => {
         </main>
     );
 };
-
-export default PrevoznikPanel;

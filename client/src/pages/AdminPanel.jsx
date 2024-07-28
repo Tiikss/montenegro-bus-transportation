@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/admin-panel.css";
-import TabelaKorisnici from "../components/TabelaKorisnici";
-import TabelaRedVoznje from "../components/TabelaRedVoznje";
-import TabelaStanice from "../components/TabelaStanice";
+import { TabelaKorisnici } from "../components/TabelaKorisnici";
+import { TabelaRedVoznje } from "../components/TabelaRedVoznje";
+import { TabelaStanice } from "../components/TabelaStanice";
 
-const AdminPanel = () => {
+export const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
     const [response, setResponse] = useState(null);
 
@@ -82,5 +82,3 @@ const AdminPanel = () => {
         </main>
     );
 };
-
-export default AdminPanel;

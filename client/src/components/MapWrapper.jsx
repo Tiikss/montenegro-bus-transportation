@@ -17,7 +17,7 @@ function DeckGLOverlay({ layers }) {
     return null;
 }
 
-const MapWrapper = ({ stations }) => {
+export const MapWrapper = ({ stations }) => {
     const [pathData, setPathData] = useState(null);
 
     useEffect(() => {
@@ -93,5 +93,3 @@ const MapWrapper = ({ stations }) => {
         </APIProvider>
     );
 };
-
-export default MapWrapper;

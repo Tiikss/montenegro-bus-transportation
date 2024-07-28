@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../styles/modal-window.css";
 
-const ModalWindow = ({
+export const ModalWindow = ({
     isConfirmation,
     isOpen,
     setIsOpen,
@@ -49,5 +49,3 @@ const ModalWindow = ({
         </>
     );
 };
-
-export default ModalWindow;
