@@ -1,7 +1,7 @@
-import { TabelaRedVoznje } from "../../components/TableTimetable/TabelaRedVoznje";
-import "./redvoznje.css";
+import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
+import "./timetable.css";
 
-export const RedVoznje = () => {
+export const Timetable = () => {
     const handleClick = (e) => {
         const content = e.target.parentElement.parentElement.nextElementSibling;
         if (content.style.maxHeight) {
@@ -22,7 +22,7 @@ export const RedVoznje = () => {
         <div className="red-voznje-content">
             <h1>Red vožnje</h1>
             <h2>Polasci sa stanice Podgorica</h2>
-            <TabelaRedVoznje isEdit={false} />
+            <TableTimetable isEdit={false} />
         </div>
     );
 };

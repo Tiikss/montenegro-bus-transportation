@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import "../styles/tabela-red-voznje.css";
-import { TabelaRedVoznjeHeader } from "./components/TableTimetableHeader/TableRedVoznjeHeader";
-import { TableRedVoznjeRow } from "./components/TableTimetableRow/TableRedVoznjeRow";
-import { TableRedVoznjeContent } from "./components/TableTimetableContent/TableRedVoznjeContent";
+import { TableTimetableHeader } from "./components/TableTimetableHeader/TableTimetableHeader";
+import { TableTimetableRow } from "./components/TableTimetableRow/TableTimetableRow";
+import { TableTimetableContent } from "./components/TableTimetableContent/TableTimetableContent";
 
-export const TabelaRedVoznje = ({
+export const TableTimetable = ({
     isEdit,
     handleDeleteClick,
     isAdmin,
@@ -83,18 +83,18 @@ export const TabelaRedVoznje = ({
 
     return (
         <ul className="red-voznje-table">
-            <TabelaRedVoznjeHeader isEdit={isEdit} />
+            <TableTimetableHeader isEdit={isEdit} />
             {departures
                 ? departures.map((departure) => (
                       <>
-                          <TableRedVoznjeRow
+                          <TableTimetableRow
                               departure={departure}
                               isEdit={isEdit}
                               isAdmin={isAdmin}
                               handleDeleteClick={handleDeleteClick}
                               handleResponse={handleResponse}
                           />
-                          <TableRedVoznjeContent
+                          <TableTimetableContent
                               departure={departure}
                               isEdit={isEdit}
                               isAdmin={isAdmin}

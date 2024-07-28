@@ -1,7 +1,7 @@
 import React from "react";
-import "./oNama.css";
+import "./about-us.css";
 
-export const ONama = () => {
+export const AboutUs = () => {
     return (
         <main id="o-nama-body">
             <h1>O nama</h1>

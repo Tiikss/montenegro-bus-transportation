@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./tabela-korisnici.css";
+import "./table-users.css";
 import { Link } from "react-router-dom";
 import { ModalWindow } from "../ModalWindow/ModalWindow";
 
-export const TabelaKorisnici = ({ isDriver, isEdit }) => {
+export const TableUsers = ({ isDriver, isEdit }) => {
     const [korisnici, setKorisnici] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});

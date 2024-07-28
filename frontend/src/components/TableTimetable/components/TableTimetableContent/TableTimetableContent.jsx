@@ -1,8 +1,8 @@
-import "./tableredvoznjecontent.css";
-import { Linija } from "../../../Line/Linija";
+import "./table-timetable-content.css";
+import { Line } from "../../../Line/Line";
 import { MapWrapper } from "../../../MapWrapper/MapWrapper";
 
-export const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
+export const TableTimetableContent = ({ departure, isEdit, isAdmin }) => {
     return (
         <li className="col-content">
             <div className="col table-row-description">
@@ -14,7 +14,7 @@ export const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
                     {departure.departureTime}-{departure.arrivalTime}
                 </h4>
                 <div className="table-line-container">
-                    <Linija
+                    <Line
                         stations={departure.stations}
                         isEdit={isEdit}
                         isAdmin={isAdmin}

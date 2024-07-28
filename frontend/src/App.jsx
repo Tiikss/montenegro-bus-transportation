@@ -3,15 +3,15 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Footer } from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Home } from "./pages/Home/Home";
-import { RedVoznje } from "./pages/Timetable/RedVoznje";
-import { PrevoznikPanel } from "./pages/CarrierPanel/PrevoznikPanel";
-import { DodajLiniju } from "./pages/AddLine/DodajLiniju";
+import { Timetable } from "./pages/Timetable/Timetable";
+import { CarrierPanel } from "./pages/CarrierPanel/CarrierPanel";
+import { AddLine } from "./pages/AddLine/AddLine";
 import { News } from "./pages/News/News";
-import { Cjenovnik } from "./pages/PriceList/Cjenovnik";
-import { ONama } from "./pages/AboutUs/ONama";
+import { PriceList } from "./pages/PriceList/PriceList";
+import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
-import { Profil } from "./pages/Profile/Profil";
+import { Profile } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 
 const Layout = () => {
@@ -35,11 +35,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/red-voznje",
-                element: <RedVoznje />,
+                element: <Timetable />,
             },
             {
                 path: "/prevoznik-panel",
-                element: <PrevoznikPanel />,
+                element: <CarrierPanel />,
             },
             {
                 path: "/admin-panel",
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dodaj-liniju",
-                element: <DodajLiniju />,
+                element: <AddLine />,
             },
             {
                 path: "/news",
@@ -55,11 +55,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/cjenovnik",
-                element: <Cjenovnik />,
+                element: <PriceList />,
             },
             {
                 path: "/onama",
-                element: <ONama />,
+                element: <AboutUs />,
             },
             {
                 path: "/login",
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profil",
-                element: <Profil />,
+                element: <Profile />,
             },
         ],
     },

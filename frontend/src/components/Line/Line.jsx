@@ -1,7 +1,7 @@
 import React from "react";
-import "./linija.css";
+import "./line.css";
 
-export const Linija = ({
+export const Line = ({
     stations,
     isEdit,
     handleEditClick,

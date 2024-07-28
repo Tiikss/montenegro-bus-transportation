@@ -1,4 +1,4 @@
-import "./ticketreservation.css";
+import "./ticket-reservation.css";
 
 export const TicketReservation = () => {
     const handleModalClose = () => {

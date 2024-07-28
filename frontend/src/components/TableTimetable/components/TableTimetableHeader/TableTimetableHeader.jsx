@@ -1,4 +1,4 @@
-export const TabelaRedVoznjeHeader = ({ isEdit }) => {
+export const TableTimetableHeader = ({ isEdit }) => {
     return (
         <li className="red-voznje-table-header">
             {isEdit && <div className="col col-0">Pocetna</div>}

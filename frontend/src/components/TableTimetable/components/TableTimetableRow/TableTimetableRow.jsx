@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { TicketReservation } from "../../../TicketReservation/TicketReservation";
 
-export const TableRedVoznjeRow = ({
+export const TableTimetableRow = ({
     departure,
     isEdit,
     handleDeleteClick,
