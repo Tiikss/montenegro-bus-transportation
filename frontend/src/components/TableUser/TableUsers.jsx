@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./table-users.css";
 import { Link } from "react-router-dom";
 import { ModalWindow } from "../ModalWindow/ModalWindow";
-import { getUsers } from "../../services/users";
+import { getUsersByRole, deleteUser } from "../../services/users";
 
 export const TableUsers = ({ role, isEdit }) => {
     const [users, setUsers] = useState([]);
@@ -33,17 +33,25 @@ export const TableUsers = ({ role, isEdit }) => {
     };
 
     useEffect(() => {
-        if (modalResponse && modalData.title === "Brisanje korisnika") {
-            // Ovdje se salje zahtjev za brisanje korisnika
-            console.log("Brisanje korisnika");
-            setModalResponse(false);
-        }
+        const deleteUserFunc = async () => {
+            if (modalResponse && modalData.title === "Brisanje korisnika") {
+                try {
+                    const response = await deleteUser(selectedUser);
+                    console.log("Response", response);
+                } catch (error) {
+                    console.error("Error", error);
+                }
+                console.log("Brisanje korisnika");
+                setModalResponse(false);
+            }
+        };
+        deleteUserFunc();
     }, [modalResponse]);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await getUsers(1, role);
+                const response = await getUsersByRole(1, role);
                 setUsers(response);
                 console.log("Users", users);
             } catch (error) {
@@ -70,7 +78,7 @@ export const TableUsers = ({ role, isEdit }) => {
                 </thead>
                 <tbody>
                     {users.map((user) => (
-                        <tr>
+                        <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>{user.username}</td>
                             <td>{user.full_name}</td>
@@ -110,7 +118,6 @@ export const TableUsers = ({ role, isEdit }) => {
                                             handleDeleteClick(e, user.id)
                                         }
                                     >
-                                        {/*Odje mora id da se stavi umjesto 0 */}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
