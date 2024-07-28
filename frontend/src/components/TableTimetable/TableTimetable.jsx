@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import "../styles/tabela-red-voznje.css";
 import { TableTimetableHeader } from "./components/TableTimetableHeader/TableTimetableHeader";
 import { TableTimetableRow } from "./components/TableTimetableRow/TableTimetableRow";
 import { TableTimetableContent } from "./components/TableTimetableContent/TableTimetableContent";
+import { getLines } from "../../services/lines";
 
 export const TableTimetable = ({
     isEdit,
@@ -81,21 +82,35 @@ export const TableTimetable = ({
         },
     ]);
 
+    const [lines, setLines] = useState([]);
+
+    useEffect(() => {
+        try {
+            const fetchLines = async () => {
+                const response = await getLines();
+                setLines(response);
+            };
+            fetchLines();
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     return (
         <ul className="red-voznje-table">
             <TableTimetableHeader isEdit={isEdit} />
-            {departures
-                ? departures.map((departure) => (
+            {lines
+                ? lines.map((line) => (
                       <>
                           <TableTimetableRow
-                              departure={departure}
+                              departure={line}
                               isEdit={isEdit}
                               isAdmin={isAdmin}
                               handleDeleteClick={handleDeleteClick}
                               handleResponse={handleResponse}
                           />
                           <TableTimetableContent
-                              departure={departure}
+                              departure={line}
                               isEdit={isEdit}
                               isAdmin={isAdmin}
                           />
