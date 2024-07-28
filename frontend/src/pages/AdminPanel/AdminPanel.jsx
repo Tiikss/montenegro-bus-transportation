@@ -49,9 +49,11 @@ export const AdminPanel = () => {
                 {selectedTab == "korisnici" && (
                     <>
                         <h2>Korisnici</h2>
-                        <TableUsers isDriver={false} isEdit={true} />
+                        <TableUsers role="Passenger" isEdit={true} />
                         <h2>Prevoznici</h2>
-                        <TableUsers isDriver={true} isEdit={true} />
+                        <TableUsers role="Driver" isEdit={true} />
+                        <h2>Administratori</h2>
+                        <TableUsers role="Admin" isEdit={true} />
                         <button
                             className="adminpanel-button"
                             onClick={handleSaveChanges}
