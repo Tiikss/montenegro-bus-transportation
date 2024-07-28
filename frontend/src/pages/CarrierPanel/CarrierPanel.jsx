@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./prevoznik-panel.css";
-import { TabelaRedVoznje } from "../../components/TableTimetable/TabelaRedVoznje";
+import { TabelaRedVoznje } from "../../components/TableTimetable/TableTimetable";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { Link } from "react-router-dom";
 
-export const PrevoznikPanel = () => {
+export const CarrierPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const [modalResponse, setModalResponse] = useState(false);

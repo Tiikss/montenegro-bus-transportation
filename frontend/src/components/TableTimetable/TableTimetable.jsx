@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import "../styles/tabela-red-voznje.css";
-import { TabelaRedVoznjeHeader } from "./components/TableTimetableHeader/TableRedVoznjeHeader";
-import { TableRedVoznjeRow } from "./components/TableTimetableRow/TableRedVoznjeRow";
-import { TableRedVoznjeContent } from "./components/TableTimetableContent/TableRedVoznjeContent";
+import { TabelaRedVoznjeHeader } from "./components/TableTimetableHeader/TableTimetableHeader";
+import { TableRedVoznjeRow } from "./components/TableTimetableRow/TableTimetableRow";
+import { TableRedVoznjeContent } from "./components/TableTimetableContent/TableTimetableContent";
 
-export const TabelaRedVoznje = ({
+export const TableTimetable = ({
     isEdit,
     handleDeleteClick,
     isAdmin,

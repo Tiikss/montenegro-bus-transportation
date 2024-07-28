@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./tabela-stanice.css";
 import { MapWrapper } from "../MapWrapper/MapWrapper";
 
-export const TabelaStanice = () => {
+export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleAddNewStation = (e) => {

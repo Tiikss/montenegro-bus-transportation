@@ -3,15 +3,15 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Footer } from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Home } from "./pages/Home/Home";
-import { RedVoznje } from "./pages/Timetable/RedVoznje";
-import { PrevoznikPanel } from "./pages/CarrierPanel/PrevoznikPanel";
-import { DodajLiniju } from "./pages/AddLine/DodajLiniju";
+import { RedVoznje } from "./pages/Timetable/Timetable";
+import { PrevoznikPanel } from "./pages/CarrierPanel/CarrierPanel";
+import { DodajLiniju } from "./pages/AddLine/AddLine";
 import { News } from "./pages/News/News";
-import { Cjenovnik } from "./pages/PriceList/Cjenovnik";
-import { ONama } from "./pages/AboutUs/ONama";
+import { Cjenovnik } from "./pages/PriceList/PriceList";
+import { ONama } from "./pages/AboutUs/AboutUs";
 import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
-import { Profil } from "./pages/Profile/Profil";
+import { Profil } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 
 const Layout = () => {

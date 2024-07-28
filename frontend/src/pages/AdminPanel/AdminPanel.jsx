@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./admin-panel.css";
-import { TabelaKorisnici } from "../../components/TableUser/TabelaKorisnici";
-import { TabelaRedVoznje } from "../../components/TableTimetable/TabelaRedVoznje";
-import { TabelaStanice } from "../../components/TableStation/TabelaStanice";
+import { TabelaKorisnici } from "../../components/TableUser/TableUsers";
+import { TabelaRedVoznje } from "../../components/TableTimetable/TableTimetable";
+import { TabelaStanice } from "../../components/TableStation/TableStations";
 
 export const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");

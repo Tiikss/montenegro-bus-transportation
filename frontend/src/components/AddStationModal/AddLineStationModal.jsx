@@ -2,7 +2,7 @@ import React from "react";
 import "./dodaj-liniju.css";
 import { DropDownCard } from "../DropdownCard/DropdownCard";
 
-export const DodajStanicuModal = ({
+export const AddLineStationModal = ({
     isOpen,
     setIsOpen,
     nazivStanice,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./profil.css";
 import { Pagination } from "../../components/Pagination/Pagination";
 
-export const Profil = () => {
+export const Profile = () => {
     const [user, setUser] = useState(null);
     const [tickets, setTickets] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);

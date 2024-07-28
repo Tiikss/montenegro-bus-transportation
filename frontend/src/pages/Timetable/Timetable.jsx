@@ -1,7 +1,7 @@
-import { TabelaRedVoznje } from "../../components/TableTimetable/TabelaRedVoznje";
+import { TabelaRedVoznje } from "../../components/TableTimetable/TableTimetable";
 import "./redvoznje.css";
 
-export const RedVoznje = () => {
+export const Timetable = () => {
     const handleClick = (e) => {
         const content = e.target.parentElement.parentElement.nextElementSibling;
         if (content.style.maxHeight) {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./dodaj-liniju.css";
-import { Linija } from "../../components/Line/Linija";
+import { Linija } from "../../components/Line/Line";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
-import { DodajStanicuModal } from "../../components/AddStationModal/DodajStanicuModal";
+import { DodajStanicuModal } from "../../components/AddStationModal/AddLineStationModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
-export const DodajLiniju = () => {
+export const AddLine = () => {
     const [polazistaLista, setPolazistaLista] = useState([
         "Podgorica",
         "Niksic",

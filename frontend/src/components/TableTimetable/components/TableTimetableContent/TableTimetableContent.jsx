@@ -1,8 +1,8 @@
 import "./tableredvoznjecontent.css";
-import { Linija } from "../../../Line/Linija";
+import { Linija } from "../../../Line/Line";
 import { MapWrapper } from "../../../MapWrapper/MapWrapper";
 
-export const TableRedVoznjeContent = ({ departure, isEdit, isAdmin }) => {
+export const TableTimetableContent = ({ departure, isEdit, isAdmin }) => {
     return (
         <li className="col-content">
             <div className="col table-row-description">

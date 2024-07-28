@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./cjenovnik.css";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 
-export const Cjenovnik = () => {
+export const PriceList = () => {
     const [stations, setStations] = useState([
         "Podgorica",
         "Niksic",
