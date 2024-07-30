@@ -10,3 +10,12 @@ export const getNews = async () => {
     });
     return response.data;
 }
+
+export const deleteNews = async (id) => {
+    const response = await axios.delete(`${URL}/news/${id}`, {
+        headers: {
+            "ngrok-skip-browser-warning": "true"
+        }
+    });
+    return response.data;
+}
