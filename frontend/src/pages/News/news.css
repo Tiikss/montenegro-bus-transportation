@@ -102,7 +102,20 @@ h1 {
 }
 
 .news-search-container {
-    position: relative;
     width: 400px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.news-btn-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.news-admin-btn {
+    border: none;
+    background-color: white;
 }
