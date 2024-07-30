@@ -63,6 +63,7 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
+    border: 1px solid #ba0c0e;
 }
 
 .read-more-btn:hover {
