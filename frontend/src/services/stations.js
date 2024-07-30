@@ -6,7 +6,7 @@ export const getAllStations = async () => {
     try {
         const response = await axios.get(`${URL}/stations`, {
             headers: {
-                Authorization: "Basic " + btoa("username1:idemoautobusi"),
+                "ngrok-skip-browser-warning": "true"
             },
         });
         return response.data;
@@ -19,7 +19,7 @@ export const deleteStation = async (id) => {
     try {
         const response = await axios.delete(`${URL}/stations/${id}`, {
             headers: {
-                Authorization: "Basic " + btoa("username1:idemoautobusi"),
+                "ngrok-skip-browser-warning": "true"
             },
         });
         return response.data;
