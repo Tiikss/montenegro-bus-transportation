@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./news.css";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { Modal } from "../../components/Modal/Modal";
+import { getNews } from "../../services/news";
 
 export const News = () => {
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
     const [search, setSearch] = useState("");
+    const [tmpNews, setTmpNews] = useState([]);
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -26,29 +28,6 @@ export const News = () => {
         }
     }, [search]);
 
-    console.log(search);
-
-    const newsData = [
-        {
-            title: "Naslov 1",
-            date: "21. jul 2024.",
-            content:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vehicula nisl vel lacus tincidunt, ut elementum neque ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-        },
-        {
-            title: "Naslov 2",
-            date: "22. jul 2024.",
-            content:
-                "Curabitur quis nulla enim. Maecenas feugiat, odio a dignissim ullamcorper, sapien erat lacinia erat, non pharetra justo dolor at nisi. Proin tincidunt lectus sed metus tristique.",
-        },
-        {
-            title: "Naslov 3",
-            date: "23. jul 2024.",
-            content:
-                "Donec efficitur velit ac dolor sodales, ut fermentum odio pellentesque. Integer sed leo vitae nulla fringilla posuere. Integer sollicitudin mi vel nunc varius.",
-        },
-    ];
-
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
 
@@ -60,6 +39,19 @@ export const News = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    useEffect(() => {
+        try {
+            const fetchData = async () => {
+                const news = await getNews();
+                setTmpNews(news);
+            };
+            fetchData();
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }, []);
 
     return (
         <main id="news-body">
@@ -91,10 +83,10 @@ export const News = () => {
                     </div>
                 </div>
 
-                {newsData.map((news, index) => (
-                    <div key={index} className="news-card">
+                {tmpNews ? tmpNews.map((news, id) => (
+                    <div key={id} className="news-card">
                         <h2 className="news-title">{news.title}</h2>
-                        <p className="news-date">Objavljeno: {news.date}</p>
+                        <p className="news-date">Objavljeno: {news.created_date}</p>
                         <p className="news-content short-content">
                             {news.content.slice(0, 100)}...
                         </p>
@@ -105,7 +97,7 @@ export const News = () => {
                             Pročitaj više
                         </button>
                     </div>
-                ))}
+                )) : null}
 
                 <Modal
                     show={showModal}
