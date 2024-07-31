@@ -6,7 +6,7 @@ export const getAllStations = async () => {
     try {
         const response = await axios.get(`${URL}/stations`, {
             headers: {
-                "ngrok-skip-browser-warning": "true"
+                "ngrok-skip-browser-warning": "true",
             },
         });
         return response.data;
@@ -19,9 +19,25 @@ export const deleteStation = async (id) => {
     try {
         const response = await axios.delete(`${URL}/stations/${id}`, {
             headers: {
-                "ngrok-skip-browser-warning": "true"
+                "ngrok-skip-browser-warning": "true",
             },
         });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const addStation = async (station) => {
+    try {
+        const response = await axios.post(`${URL}/stations`, station, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        });
+        console.log(station);
+        console.log(response.data);
+
         return response.data;
     } catch (error) {
         console.log(error);
