@@ -79,9 +79,12 @@ export const MapWrapper = ({ stations, isAdmin }) => {
     return (
         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
             <Map
-                style={{ width: "700px", height: "500px" }}
+                style={{
+                    width: !isAdmin ? "700px" : "400px",
+                    height: !isAdmin ? "500px" : "250px",
+                }}
                 defaultCenter={{ lat: 42.7044223, lng: 19.3957785 }}
-                defaultZoom={8.3}
+                defaultZoom={!isAdmin ? 8.3 : 7}
                 gestureHandling={"greedy"}
                 disableDefaultUI={true}
                 mapId={"montenegro-bus-transportation"}
