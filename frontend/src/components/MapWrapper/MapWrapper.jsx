@@ -69,6 +69,12 @@ export const MapWrapper = ({ stations }) => {
         ];
     }, [pathData]);
 
+    const handleMapClick = (event) => {
+        const lat = event.detail.latLng.lat;
+        const lng = event.detail.latLng.lng;
+        console.log("Clicked on: ", lat, lng);
+    };
+
     return (
         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
             <Map
@@ -78,6 +84,7 @@ export const MapWrapper = ({ stations }) => {
                 gestureHandling={"greedy"}
                 disableDefaultUI={true}
                 mapId={"montenegro-bus-transportation"}
+                onClick={(e) => handleMapClick(e)}
             >
                 {stations.map((station) => (
                     <Marker
