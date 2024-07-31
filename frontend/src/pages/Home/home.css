@@ -89,6 +89,7 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    border: 1px solid #ba0c0e;
 }
 
 .choose button:hover {
@@ -269,6 +270,7 @@
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    border: 1px solid #ba0c0e;
 }
 
 .novost button:hover {
