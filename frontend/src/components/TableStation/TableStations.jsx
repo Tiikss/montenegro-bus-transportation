@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./table-stations.css";
 import { MapWrapper } from "../MapWrapper/MapWrapper";
 import { getAllStations, deleteStation } from "../../services/stations";
+import { addStation } from "../../services/stations";
 
 export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +12,18 @@ export const TableStations = () => {
     const handleAddNewStation = (e) => {
         e.preventDefault();
         setIsModalOpen(true);
+    };
+
+    const handleAddStationApi = async (e) => {
+        e.preventDefault();
+        await addStation({
+            phone_number: "123456789",
+            address: "Neka adresa",
+            city_name: "Budva",
+            country_name: "Montenegro",
+            latitude: 12.3,
+            longitude: 12.3,
+        });
     };
 
     const handleDeleteStation = async (e, id) => {
@@ -58,7 +71,7 @@ export const TableStations = () => {
                             station,
                             index // odje umjesto index trba station_id da stoji da se izmijeni obavezno!!!!
                         ) => (
-                            <tr key={index}>
+                            <tr key={station.id}>
                                 <td>index</td>
                                 <td>{station.address}</td>
                                 <td>{station.country_name}</td>
@@ -69,7 +82,7 @@ export const TableStations = () => {
                                     <button
                                         className="adminpanel-button"
                                         onClick={(e) =>
-                                            handleDeleteStation(e, index)
+                                            handleDeleteStation(e, station.id)
                                         }
                                     >
                                         Izbrisi
@@ -103,7 +116,12 @@ export const TableStations = () => {
                 <input type="text" id="station-city" />
                 <MapWrapper stations={[]} isAdmin={true} />
                 {/* Odje treba opcija da se sa mape bira lokacija i da se stavi */}
-                <button className="adminpanel-button">Dodaj stanicu</button>
+                <button
+                    className="adminpanel-button"
+                    onClick={handleAddStationApi}
+                >
+                    Dodaj stanicu
+                </button>
             </form>
             <div
                 className={
