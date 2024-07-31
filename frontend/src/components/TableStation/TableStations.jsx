@@ -59,7 +59,7 @@ export const TableStations = () => {
                 <input type="text" id="station-country" />
                 <label htmlFor="station-city">Grad:</label>
                 <input type="text" id="station-city" />
-                <MapWrapper stations={[]} />
+                <MapWrapper stations={[]} isAdmin={true} />
                 {/* Odje treba opcija da se sa mape bira lokacija i da se stavi */}
                 <button className="adminpanel-button">Dodaj stanicu</button>
             </form>

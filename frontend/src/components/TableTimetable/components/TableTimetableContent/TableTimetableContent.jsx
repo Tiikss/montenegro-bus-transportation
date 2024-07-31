@@ -21,7 +21,7 @@ export const TableTimetableContent = ({ departure, isEdit, isAdmin }) => {
                         handleEditClick={() => {}}
                         handleDeleteClick={() => {}}
                     />
-                    <MapWrapper stations={departure.stations} />
+                    <MapWrapper stations={departure.stations} isAdmin={false} />
                 </div>
             </div>
         </li>

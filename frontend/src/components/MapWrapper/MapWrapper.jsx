@@ -17,8 +17,9 @@ function DeckGLOverlay({ layers }) {
     return null;
 }
 
-export const MapWrapper = ({ stations }) => {
+export const MapWrapper = ({ stations, isAdmin }) => {
     const [pathData, setPathData] = useState(null);
+    const [currPoint, setCurrPoint] = useState(null);
 
     useEffect(() => {
         if (!window.google) return;
@@ -69,15 +70,25 @@ export const MapWrapper = ({ stations }) => {
         ];
     }, [pathData]);
 
+    const handleMapClick = (event) => {
+        const lat = event.detail.latLng.lat;
+        const lng = event.detail.latLng.lng;
+        setCurrPoint({ lat, lng });
+    };
+
     return (
         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
             <Map
-                style={{ width: "700px", height: "500px" }}
+                style={{
+                    width: !isAdmin ? "700px" : "400px",
+                    height: !isAdmin ? "500px" : "250px",
+                }}
                 defaultCenter={{ lat: 42.7044223, lng: 19.3957785 }}
-                defaultZoom={8.3}
+                defaultZoom={!isAdmin ? 8.3 : 7}
                 gestureHandling={"greedy"}
                 disableDefaultUI={true}
                 mapId={"montenegro-bus-transportation"}
+                onClick={(e) => handleMapClick(e)}
             >
                 {stations.map((station) => (
                     <Marker
@@ -88,6 +99,14 @@ export const MapWrapper = ({ stations }) => {
                         }}
                     />
                 ))}
+                {isAdmin && currPoint ? (
+                    <Marker
+                        position={{
+                            lat: currPoint.lat,
+                            lng: currPoint.lng,
+                        }}
+                    />
+                ) : null}
                 <DeckGLOverlay layers={layers} />
             </Map>
         </APIProvider>
