@@ -17,7 +17,7 @@ function DeckGLOverlay({ layers }) {
     return null;
 }
 
-export const MapWrapper = ({ stations }) => {
+export const MapWrapper = ({ stations, isAdmin }) => {
     const [pathData, setPathData] = useState(null);
 
     useEffect(() => {
@@ -72,7 +72,7 @@ export const MapWrapper = ({ stations }) => {
     const handleMapClick = (event) => {
         const lat = event.detail.latLng.lat;
         const lng = event.detail.latLng.lng;
-        console.log("Clicked on: ", lat, lng);
+        setCurrPoint({ lat, lng });
     };
 
     return (
