@@ -19,6 +19,7 @@ function DeckGLOverlay({ layers }) {
 
 export const MapWrapper = ({ stations, isAdmin }) => {
     const [pathData, setPathData] = useState(null);
+    const [currPoint, setCurrPoint] = useState(null);
 
     useEffect(() => {
         if (!window.google) return;
@@ -95,6 +96,14 @@ export const MapWrapper = ({ stations, isAdmin }) => {
                         }}
                     />
                 ))}
+                {isAdmin && currPoint ? (
+                    <Marker
+                        position={{
+                            lat: currPoint.lat,
+                            lng: currPoint.lng,
+                        }}
+                    />
+                ) : null}
                 <DeckGLOverlay layers={layers} />
             </Map>
         </APIProvider>
