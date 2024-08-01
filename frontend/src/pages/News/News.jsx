@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./news.css";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { Modal } from "../../components/Modal/Modal";
-import { deleteNews, getNews } from "../../services/news";
+import { deleteNews, getNews, updateNews, addNews } from "../../services/news";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { AddNewsModal } from "./AddNewsModal/AddNewsModal";
 
 export const News = () => {
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
     const [showModal, setShowModal] = useState(false);
-    const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
+    const [currentNews, setCurrentNews] = useState({ id: -1, title: "", content: "" });
     const [search, setSearch] = useState("");
     const [tmpNews, setTmpNews] = useState([]);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -50,6 +50,10 @@ export const News = () => {
         setShowModal(false);
         setIsAddModalOpen(false);
     };
+
+    useEffect(() => {
+        console.log("umro",currentNews.id);
+    }, [currentNews]);
 
     useEffect(() => {
         try {
@@ -210,6 +214,7 @@ export const News = () => {
                     title={currentNews.title}
                     setTitle={setCurrentNews}
                     content={currentNews.content}
+                    id={currentNews.id}
                 />
             </div>
         </main>

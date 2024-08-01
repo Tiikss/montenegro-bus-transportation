@@ -19,3 +19,21 @@ export const deleteNews = async (id) => {
     });
     return response.data;
 }
+
+export const updateNews = async (id, news) => {
+    const response = await axios.put(`${URL}/news/${id}`, news, {
+        headers: {
+            "ngrok-skip-browser-warning": "true"
+        }
+    });
+    return response.data;
+}
+
+export const addNews = async (news) => {
+    const response = await axios.post(`${URL}/news`, news, {
+        headers: {
+            "ngrok-skip-browser-warning": "true"
+        }
+    });
+    return response.data;
+}
