@@ -75,6 +75,12 @@ export const News = () => {
         setSelectedNews(id);
     };
 
+    const handleAddNewNews = (e) => {
+        e.preventDefault();
+        setCurrentNews({ id: -1, title: "", content: "" });
+        setIsAddModalOpen(true);
+    };
+
     useEffect(() => {
         if (deleteModalResponse) {
             const handleDelete = async () => {
@@ -96,7 +102,7 @@ export const News = () => {
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
                 <div className="news-search-container">
-                    <button className="read-more-btn">Dodaj novost</button>
+                    <button className="read-more-btn" onClick={e => handleAddNewNews(e)}>Dodaj novost</button>
                     <input
                         type="text"
                         placeholder="Pretraži objave"
@@ -215,6 +221,7 @@ export const News = () => {
                     setTitle={setCurrentNews}
                     content={currentNews.content}
                     id={currentNews.id}
+                    isEdit={currentNews.id !== -1}
                 />
             </div>
         </main>

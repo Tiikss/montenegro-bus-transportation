@@ -1,8 +1,8 @@
 import React from "react";
 import "./addnewsmodal.css";
-import { updateNews } from "../../../services/news";
+import { updateNews, addNews } from "../../../services/news";
 
-export const AddNewsModal = ({ id, show, handleClose, title, setTitle, content }) => {
+export const AddNewsModal = ({ id, show, handleClose, title, setTitle, content, isEdit }) => {
     if (!show) {
         return null;
     }
@@ -17,8 +17,11 @@ export const AddNewsModal = ({ id, show, handleClose, title, setTitle, content }
 
     const handleUpdateNews = async (e) => {
         e.preventDefault();
-        console.log("ajdi",id);
-        await updateNews(id, { title, content });
+        if (isEdit)
+            await updateNews(id, { title, content });
+        else
+            await addNews({ title, content });
+        setTitle({id: -1, title: "", content: ""});
         handleClose();
     };
 
@@ -26,7 +29,7 @@ export const AddNewsModal = ({ id, show, handleClose, title, setTitle, content }
         <div className="modal-overlay">
             <div className="modal-content">
                 <div className="modal-header">
-                    <input className="modal-input" type="text" value={title} onChange={handleChangeTitle}></input>
+                    <input className="modal-input" placeholder="Naslov" type="text" value={title} onChange={handleChangeTitle}></input>
                     <button onClick={handleClose} className="close-button">
                         ×
                     </button>
