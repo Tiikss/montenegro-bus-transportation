@@ -22,3 +22,12 @@ export const register = async (user) => {
     });
     return response.data;
 };
+
+export const getUser = async () => {
+    const response = await axios.get(`${URL}/user/me`, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+    return response.data;
+};
