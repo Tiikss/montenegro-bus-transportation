@@ -6,8 +6,13 @@ import { addStation } from "../../services/stations";
 
 export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [inputData, setInputData] = useState({});
     const [stations, setStations] = useState([]);
+    const [selectedPoint, setSelectedPoint] = useState({ lat: 42, lng: 18 });
+
+    const handleChange = (e) => {
+        setInputData({ ...inputData, [e.target.name]: e.target.value });
+    };
 
     const handleAddNewStation = (e) => {
         e.preventDefault();
@@ -18,11 +23,11 @@ export const TableStations = () => {
         e.preventDefault();
         await addStation({
             phone_number: "123456789",
-            address: "Neka adresa",
-            city_name: "Budva",
-            country_name: "Montenegro",
-            latitude: 12.3,
-            longitude: 12.3,
+            address: inputData.station_name,
+            city_name: inputData.station_city,
+            country_name: inputData.station_country,
+            latitude: selectedPoint.lat.toFixed(7),
+            longitude: selectedPoint.lng.toFixed(7),
         });
     };
 
@@ -30,6 +35,7 @@ export const TableStations = () => {
         e.preventDefault();
         try {
             const response = deleteStation(id);
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
@@ -72,7 +78,7 @@ export const TableStations = () => {
                             index // odje umjesto index trba station_id da stoji da se izmijeni obavezno!!!!
                         ) => (
                             <tr key={station.id}>
-                                <td>index</td>
+                                <td>{station.id}</td>
                                 <td>{station.address}</td>
                                 <td>{station.country_name}</td>
                                 <td>{station.city_name}</td>
@@ -109,12 +115,34 @@ export const TableStations = () => {
             >
                 <h2>Dodaj novu stanicu</h2>
                 <label htmlFor="station-name">Ime:</label>
-                <input type="text" id="station-name" />
+                <input
+                    type="text"
+                    id="station-name"
+                    name="station_name"
+                    required
+                    onChange={handleChange}
+                />
                 <label htmlFor="station-country">Drzava:</label>
-                <input type="text" id="station-country" />
+                <input
+                    type="text"
+                    id="station-country"
+                    name="station_country"
+                    required
+                    onChange={handleChange}
+                />
                 <label htmlFor="station-city">Grad:</label>
-                <input type="text" id="station-city" />
-                <MapWrapper stations={[]} isAdmin={true} />
+                <input
+                    type="text"
+                    id="station-city"
+                    name="station_city"
+                    required
+                    onChange={handleChange}
+                />
+                <MapWrapper
+                    stations={[]}
+                    isAdmin={true}
+                    setSelectedPoint={setSelectedPoint}
+                />
                 {/* Odje treba opcija da se sa mape bira lokacija i da se stavi */}
                 <button
                     className="adminpanel-button"
