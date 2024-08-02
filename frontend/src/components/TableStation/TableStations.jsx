@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./table-stations.css";
 import { MapWrapper } from "../MapWrapper/MapWrapper";
-import { getAllStations, deleteStation } from "../../services/stations";
-import { addStation } from "../../services/stations";
+import {
+    getAllStations,
+    deleteStation,
+    addStation,
+    getNumberOfPages,
+} from "../../services/stations";
+import PaginationNumbers from "../PaginationNumbers/PaginationNumbers";
 
 export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputData, setInputData] = useState({});
     const [stations, setStations] = useState([]);
     const [selectedPoint, setSelectedPoint] = useState({ lat: 42, lng: 18 });
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numberOfPages, setNumberOfPages] = useState(1);
 
     const handleChange = (e) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -29,6 +36,7 @@ export const TableStations = () => {
             latitude: selectedPoint.lat.toFixed(7),
             longitude: selectedPoint.lng.toFixed(7),
         });
+        fetchNumberOfPages();
     };
 
     const handleDeleteStation = async (e, id) => {
@@ -41,17 +49,31 @@ export const TableStations = () => {
         }
     };
 
+    const fetchStations = async () => {
+        try {
+            const response = await getAllStations(currentPage);
+            setStations(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchNumberOfPages = async () => {
+        try {
+            const response = await getNumberOfPages();
+            setNumberOfPages(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
-        const fetchStations = async () => {
-            try {
-                const response = await getAllStations();
-                setStations(response);
-            } catch (error) {
-                console.log(error);
-            }
-        };
         fetchStations();
     }, []);
+
+    useEffect(() => {
+        fetchNumberOfPages();
+    }, [stations]);
 
     return (
         <>
@@ -98,17 +120,6 @@ export const TableStations = () => {
                         )
                     )}
                 </tbody>
-                <tr>
-                    <td>2</td>
-                    <td>Stanica 2</td>
-                    <td>Crna Gora</td>
-                    <td>Bar</td>
-                    <td>43.5563</td>
-                    <td>18.4131</td>
-                    <td>
-                        <button className="adminpanel-button">Izbrisi</button>
-                    </td>
-                </tr>
             </table>
             <form
                 className={"new-station-modal" + (isModalOpen ? "" : " hidden")}
@@ -157,6 +168,13 @@ export const TableStations = () => {
                 }
                 onClick={() => setIsModalOpen(false)}
             ></div>
+            <div className="pagination-numbers-container">
+                <PaginationNumbers
+                    selectedPageId={currentPage}
+                    setPageId={setCurrentPage}
+                    numberOfPages={numberOfPages}
+                />
+            </div>
         </>
     );
 };
