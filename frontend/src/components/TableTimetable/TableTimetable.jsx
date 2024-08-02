@@ -12,6 +12,7 @@ export const TableTimetable = ({
     handleDeleteClick,
     isAdmin,
     handleResponse,
+    isActive,
 }) => {
     const [departures, setDepartures] = useState([
         {
@@ -87,7 +88,8 @@ export const TableTimetable = ({
     useEffect(() => {
         try {
             const fetchLines = async () => {
-                const response = await getLines();
+                console.log("je aktivan", isActive);
+                const response = await getLines(isActive);
                 setLines(response);
             };
             fetchLines();

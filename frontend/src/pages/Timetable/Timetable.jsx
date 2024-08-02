@@ -22,7 +22,7 @@ export const Timetable = () => {
         <div className="red-voznje-content">
             <h1>Red vožnje</h1>
             <h2>Polasci sa stanice Podgorica</h2>
-            <TableTimetable isEdit={false} />
+            <TableTimetable isEdit={false} isActive={true} />
         </div>
     );
 };

@@ -69,9 +69,14 @@ export const AdminPanel = () => {
                             isEdit={true}
                             isAdmin={true}
                             handleResponse={setResponse}
+                            isActive={false}
                         />
                         <h2>Aktivne linije</h2>
-                        <TableTimetable isEdit={true} isAdmin={true} />
+                        <TableTimetable
+                            isEdit={true}
+                            isAdmin={true}
+                            isActive={true}
+                        />
                     </>
                 )}
                 {selectedTab == "stanice" && (
