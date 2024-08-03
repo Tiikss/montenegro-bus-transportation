@@ -9,7 +9,11 @@ import { AddNewsModal } from "./AddNewsModal/AddNewsModal";
 export const News = () => {
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
     const [showModal, setShowModal] = useState(false);
-    const [currentNews, setCurrentNews] = useState({ id: -1, title: "", content: "" });
+    const [currentNews, setCurrentNews] = useState({
+        id: -1,
+        title: "",
+        content: "",
+    });
     const [search, setSearch] = useState("");
     const [tmpNews, setTmpNews] = useState([]);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -52,13 +56,13 @@ export const News = () => {
     };
 
     useEffect(() => {
-        console.log("umro",currentNews.id);
+        console.log("umro", currentNews.id);
     }, [currentNews]);
 
     useEffect(() => {
         try {
             const fetchData = async () => {
-                const news = await getNews();
+                const news = await getNews(1);
                 setTmpNews(news);
             };
             fetchData();
@@ -102,7 +106,12 @@ export const News = () => {
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
                 <div className="news-search-container">
-                    <button className="read-more-btn" onClick={e => handleAddNewNews(e)}>Dodaj novost</button>
+                    <button
+                        className="read-more-btn"
+                        onClick={(e) => handleAddNewNews(e)}
+                    >
+                        Dodaj novost
+                    </button>
                     <input
                         type="text"
                         placeholder="Pretraži objave"
