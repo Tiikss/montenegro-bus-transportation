@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import slika1 from "../../images/young-girl-bus.jpg";
 import { Modal } from "../../components/Modal/Modal";
+import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { useState } from "react";
 
 export const Home = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
+    const [stations, setStations] = useState([
+        "Podgorica",
+        "Niksic",
+        "Bar",
+        "Budva",
+        "Kotor",
+    ]);
+    const [inputs, setInputs] = useState({
+        searchFrom: "",
+        searchTo: "",
+    });
 
     const newsData = [
         {
@@ -40,9 +52,42 @@ export const Home = () => {
         setShowModal(true);
     };
 
+    const handleChange = (e) => {
+        setInputs((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    const handleSetSearch = (e) => {
+        setInputs((prev) => ({
+            ...prev,
+            [e.target.parentElement.parentElement.childNodes[0].id]:
+                e.target.innerText,
+        }));
+        setStations([]);
+    };
+
+    useEffect(() => {
+        const filteredStationsFrom = stations.filter((item) =>
+            item.toLowerCase().includes(inputs.searchFrom.toLowerCase())
+        );
+        setStations(filteredStationsFrom);
+        if (inputs.searchFrom === "") {
+            setStations(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        }
+    }, [inputs.searchFrom]);
+
+    useEffect(() => {
+        const filteredStationsTo = stations.filter((item) =>
+            item.toLowerCase().includes(inputs.searchTo.toLowerCase())
+        );
+        setStations(filteredStationsTo);
+        if (inputs.searchTo === "") {
+            setStations(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        }
+    }, [inputs.searchTo]);
 
     return (
         <main className="home-body">
@@ -55,17 +100,47 @@ export const Home = () => {
 
                 <div className="choose">
                     <label htmlFor="beginning">Od:</label>
-                    <input
-                        type="text"
-                        placeholder="Unesite polaznu stanicu"
-                        id="beginning"
-                    />
+                    <div className="add-line-input-container">
+                        <input
+                            type="text"
+                            placeholder="Unesite polaznu stanicu"
+                            id="searchFrom"
+                            value={inputs.searchFrom}
+                            onChange={handleChange}
+                        />
+                        <div className="dropdown-container">
+                            {inputs.searchFrom !== ""
+                                ? stations.map((item) => (
+                                      <DropDownCard
+                                          item={item}
+                                          key={item}
+                                          onClick={handleSetSearch}
+                                      />
+                                  ))
+                                : null}
+                        </div>
+                    </div>
                     <label htmlFor="end">Do:</label>
-                    <input
-                        type="text"
-                        placeholder="Unesite krajnju stanicu"
-                        id="end"
-                    />
+                    <div className="add-line-input-container">
+                        <input
+                            type="text"
+                            placeholder="Unesite krajnju stanicu"
+                            id="searchTo"
+                            value={inputs.searchTo}
+                            onChange={handleChange}
+                        />
+                        <div className="dropdown-container">
+                            {inputs.searchTo !== ""
+                                ? stations.map((item) => (
+                                      <DropDownCard
+                                          item={item}
+                                          key={item}
+                                          onClick={handleSetSearch}
+                                      />
+                                  ))
+                                : null}
+                        </div>
+                    </div>
                     <label htmlFor="date">Datum:</label>
                     <input type="date" id="date" />
                     <button>

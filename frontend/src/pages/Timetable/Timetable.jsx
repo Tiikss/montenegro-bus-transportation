@@ -1,7 +1,29 @@
+import { useState, useEffect } from "react";
 import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
+import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import "./timetable.css";
 
 export const Timetable = () => {
+    const [city, setCity] = useState("");
+    const [allCities, setAllCities] = useState([
+        "Podgorica",
+        "Niksic",
+        "Bar",
+        "Budva",
+        "Kotor",
+    ]);
+    const [displayCity, setDisplayCity] = useState("");
+
+    const handleChange = (e) => {
+        setCity(e.target.value);
+    };
+
+    const handleSetSearch = (e) => {
+        setCity(e.target.innerText);
+        setDisplayCity(e.target.innerText);
+        setAllCities([]);
+    };
+
     const handleClick = (e) => {
         const content = e.target.parentElement.parentElement.nextElementSibling;
         if (content.style.maxHeight) {
@@ -18,11 +40,47 @@ export const Timetable = () => {
         }
     };
 
+    useEffect(() => {
+        const filteredStations = allCities.filter((station) =>
+            station.toLowerCase().includes(city.toLowerCase())
+        );
+        setAllCities(filteredStations);
+        if (city === "") {
+            setAllCities(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+        }
+    }, [city]);
+
     return (
         <div className="red-voznje-content">
             <h1>Red vožnje</h1>
-            <h2>Polasci sa stanice Podgorica</h2>
-            <TableTimetable isEdit={false} isActive={true} />
+
+            <div className="choose-city-container">
+                <input
+                    type="text"
+                    placeholder="Unesite željeni grad:"
+                    id="cityTable"
+                    value={city}
+                    onChange={handleChange}
+                    style={
+                        city === "" || allCities.length === 0
+                            ? { borderRadius: "10px" }
+                            : { borderRadius: "10px 10px 0 0" }
+                    }
+                />
+                <div className="dropdown-container">
+                    {city !== ""
+                        ? allCities.map((item) => (
+                              <DropDownCard
+                                  item={item}
+                                  key={item}
+                                  onClick={handleSetSearch}
+                              />
+                          ))
+                        : null}
+                </div>
+            </div>
+            <h2>Polasci sa stanice {displayCity}</h2>
+            <TableTimetable isEdit={false} />
         </div>
     );
 };
