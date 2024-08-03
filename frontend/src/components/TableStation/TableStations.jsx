@@ -8,19 +8,38 @@ import {
     getNumberOfPages,
 } from "../../services/stations";
 import PaginationNumbers from "../PaginationNumbers/PaginationNumbers";
+import { DropDownCard } from "../DropdownCard/DropdownCard";
 
 export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [inputData, setInputData] = useState({});
+    const [inputData, setInputData] = useState({
+        country: "",
+        city: "",
+    });
     const [stations, setStations] = useState([]);
     const [selectedPoint, setSelectedPoint] = useState({ lat: 42, lng: 18 });
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
+    const [allCities, setAllCities] = useState([
+        "Podgorica",
+        "Niksic",
+        "Bar",
+        "Budva",
+        "Kotor",
+    ]);
+    const [allCountries, setAllCountries] = useState([
+        "Crna Gora",
+        "Srbija",
+        "Hrvatska",
+        "Bosna i Hercegovina",
+        "Slovenija",
+    ]);
+
+    console.log(inputData);
 
     const handleChange = (e) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
     };
-
 
     const handleAddNewStation = (e) => {
         e.preventDefault();
@@ -79,12 +98,9 @@ export const TableStations = () => {
     useEffect(() => {
         fetchStations();
     }, [currentPage]);
-    const handleChange = (e) => {
-        setInputs((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    };
 
     const handleSetSearch = (e) => {
-        setInputs((prev) => ({
+        setInputData((prev) => ({
             ...prev,
             [e.target.parentElement.parentElement.childNodes[0].id]:
                 e.target.innerText,
@@ -98,20 +114,20 @@ export const TableStations = () => {
 
     useEffect(() => {
         const filteredCities = allCities.filter((item) =>
-            item.toLowerCase().includes(inputs.city.toLowerCase())
+            item.toLowerCase().includes(inputData.city.toLowerCase())
         );
         setAllCities(filteredCities);
-        if (inputs.city === "") {
+        if (inputData.city === "") {
             setAllCities(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
         }
-    }, [inputs.city]);
+    }, [inputData.city]);
 
     useEffect(() => {
         const filteredCountries = allCountries.filter((item) =>
-            item.toLowerCase().includes(inputs.country.toLowerCase())
+            item.toLowerCase().includes(inputData.country.toLowerCase())
         );
         setAllCountries(filteredCountries);
-        if (inputs.country === "") {
+        if (inputData.country === "") {
             setAllCountries([
                 "Crna Gora",
                 "Srbija",
@@ -120,7 +136,7 @@ export const TableStations = () => {
                 "Slovenija",
             ]);
         }
-    }, [inputs.country]);
+    }, [inputData.country]);
 
     return (
         <>
@@ -186,11 +202,12 @@ export const TableStations = () => {
                     <input
                         type="text"
                         id="country"
-                        value={inputs.country}
+                        name="country"
+                        value={inputData.country}
                         onChange={handleChange}
                     />
                     <div className="dropdown-container">
-                        {inputs.country !== ""
+                        {inputData.country !== ""
                             ? allCountries.map((item) => (
                                   <DropDownCard
                                       item={item}
@@ -206,11 +223,12 @@ export const TableStations = () => {
                     <input
                         type="text"
                         id="city"
-                        value={inputs.city}
+                        name="city"
+                        value={inputData.city}
                         onChange={handleChange}
                     />
                     <div className="dropdown-container">
-                        {inputs.city !== ""
+                        {inputData.city !== ""
                             ? allCities.map((item) => (
                                   <DropDownCard
                                       item={item}
