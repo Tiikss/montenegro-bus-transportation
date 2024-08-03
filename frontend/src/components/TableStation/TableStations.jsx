@@ -75,6 +75,10 @@ export const TableStations = () => {
         fetchNumberOfPages();
     }, [stations]);
 
+    useEffect(() => {
+        fetchStations();
+    }, [currentPage]);
+
     return (
         <>
             <button className="adminpanel-button" onClick={handleAddNewStation}>

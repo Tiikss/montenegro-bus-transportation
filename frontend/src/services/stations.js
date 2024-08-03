@@ -22,7 +22,7 @@ export const getNumberOfPages = async () => {
                 "ngrok-skip-browser-warning": "true",
             },
         });
-        return Math.ceil(response.data / 10);
+        return response.data;
     } catch (error) {
         console.log(error);
     }
