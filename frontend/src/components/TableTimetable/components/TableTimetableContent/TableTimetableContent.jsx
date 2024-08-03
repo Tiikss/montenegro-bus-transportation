@@ -8,10 +8,18 @@ export const TableTimetableContent = ({ departure, isEdit, isAdmin }) => {
             <div className="col table-row-description">
                 <h3>Broj autobusa: {departure.busID}</h3>
                 <h4>
-                    {departure.startingPoint}-{departure.destination}
+                    {departure.stations[0].station.address}-
+                    {
+                        departure.stations[departure.stations.length - 1]
+                            .station.address
+                    }
                     <br></br>
                     <br></br>
-                    {departure.departureTime}-{departure.arrivalTime}
+                    {departure.stations[0].departure_time}-
+                    {
+                        departure.stations[departure.stations.length - 1]
+                            .arrival_time
+                    }
                 </h4>
                 <div className="table-line-container">
                     <Line

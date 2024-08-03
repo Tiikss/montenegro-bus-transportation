@@ -15,18 +15,18 @@ export const Line = ({
                     <div class="card" key={index}>
                         <div class="info">
                             <h3 class="title">
-                                {station.nazivStanice ||
+                                {station.station.city_name ||
                                     station.polaziste ||
                                     station.odrediste}
                             </h3>
                             <p>
                                 Naziv Stanice:
-                                {station.nazivStanice ||
+                                {station.station.address ||
                                     station.polaziste ||
                                     station.odrediste}
                             </p>
-                            {station.vrijemeDolaska && (
-                                <p>Vrijeme dolaska: {station.vrijemeDolaska}</p>
+                            {station.arrival_time && (
+                                <p>Vrijeme dolaska: {station.arrival_time}</p>
                             )}
                             {station.vrijemeDolaskaStanica && (
                                 <p>
@@ -34,8 +34,8 @@ export const Line = ({
                                     {station.vrijemeDolaskaStanica}
                                 </p>
                             )}
-                            {station.vrijemePolaska && (
-                                <p>Vrijeme polaska: {station.vrijemePolaska}</p>
+                            {station.departure_time && (
+                                <p>Vrijeme polaska: {station.departure_time}</p>
                             )}
                             {station.vrijemePolaskaStanica && (
                                 <p>

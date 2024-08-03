@@ -42,17 +42,31 @@ export const TableTimetableRow = ({
         <>
             <li className="red-voznje-table-row red-voznje-row-hover">
                 {isEdit && (
-                    <div className="col col-0">{departure.startingPoint}</div>
+                    <div className="col col-0">
+                        {departure.stations[0].station.address}
+                    </div>
                 )}
-                <div className="col col-1">{departure.destination}</div>
-                <div className="col col-2">{departure.busID}</div>
-                <div className="col col-3">{departure.departureTime}</div>
-                <div className="col col-4">{departure.travelTime}</div>
-                <div className="col col-5">{departure.arrivalTime}</div>
+                <div className="col col-1">
+                    {
+                        departure.stations[departure.stations.length - 1]
+                            .station.address
+                    }
+                </div>
+                <div className="col col-2">{0}</div>
+                <div className="col col-3">
+                    {departure.stations[0].departure_time}
+                </div>
+                <div className="col col-4">{"13h"}</div>
+                <div className="col col-5">
+                    {
+                        departure.stations[departure.stations.length - 1]
+                            .arrival_time
+                    }
+                </div>
                 {!isEdit && (
-                    <div className="col col-6">{departure.carrier}</div>
+                    <div className="col col-6">{departure.company_name}</div>
                 )}
-                <div className="col col-7">{departure.price}</div>
+                <div className="col col-7">{"300e"}</div>
                 <div className="col col-8">
                     <input
                         type="checkbox"

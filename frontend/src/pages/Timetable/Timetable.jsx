@@ -53,6 +53,7 @@ export const Timetable = () => {
     return (
         <div className="red-voznje-content">
             <h1>Red vožnje</h1>
+
             <div className="choose-city-container">
                 <input
                     type="text"

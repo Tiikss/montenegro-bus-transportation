@@ -17,7 +17,7 @@ function DeckGLOverlay({ layers }) {
     return null;
 }
 
-export const MapWrapper = ({ stations, isAdmin }) => {
+export const MapWrapper = ({ stations, isAdmin, setSelectedPoint }) => {
     const [pathData, setPathData] = useState(null);
     const [currPoint, setCurrPoint] = useState(null);
 
@@ -26,11 +26,23 @@ export const MapWrapper = ({ stations, isAdmin }) => {
 
         const directionsService = new window.google.maps.DirectionsService();
 
-        const request = {
-            origin: { lat: 42.4413, lng: 19.2594 },
-            destination: { lat: 42.09807, lng: 19.09494 },
-            travelMode: window.google.maps.TravelMode.DRIVING,
-        };
+        let request = null;
+
+        if (!isAdmin) {
+            request = {
+                origin: {
+                    lat: Number(stations[0].station.latitude),
+                    lng: Number(stations[0].station.longitude),
+                },
+                destination: {
+                    lat: Number(stations[stations.length - 1].station.latitude),
+                    lng: Number(
+                        stations[stations.length - 1].station.longitude
+                    ),
+                },
+                travelMode: window.google.maps.TravelMode.DRIVING,
+            };
+        }
 
         directionsService.route(request, (result) => {
             const route = result.routes[0].overview_path.map((p) => [
@@ -74,6 +86,8 @@ export const MapWrapper = ({ stations, isAdmin }) => {
         const lat = event.detail.latLng.lat;
         const lng = event.detail.latLng.lng;
         setCurrPoint({ lat, lng });
+        setSelectedPoint({ lat, lng });
+        console.log(lat, lng);
     };
 
     return (
@@ -92,10 +106,10 @@ export const MapWrapper = ({ stations, isAdmin }) => {
             >
                 {stations.map((station) => (
                     <Marker
-                        key={station.nazivStanice}
+                        key={station.station.nazivStanice}
                         position={{
-                            lat: Number(station.lat),
-                            lng: Number(station.lng),
+                            lat: Number(station.station.latitude),
+                            lng: Number(station.station.longitude),
                         }}
                     />
                 ))}
