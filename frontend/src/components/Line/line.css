@@ -3,6 +3,9 @@
     background: var(--primary-color);
     margin: 20px auto;
     padding: 20px;
+
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 /* Outer Layer with the timeline border */
