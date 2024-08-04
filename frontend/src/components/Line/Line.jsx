@@ -15,41 +15,16 @@ export const Line = ({
                 {stations.map((station, index) => (
                     <div class="card" key={index}>
                         <div class="info">
-                            <h3 class="title">
-                                {station.city_name ||
-                                    station.polaziste ||
-                                    station.odrediste}
-                            </h3>
-                            <p>
-                                Naziv Stanice:
-                                {station.address ||
-                                    station.polaziste ||
-                                    station.odrediste}
-                            </p>
+                            <h3 class="title">{station.city_name}</h3>
+                            <p>Naziv Stanice: {station.address}</p>
                             {station.arrival_time && (
                                 <p>Vrijeme dolaska: {station.arrival_time}</p>
-                            )}
-                            {station.vrijemeDolaskaStanica && (
-                                <p>
-                                    Vrijeme dolaska:
-                                    {station.vrijemeDolaskaStanica}
-                                </p>
                             )}
                             {station.departure_time && (
                                 <p>Vrijeme polaska: {station.departure_time}</p>
                             )}
-                            {station.vrijemePolaskaStanica && (
-                                <p>
-                                    Vrijeme polaska:
-                                    {station.vrijemePolaskaStanica}
-                                </p>
-                            )}
-                            {(station.cijena && (
-                                <p>Cijena: {station.cijena}</p>
-                            )) ||
-                                (station.cijenaStanica && (
-                                    <p>Cijena: {station.cijenaStanica}</p>
-                                ))}
+
+                            {station.price && <p>Cijena: {station.price}</p>}
 
                             {isEdit &&
                                 !isAdmin &&
