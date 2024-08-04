@@ -11,6 +11,15 @@ export const getUsersByRole = async (page, role) => {
     return response.data;
 };
 
+export const getNumberOfPagesByRole = async (role) => {
+    const response = await axios.get(`${URL}/users/count?role=${role}`, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+    return response.data;
+};
+
 export const deleteUser = async (id) => {
     const response = await axios.delete(`${URL}/users/${id}`, {
         headers: {
