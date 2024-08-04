@@ -29,4 +29,12 @@ input:focus {
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
     border-radius: 0 0 10px 10px;
+    max-height: 200px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.dropdown-container::-webkit-scrollbar {
+    display: none;
 }
