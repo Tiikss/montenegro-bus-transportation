@@ -8,13 +8,14 @@ import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { useState } from "react";
 import { SingleNewsMain } from "./components/SingleNewsMain/SingleNewsMain";
 import { getNews } from "../../services/news";
-import { getAllStations } from "../../services/stations";
+import { getStationsFiltered } from "../../services/stations";
 
 export const Home = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
     const [news, setNews] = useState([]);
-    const [stations, setStations] = useState([]);
+    const [stationsFrom, setStationsFrom] = useState([]);
+    const [stationsTo, setStationsTo] = useState([]);
     const [inputs, setInputs] = useState({
         searchFrom: "",
         searchTo: "",
@@ -34,12 +35,14 @@ export const Home = () => {
     };
 
     const handleSetSearch = (e) => {
+        console.log(
+            e.target.parentElement.parentElement.parentElement.childNodes[0]
+        );
         setInputs((prev) => ({
             ...prev,
-            [e.target.parentElement.parentElement.childNodes[0].id]:
-                e.target.innerText,
+            [e.target.parentElement.parentElement.parentElement.childNodes[0]
+                .id]: e.target.innerText,
         }));
-        setStations([]);
     };
 
     const fetchNews = async () => {
@@ -51,46 +54,34 @@ export const Home = () => {
         }
     };
 
-    const fetchStations = async () => {
+    const fetchStationsFrom = async () => {
         try {
-            let i = 1;
-            let response = await getAllStations(i);
-            setStations(response);
-            while (response.length > 0) {
-                i++;
-                response = await getAllStations(i);
-                setStations((prev) => [...prev, ...response]);
-            }
+            let response = await getStationsFiltered(inputs.searchFrom);
+            setStationsFrom(response);
         } catch (error) {
             console.log(error);
         }
     };
 
-    console.log(stations);
+    const fetchStationsTo = async () => {
+        try {
+            let response = await getStationsFiltered(inputs.searchTo);
+            setStationsTo(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         fetchNews();
-        fetchStations();
     }, []);
 
     useEffect(() => {
-        const filteredStationsFrom = stations.filter((item) =>
-            item.address.toLowerCase().includes(inputs.searchFrom.toLowerCase())
-        );
-        setStations(filteredStationsFrom);
-        if (inputs.searchFrom === "") {
-            setStations(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        }
+        fetchStationsFrom();
     }, [inputs.searchFrom]);
 
     useEffect(() => {
-        const filteredStationsTo = stations.filter((item) =>
-            item.address.toLowerCase().includes(inputs.searchTo.toLowerCase())
-        );
-        setStations(filteredStationsTo);
-        if (inputs.searchTo === "") {
-            setStations(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        }
+        fetchStationsTo();
     }, [inputs.searchTo]);
 
     return (
@@ -113,8 +104,10 @@ export const Home = () => {
                             onChange={handleChange}
                         />
                         <div className="dropdown-container">
-                            {inputs.searchFrom !== ""
-                                ? stations.map((item) => (
+                            {inputs.searchFrom !== "" &&
+                            stationsFrom &&
+                            inputs.searchFrom !== stationsFrom[0].address
+                                ? stationsFrom.map((item) => (
                                       <DropDownCard
                                           item={item.address}
                                           key={item.id}
@@ -134,8 +127,10 @@ export const Home = () => {
                             onChange={handleChange}
                         />
                         <div className="dropdown-container">
-                            {inputs.searchTo !== ""
-                                ? stations.map((item) => (
+                            {inputs.searchTo !== "" &&
+                            stationsTo &&
+                            inputs.searchTo !== stationsTo[0].address
+                                ? stationsTo.map((item) => (
                                       <DropDownCard
                                           item={item.address}
                                           key={item.id}
