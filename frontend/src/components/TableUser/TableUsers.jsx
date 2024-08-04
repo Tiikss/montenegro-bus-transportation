@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./table-users.css";
-import { Link } from "react-router-dom";
-import { ModalWindow } from "../ModalWindow/ModalWindow";
-import { getUsersByRole, deleteUser } from "../../services/users";
+import { getUsersByRole, getNumberOfPagesByRole } from "../../services/users";
 import { UserTableRow } from "./UserTableRow/UserTableRow";
+import PaginationNumbers from "../PaginationNumbers/PaginationNumbers";
 
 export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
     const [users, setUsers] = useState([]);
     const [changedUsers, setChangedUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numberOfPages, setNumberOfPages] = useState(1);
 
     const fetchUsers = async () => {
         try {
-            const response = await getUsersByRole(1, role);
+            const response = await getUsersByRole(currentPage, role);
             setUsers(response);
             console.log("Users", users);
         } catch (error) {
@@ -19,7 +20,17 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
         }
     };
 
+    const fetchNumberOfPages = async () => {
+        try {
+            const response = await getNumberOfPagesByRole(currentPage, role);
+            setNumberOfPages(response);
+        } catch (error) {
+            console.error("Error", error);
+        }
+    };
+
     useEffect(() => {
+        fetchNumberOfPages();
         fetchUsers();
     }, []);
 
@@ -31,8 +42,12 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
         fetchUsers();
     }, [isSaveClicked]);
 
+    useEffect(() => {
+        fetchUsers();
+    }, [currentPage]);
+
     return (
-        <>
+        <div className="tabela-korisnici-content">
             <table className="tabela-korisnici">
                 <thead>
                     <tr>
@@ -59,6 +74,13 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
                     ))}
                 </tbody>
             </table>
-        </>
+            <div className="pagination-numbers-container">
+                <PaginationNumbers
+                    selectedPageId={currentPage}
+                    setPageId={setCurrentPage}
+                    numberOfPages={numberOfPages}
+                />
+            </div>
+        </div>
     );
 };
