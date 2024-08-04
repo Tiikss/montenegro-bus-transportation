@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./line.css";
 
 export const Line = ({
@@ -8,15 +8,25 @@ export const Line = ({
     handleDeleteClick,
     isAdmin,
 }) => {
-    console.log(stations);
     return (
         <div class="timeline">
             <div class="outer">
                 {stations.map((station, index) => (
                     <div class="card" key={index}>
                         <div class="info">
-                            <h3 class="title">{station.city_name}</h3>
-                            <p>Naziv Stanice: {station.address}</p>
+                            <h3 class="title">
+                                {station.city_name
+                                    ? station.city_name
+                                    : station.station.city_name
+                                    ? station.station.city_name
+                                    : ""}
+                            </h3>
+                            <p>
+                                Naziv Stanice:{" "}
+                                {station.address
+                                    ? station.address
+                                    : station.station.address}
+                            </p>
                             {station.arrival_time && (
                                 <p>Vrijeme dolaska: {station.arrival_time}</p>
                             )}
