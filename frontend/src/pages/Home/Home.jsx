@@ -8,18 +8,13 @@ import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { useState } from "react";
 import { SingleNewsMain } from "./components/SingleNewsMain/SingleNewsMain";
 import { getNews } from "../../services/news";
+import { getAllStations } from "../../services/stations";
 
 export const Home = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
     const [news, setNews] = useState([]);
-    const [stations, setStations] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
+    const [stations, setStations] = useState([]);
     const [inputs, setInputs] = useState({
         searchFrom: "",
         searchTo: "",
@@ -47,21 +42,40 @@ export const Home = () => {
         setStations([]);
     };
 
-    useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                const response = await getNews(1);
-                setNews(response.slice(0, 4));
-            } catch (error) {
-                console.log(error);
+    const fetchNews = async () => {
+        try {
+            const response = await getNews(1);
+            setNews(response.slice(0, 4));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchStations = async () => {
+        try {
+            let i = 1;
+            let response = await getAllStations(i);
+            setStations(response);
+            while (response.length > 0) {
+                i++;
+                response = await getAllStations(i);
+                setStations((prev) => [...prev, ...response]);
             }
-        };
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    console.log(stations);
+
+    useEffect(() => {
         fetchNews();
+        fetchStations();
     }, []);
 
     useEffect(() => {
         const filteredStationsFrom = stations.filter((item) =>
-            item.toLowerCase().includes(inputs.searchFrom.toLowerCase())
+            item.address.toLowerCase().includes(inputs.searchFrom.toLowerCase())
         );
         setStations(filteredStationsFrom);
         if (inputs.searchFrom === "") {
@@ -71,7 +85,7 @@ export const Home = () => {
 
     useEffect(() => {
         const filteredStationsTo = stations.filter((item) =>
-            item.toLowerCase().includes(inputs.searchTo.toLowerCase())
+            item.address.toLowerCase().includes(inputs.searchTo.toLowerCase())
         );
         setStations(filteredStationsTo);
         if (inputs.searchTo === "") {
@@ -102,8 +116,8 @@ export const Home = () => {
                             {inputs.searchFrom !== ""
                                 ? stations.map((item) => (
                                       <DropDownCard
-                                          item={item}
-                                          key={item}
+                                          item={item.address}
+                                          key={item.id}
                                           onClick={handleSetSearch}
                                       />
                                   ))
@@ -123,8 +137,8 @@ export const Home = () => {
                             {inputs.searchTo !== ""
                                 ? stations.map((item) => (
                                       <DropDownCard
-                                          item={item}
-                                          key={item}
+                                          item={item.address}
+                                          key={item.id}
                                           onClick={handleSetSearch}
                                       />
                                   ))
