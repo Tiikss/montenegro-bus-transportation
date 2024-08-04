@@ -79,7 +79,7 @@ export const TableTimetableRow = ({
                     <div className="col col-9">
                         {!isAdmin ? (
                             <>
-                                <Link to="/dodaj-liniju">
+                                <Link to={`/dodaj-liniju/${routeId}`}>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
