@@ -7,10 +7,12 @@ import { Modal } from "../../components/Modal/Modal";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { useState } from "react";
 import { SingleNewsMain } from "./components/SingleNewsMain/SingleNewsMain";
+import { getNews } from "../../services/news";
 
 export const Home = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
+    const [news, setNews] = useState([]);
     const [stations, setStations] = useState([
         "Podgorica",
         "Niksic",
@@ -22,31 +24,6 @@ export const Home = () => {
         searchFrom: "",
         searchTo: "",
     });
-
-    const newsData = [
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content: "Uveden je novi red vožnje za liniju Podgorica - Bar.",
-        },
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!",
-        },
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!",
-        },
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content: "Uveden je novi red vožnje za liniju Podgorica - Bar.",
-        },
-    ];
 
     const handleOpenModal = (title, content) => {
         setCurrentNews({ title, content });
@@ -69,6 +46,18 @@ export const Home = () => {
         }));
         setStations([]);
     };
+
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const response = await getNews(1);
+                setNews(response.slice(0, 4));
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchNews();
+    }, []);
 
     useEffect(() => {
         const filteredStationsFrom = stations.filter((item) =>
@@ -253,7 +242,7 @@ export const Home = () => {
 
             <div id="pom-div3">
                 <div className="novosti">
-                    {newsData.map((news, index) => (
+                    {news.map((news, index) => (
                         <SingleNewsMain
                             news={news}
                             key={index}
