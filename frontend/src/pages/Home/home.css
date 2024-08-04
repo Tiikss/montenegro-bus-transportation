@@ -230,61 +230,6 @@
     margin: 0 auto;
 }
 
-.novost {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-}
-
-.novost {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    padding: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    height: 400px;
-    width: 250px;
-    gap: 20px;
-}
-
-.novost p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 8;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-}
-
-.novost button {
-    width: 200px;
-    height: 50px;
-    font-size: 14px;
-    background-color: #ba0c0e;
-    color: white;
-    border: 0;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid #ba0c0e;
-}
-
-.novost button:hover {
-    background-color: #eee;
-    color: #ba0c0e;
-    border: 1px solid #ba0c0e;
-}
-
-.novost:hover {
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    scale: 1.1;
-    transition: scale 0.5s ease;
-}
-
 .ttl-and-date {
     display: flex;
     flex-direction: column;

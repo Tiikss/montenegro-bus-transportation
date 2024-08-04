@@ -6,6 +6,7 @@ import slika1 from "../../images/young-girl-bus.jpg";
 import { Modal } from "../../components/Modal/Modal";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { useState } from "react";
+import { SingleNewsMain } from "./components/SingleNewsMain/SingleNewsMain";
 
 export const Home = () => {
     const [showModal, setShowModal] = useState(false);
@@ -253,20 +254,11 @@ export const Home = () => {
             <div id="pom-div3">
                 <div className="novosti">
                     {newsData.map((news, index) => (
-                        <div className="novost" key={index}>
-                            <div className="ttl-and-date">
-                                <h1>{news.title}</h1>
-                                <p className="ndate">Objavljeno: {news.date}</p>
-                            </div>
-                            <p>{news.content.substring(0, 100)}...</p>
-                            <button
-                                onClick={() =>
-                                    handleOpenModal(news.title, news.content)
-                                }
-                            >
-                                Pročitaj više
-                            </button>
-                        </div>
+                        <SingleNewsMain
+                            news={news}
+                            key={index}
+                            handleOpenModal={handleOpenModal}
+                        />
                     ))}
                 </div>
             </div>
