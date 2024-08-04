@@ -8,6 +8,7 @@ export const Line = ({
     handleDeleteClick,
     isAdmin,
 }) => {
+    console.log(stations);
     return (
         <div class="timeline">
             <div class="outer">
