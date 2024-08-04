@@ -14,7 +14,6 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
         try {
             const response = await getUsersByRole(currentPage, role);
             setUsers(response);
-            console.log("Users", users);
         } catch (error) {
             console.error("Error", error);
         }
@@ -22,7 +21,7 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
 
     const fetchNumberOfPages = async () => {
         try {
-            const response = await getNumberOfPagesByRole(currentPage, role);
+            const response = await getNumberOfPagesByRole(role);
             setNumberOfPages(response);
         } catch (error) {
             console.error("Error", error);
@@ -33,10 +32,6 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
         fetchNumberOfPages();
         fetchUsers();
     }, []);
-
-    useEffect(() => {
-        console.log("changed users: ", changedUsers);
-    }, [changedUsers]);
 
     useEffect(() => {
         fetchUsers();
