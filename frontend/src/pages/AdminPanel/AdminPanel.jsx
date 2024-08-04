@@ -3,6 +3,7 @@ import "./admin-panel.css";
 import { TableUsers } from "../../components/TableUser/TableUsers";
 import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
 import { TableStations } from "../../components/TableStation/TableStations";
+import { activateLine } from "../../services/lines";
 
 export const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
@@ -18,13 +19,17 @@ export const AdminPanel = () => {
         setIsSaveClicked(true);
     };
 
+    const handleResponseApi = async (id) => {
+        try {
+            await activateLine(id, response.response === "accept");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         if (response) {
-            if (response === "accept") {
-                console.log("Accepted");
-            } else if (response === "decline") {
-                console.log("Rejected");
-            }
+            handleResponseApi(response.id);
             setResponse(null);
         }
     }, [response]);

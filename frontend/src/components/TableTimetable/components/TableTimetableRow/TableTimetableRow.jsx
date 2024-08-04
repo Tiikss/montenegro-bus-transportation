@@ -10,6 +10,7 @@ export const TableTimetableRow = ({
     handleDeleteClick,
     isAdmin,
     handleResponse,
+    routeId,
 }) => {
     const handleClick = (e) => {
         const content =
@@ -113,7 +114,14 @@ export const TableTimetableRow = ({
                             </>
                         ) : (
                             <>
-                                <Link onClick={(e) => handleResponse("accept")}>
+                                <Link
+                                    onClick={(e) =>
+                                        handleResponse({
+                                            response: "accept",
+                                            id: routeId,
+                                        })
+                                    }
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -130,7 +138,12 @@ export const TableTimetableRow = ({
                                     </svg>
                                 </Link>
                                 <Link
-                                    onClick={(e) => handleResponse("decline")}
+                                    onClick={(e) =>
+                                        handleResponse({
+                                            response: "decline",
+                                            id: routeId,
+                                        })
+                                    }
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
