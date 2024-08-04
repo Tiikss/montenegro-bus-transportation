@@ -19,3 +19,12 @@ export const deleteUser = async (id) => {
     });
     return response.data;
 };
+
+export const updateUser = async (id, user) => {
+    const response = await axios.put(`${URL}/users/${id}`, user, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+    return response.data;
+};

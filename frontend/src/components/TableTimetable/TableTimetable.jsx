@@ -115,6 +115,10 @@ export const TableTimetable = ({
         fetchLines();
     }, []);
 
+    useEffect(() => {
+        console.log("lajns", lines);
+    }, [lines]);
+
     return (
         <>
             <ul className="red-voznje-table">
@@ -128,6 +132,7 @@ export const TableTimetable = ({
                                   isAdmin={isAdmin}
                                   handleDeleteClick={handleDeleteClick}
                                   handleResponse={handleResponse}
+                                  routeId={line.route_id}
                               />
                               <TableTimetableContent
                                   departure={line}
