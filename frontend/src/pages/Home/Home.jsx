@@ -19,6 +19,7 @@ export const Home = () => {
     const [inputs, setInputs] = useState({
         searchFrom: "",
         searchTo: "",
+        date: new Date().toISOString().split("T")[0],
     });
 
     const handleOpenModal = (title, content) => {
@@ -141,7 +142,12 @@ export const Home = () => {
                         </div>
                     </div>
                     <label htmlFor="date">Datum:</label>
-                    <input type="date" id="date" />
+                    <input
+                        type="date"
+                        id="date"
+                        defaultValue={new Date().toISOString().split("T")[0]}
+                        onChange={handleChange}
+                    />
                     <button>
                         <FontAwesomeIcon
                             icon={faSearch}
