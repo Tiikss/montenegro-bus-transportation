@@ -25,3 +25,15 @@ export const getNumberOfPages = async (isActive) => {
     );
     return response.data;
 };
+
+export const activateLine = async (id, activate) => {
+    const response = await axios.put(
+        `${URL}/routes/activate/${id}?should_be_activated=${activate}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
+    );
+    return response.data;
+};
