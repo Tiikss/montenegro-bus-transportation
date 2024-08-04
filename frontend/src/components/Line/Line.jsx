@@ -16,13 +16,13 @@ export const Line = ({
                     <div class="card" key={index}>
                         <div class="info">
                             <h3 class="title">
-                                {station.station.city_name ||
+                                {station.city_name ||
                                     station.polaziste ||
                                     station.odrediste}
                             </h3>
                             <p>
                                 Naziv Stanice:
-                                {station.station.address ||
+                                {station.address ||
                                     station.polaziste ||
                                     station.odrediste}
                             </p>

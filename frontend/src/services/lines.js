@@ -25,3 +25,12 @@ export const getNumberOfPages = async (isActive) => {
     );
     return response.data;
 };
+
+export const addLine = async (line) => {
+    const response = await axios.post(`${URL}/routes`, line, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+    return response.data;
+};

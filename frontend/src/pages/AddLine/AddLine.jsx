@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./add-line.css";
 import { Line } from "../../components/Line/Line";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
@@ -6,8 +7,11 @@ import { AddLineStationModal } from "../../components/AddStationModal/AddLineSta
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { getFilteredStations } from "../../services/stations";
+import { AuthContext } from "../../contexts/AuthContext";
+import { addLine } from "../../services/lines";
 
 export const AddLine = () => {
+    const navigate = useNavigate();
     const [polazistaLista, setPolazistaLista] = useState([
         "Podgorica",
         "Niksic",
@@ -30,6 +34,8 @@ export const AddLine = () => {
         "Kotor",
     ]);
 
+    const { user } = useContext(AuthContext);
+
     const [allStations, setAllStations] = useState([]);
 
     const [stations, setStations] = useState([]);
@@ -40,10 +46,12 @@ export const AddLine = () => {
     const [arrivalTime, setArrivalTime] = useState("00:00");
     const [price, setPrice] = useState(0);
 
-    const [stationName, setStationName] = useState("");
+    const [stationName, setStationName] = useState({});
     const [arrivalTimeStation, setArrivalTimeStation] = useState("00:00");
     const [departureTimeStation, setDepartureTimeStation] = useState("00:00");
     const [priceStation, setPriceStation] = useState(0);
+
+    const [selectedDays, setSelectedDays] = useState([]);
 
     const [isEditLine, setIsEditLine] = useState(false);
     const [editStationIndex, setEditStationIndex] = useState(-1);
@@ -92,29 +100,36 @@ export const AddLine = () => {
         if (isEditLine) {
             let newStations = JSON.parse(JSON.stringify(stations));
             newStations = newStations.map((station) => {
-                if (station.stationName === stationName) {
+                if (station.id === stationName.id) {
                     return {
-                        stationName,
-                        arrivalTimeStation,
-                        departureTimeStation,
-                        priceStation,
+                        station_id: stationName.id,
+                        address: stationName.address,
+                        city_name: stationName.city_name,
+                        arrival_time: arrivalTimeStation,
+                        departure_time: departureTimeStation,
+                        price: priceStation,
                     };
-                } else if (station.source === source) {
+                } else if (station.id === source.id) {
                     return {
-                        source,
-                        departureTime,
+                        station_id: source.id,
+                        address: source.address,
+                        city_name: source.city_name,
+                        departure_time: departureTime,
                     };
-                } else if (station.destination === destination) {
+                } else if (station.id === destination.id) {
                     return {
-                        destination,
-                        arrivalTime,
+                        station_id: destination.id,
+                        address: destination.address,
+                        city_name: destination.city_name,
+                        arrival_time: arrivalTime,
+                        price: price,
                     };
                 }
                 return station;
             });
             setStations(newStations);
             setIsEditLine(false);
-            setStationName("");
+            setStationName({});
             setArrivalTimeStation("");
             setDepartureTimeStation("");
             setPriceStation(0);
@@ -123,36 +138,44 @@ export const AddLine = () => {
 
         if (stations.length === 0) {
             const startStation = {
-                source,
-                departureTime,
+                station_id: source.id,
+                address: source.address,
+                city_name: source.city_name,
+                departure_time: departureTime,
             };
 
             const endStation = {
-                destination,
-                arrivalTime,
-                price,
+                station_id: destination.id,
+                address: destination.address,
+                city_name: destination.city_name,
+                arrival_time: arrivalTime,
+                price: price,
             };
 
             const station = {
-                stationName,
-                arrivalTimeStation,
-                departureTimeStation,
-                priceStation,
+                station_id: stationName.id,
+                address: stationName.address,
+                city_name: stationName.city_name,
+                arrival_time: arrivalTimeStation,
+                departure_time: departureTimeStation,
+                price: priceStation,
             };
 
             setStations([startStation, station, endStation]);
         } else {
             const station = {
-                stationName,
-                arrivalTimeStation,
-                departureTimeStation,
-                priceStation,
+                station_id: stationName.id,
+                address: stationName.address,
+                city_name: stationName.city_name,
+                arrival_time: arrivalTimeStation,
+                departure_time: departureTimeStation,
+                price: priceStation,
             };
             let newStations = JSON.parse(JSON.stringify(stations));
             newStations.splice(stations.length - 1, 0, station);
             setStations(newStations);
         }
-        setStationName("");
+        setStationName({});
         setArrivalTimeStation("");
         setDepartureTimeStation("");
         setPriceStation(0);
@@ -192,6 +215,15 @@ export const AddLine = () => {
         setSveStanice([]);
     };
 
+    const handleSelectDay = (e) => {
+        const { id, checked } = e.target;
+        if (checked) {
+            setSelectedDays([...selectedDays, { day_name: id }]);
+        } else {
+            setSelectedDays(selectedDays.filter((day) => day_name !== id));
+        }
+    };
+
     const openStationModal = (e) => {
         e.preventDefault();
         setIsModalOpen(true);
@@ -210,6 +242,26 @@ export const AddLine = () => {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const addLineApi = async (body) => {
+        try {
+            const response = await addLine(body);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleAddLineClick = async (e) => {
+        e.preventDefault();
+        const body = {
+            stations: stations,
+            company_id: user.company_id,
+            days: selectedDays,
+        };
+        await addLineApi(body);
+        navigate("/prevoznik-panel");
     };
 
     // useEffect(() => {
@@ -255,16 +307,16 @@ export const AddLine = () => {
         const tempStations = JSON.parse(JSON.stringify(stations));
 
         const startStation = {
+            station_id: source.id,
             address: source.address,
             city_name: source.city_name,
-            station_id: source.id,
             departure_time: departureTime,
         };
 
         const endStation = {
-            address: source.address,
-            city_name: source.city_name,
-            station_id: source.id,
+            station_id: destination.id,
+            address: destination.address,
+            city_name: destination.city_name,
             arrival_time: arrivalTime,
             price: price,
         };
@@ -286,16 +338,21 @@ export const AddLine = () => {
 
     useEffect(() => {
         fetchAllStations(source, "source");
+        console.log("polaziste", source);
     }, [source]);
 
     useEffect(() => {
         fetchAllStations(destination, "destination");
+        console.log("destinacija", destination);
     }, [destination]);
 
     useEffect(() => {
         fetchAllStations(stationName, "stationName");
     }, [stationName]);
 
+    useEffect(() => {
+        console.log(selectedDays);
+    }, [selectedDays]);
     return (
         <main className="addline-body">
             <h1>Dodaj liniju</h1>
@@ -401,29 +458,60 @@ export const AddLine = () => {
                     <label htmlFor="dani">Dani vožnje:</label>
                     <div className="days-container">
                         <label htmlFor="monday">Ponedjeljak</label>
-                        <input type="checkbox" id="monday" name="monday" />
+                        <input
+                            type="checkbox"
+                            id="Monday"
+                            name="monday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="tuesday">Utorak</label>
-                        <input type="checkbox" id="tuesday" name="tuesday" />
+                        <input
+                            type="checkbox"
+                            id="Tuesday"
+                            name="tuesday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="wednesday">Srijeda</label>
                         <input
                             type="checkbox"
-                            id="wednesday"
+                            id="Wednesday"
                             name="wednesday"
+                            onChange={handleSelectDay}
                         />
                         <label htmlFor="thursday">Četvrtak</label>
-                        <input type="checkbox" id="thursday" name="thursday" />
+                        <input
+                            type="checkbox"
+                            id="Thursday"
+                            name="thursday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="friday">Petak</label>
-                        <input type="checkbox" id="friday" name="friday" />
+                        <input
+                            type="checkbox"
+                            id="Friday"
+                            name="friday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="saturday">Subota</label>
-                        <input type="checkbox" id="saturday" name="saturday" />
+                        <input
+                            type="checkbox"
+                            id="Saturday"
+                            name="saturday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="sunday">Nedjelja</label>
-                        <input type="checkbox" id="sunday" name="sunday" />
+                        <input
+                            type="checkbox"
+                            id="Sunday"
+                            name="sunday"
+                            onChange={handleSelectDay}
+                        />
                     </div>
 
                     <button onClick={openStationModal}>
                         <FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu
                     </button>
-                    <button type="submit">
+                    <button type="submit" onClick={handleAddLineClick}>
                         <FontAwesomeIcon icon={faCirclePlus} /> Dodaj liniju
                     </button>
                 </form>
