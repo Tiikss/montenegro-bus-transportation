@@ -25,3 +25,23 @@ export const getNumberOfPages = async (isActive) => {
     );
     return response.data;
 };
+
+export const getLinesFiltered = async (
+    isActive,
+    page,
+    startCity,
+    endCity,
+    date
+) => {
+    const response = await axios.get(
+        `${URL}/routes_filtered/${page}?is_active=${
+            isActive ? "1" : "-1"
+        }&startCity=${startCity}&endCity=${endCity}&date=${date}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
+    );
+    return response.data;
+};
