@@ -5,23 +5,24 @@ import { DropDownCard } from "../DropdownCard/DropdownCard";
 export const AddLineStationModal = ({
     isOpen,
     setIsOpen,
-    nazivStanice,
+    stationName,
     handleChange,
     sveStanice,
-    handleSetNazivStanice,
-    vrijemeDolaskaStanica,
-    vrijemePolaskaStanica,
-    cijenaStanica,
+    handleSetStationName,
+    arrivalTimeStation,
+    departureTimeStation,
+    priceStation,
     handleAddStation,
 }) => {
     const handleButtonClick = (e) => {
         e.preventDefault();
         if (
-            !nazivStanice ||
-            !vrijemeDolaskaStanica ||
-            !vrijemePolaskaStanica ||
-            !cijenaStanica
+            !stationName ||
+            !arrivalTimeStation ||
+            !departureTimeStation ||
+            !priceStation
         ) {
+            console.log("nemoze evoti karu");
             return;
         }
         handleAddStation(e);
@@ -32,18 +33,18 @@ export const AddLineStationModal = ({
         <div>
             <form className={"addstation-form" + (isOpen ? "" : " hidden")}>
                 <label htmlFor="prevoznik">Stanica:</label>
-                <label htmlFor="nazivStanice">Naziv stanice:</label>
+                <label htmlFor="stationName">Naziv stanice:</label>
                 <div className="add-line-input-container">
                     <input
                         className="addline-input"
                         type="text"
-                        id="nazivStanice"
-                        name="nazivStanice"
+                        id="stationName"
+                        name="stationName"
                         required
-                        value={nazivStanice}
+                        value={stationName.address}
                         onChange={handleChange}
                         style={
-                            nazivStanice === "" || sveStanice.length === 0
+                            stationName === "" || sveStanice.length === 0
                                 ? { borderRadius: "10px" }
                                 : { borderRadius: "10px 10px 0 0" }
                         }
@@ -52,10 +53,12 @@ export const AddLineStationModal = ({
                         id="filter-polaziste-container"
                         className="add-line-filter-container"
                     >
-                        {nazivStanice !== ""
+                        {stationName !== ""
                             ? sveStanice.map((item) => (
                                   <DropDownCard
-                                      onClick={handleSetNazivStanice}
+                                      onClick={(e) =>
+                                          handleSetStationName(e, item)
+                                      }
                                       item={item}
                                       key={item.item_name}
                                   />
@@ -63,34 +66,34 @@ export const AddLineStationModal = ({
                             : null}
                     </div>
                 </div>
-                <label htmlFor="vrijemeDolaskaStanica">Vrijeme dolaska:</label>
+                <label htmlFor="arrivalTimeStation">Vrijeme dolaska:</label>
                 <input
                     className="addline-input"
                     type="time"
-                    id="vrijemeDolaskaStanica"
-                    name="vrijemeDolaskaStanica"
+                    id="arrivalTimeStation"
+                    name="arrivalTimeStation"
                     required
-                    value={vrijemeDolaskaStanica}
+                    value={arrivalTimeStation}
                     onChange={handleChange}
                 />
-                <label htmlFor="vrijemePolaskaStanica">Vrijeme polaska:</label>
+                <label htmlFor="departureTimeStation">Vrijeme polaska:</label>
                 <input
                     className="addline-input"
                     type="time"
-                    id="vrijemePolaskaStanica"
-                    name="vrijemePolaskaStanica"
+                    id="departureTimeStation"
+                    name="departureTimeStation"
                     required
-                    value={vrijemePolaskaStanica}
+                    value={departureTimeStation}
                     onChange={handleChange}
                 />
-                <label htmlFor="cijenaStanica">Cijena:</label>
+                <label htmlFor="priceStation">Cijena:</label>
                 <input
                     className="addline-input"
                     type="number"
-                    id="cijenaStanica"
-                    name="cijenaStanica"
+                    id="priceStation"
+                    name="priceStation"
                     required
-                    value={cijenaStanica}
+                    value={priceStation}
                     onChange={handleChange}
                 />
                 <button type="submit" onClick={handleButtonClick}>

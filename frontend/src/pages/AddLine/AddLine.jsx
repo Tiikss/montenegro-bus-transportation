@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./add-line.css";
 import { Line } from "../../components/Line/Line";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { AddLineStationModal } from "../../components/AddStationModal/AddLineStationModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { getFilteredStations } from "../../services/stations";
+import { AuthContext } from "../../contexts/AuthContext";
+import { addLine } from "../../services/lines";
 
 export const AddLine = () => {
+    const navigate = useNavigate();
     const [polazistaLista, setPolazistaLista] = useState([
         "Podgorica",
         "Niksic",
@@ -14,7 +19,7 @@ export const AddLine = () => {
         "Budva",
         "Kotor",
     ]);
-    const [odredisteLista, setOdredisteLista] = useState([
+    const [destinationLista, setDestinationLista] = useState([
         "Podgorica",
         "Niksic",
         "Bar",
@@ -29,18 +34,24 @@ export const AddLine = () => {
         "Kotor",
     ]);
 
+    const { user } = useContext(AuthContext);
+
+    const [allStations, setAllStations] = useState([]);
+
     const [stations, setStations] = useState([]);
 
-    const [polaziste, setPolaziste] = useState("");
-    const [odrediste, setOdrediste] = useState("");
-    const [vrijemePolaska, setVrijemePolaska] = useState("00:00");
-    const [vrijemeDolaska, setVrijemeDolaska] = useState("00:00");
-    const [cijena, setCijena] = useState(0);
+    const [source, setSource] = useState("");
+    const [destination, setDestination] = useState("");
+    const [departureTime, setDepartureTime] = useState("00:00");
+    const [arrivalTime, setArrivalTime] = useState("00:00");
+    const [price, setPrice] = useState(0);
 
-    const [nazivStanice, setNazivStanice] = useState("");
-    const [vrijemeDolaskaStanica, setVrijemeDolaskaStanica] = useState("00:00");
-    const [vrijemePolaskaStanica, setVrijemePolaskaStanica] = useState("00:00");
-    const [cijenaStanica, setCijenaStanica] = useState(0);
+    const [stationName, setStationName] = useState({});
+    const [arrivalTimeStation, setArrivalTimeStation] = useState("00:00");
+    const [departureTimeStation, setDepartureTimeStation] = useState("00:00");
+    const [priceStation, setPriceStation] = useState(0);
+
+    const [selectedDays, setSelectedDays] = useState([]);
 
     const [isEditLine, setIsEditLine] = useState(false);
     const [editStationIndex, setEditStationIndex] = useState(-1);
@@ -50,32 +61,32 @@ export const AddLine = () => {
         const { name, value } = e.target;
 
         switch (name) {
-            case "polaziste":
-                setPolaziste(value);
+            case "source":
+                setSource(value);
                 break;
-            case "odrediste":
-                setOdrediste(value);
+            case "destination":
+                setDestination(value);
                 break;
-            case "vrijemePolaska":
-                setVrijemePolaska(value);
+            case "departureTime":
+                setDepartureTime(value);
                 break;
-            case "vrijemeDolaska":
-                setVrijemeDolaska(value);
+            case "arrivalTime":
+                setArrivalTime(value);
                 break;
-            case "cijena":
-                setCijena(value);
+            case "price":
+                setPrice(value);
                 break;
-            case "nazivStanice":
-                setNazivStanice(value);
+            case "stationName":
+                setStationName(value);
                 break;
-            case "vrijemePolaskaStanica":
-                setVrijemePolaskaStanica(value);
+            case "departureTimeStation":
+                setDepartureTimeStation(value);
                 break;
-            case "vrijemeDolaskaStanica":
-                setVrijemeDolaskaStanica(value);
+            case "arrivalTimeStation":
+                setArrivalTimeStation(value);
                 break;
-            case "cijenaStanica":
-                setCijenaStanica(value);
+            case "priceStation":
+                setPriceStation(value);
                 break;
             default:
                 break;
@@ -89,80 +100,95 @@ export const AddLine = () => {
         if (isEditLine) {
             let newStations = JSON.parse(JSON.stringify(stations));
             newStations = newStations.map((station) => {
-                if (station.nazivStanice === nazivStanice) {
+                if (station.id === stationName.id) {
                     return {
-                        nazivStanice,
-                        vrijemeDolaskaStanica,
-                        vrijemePolaskaStanica,
-                        cijenaStanica,
+                        station_id: stationName.id,
+                        address: stationName.address,
+                        city_name: stationName.city_name,
+                        arrival_time: arrivalTimeStation,
+                        departure_time: departureTimeStation,
+                        price: priceStation,
                     };
-                } else if (station.polaziste === polaziste) {
+                } else if (station.id === source.id) {
                     return {
-                        polaziste,
-                        vrijemePolaska,
+                        station_id: source.id,
+                        address: source.address,
+                        city_name: source.city_name,
+                        departure_time: departureTime,
                     };
-                } else if (station.odrediste === odrediste) {
+                } else if (station.id === destination.id) {
                     return {
-                        odrediste,
-                        vrijemeDolaska,
+                        station_id: destination.id,
+                        address: destination.address,
+                        city_name: destination.city_name,
+                        arrival_time: arrivalTime,
+                        price: price,
                     };
                 }
                 return station;
             });
             setStations(newStations);
             setIsEditLine(false);
-            setNazivStanice("");
-            setVrijemeDolaskaStanica("");
-            setVrijemePolaskaStanica("");
-            setCijenaStanica(0);
+            setStationName({});
+            setArrivalTimeStation("");
+            setDepartureTimeStation("");
+            setPriceStation(0);
             return;
         }
 
         if (stations.length === 0) {
             const startStation = {
-                polaziste,
-                vrijemePolaska,
+                station_id: source.id,
+                address: source.address,
+                city_name: source.city_name,
+                departure_time: departureTime,
             };
 
             const endStation = {
-                odrediste,
-                vrijemeDolaska,
-                cijena,
+                station_id: destination.id,
+                address: destination.address,
+                city_name: destination.city_name,
+                arrival_time: arrivalTime,
+                price: price,
             };
 
             const station = {
-                nazivStanice,
-                vrijemeDolaskaStanica,
-                vrijemePolaskaStanica,
-                cijenaStanica,
+                station_id: stationName.id,
+                address: stationName.address,
+                city_name: stationName.city_name,
+                arrival_time: arrivalTimeStation,
+                departure_time: departureTimeStation,
+                price: priceStation,
             };
 
             setStations([startStation, station, endStation]);
         } else {
             const station = {
-                nazivStanice,
-                vrijemeDolaskaStanica,
-                vrijemePolaskaStanica,
-                cijenaStanica,
+                station_id: stationName.id,
+                address: stationName.address,
+                city_name: stationName.city_name,
+                arrival_time: arrivalTimeStation,
+                departure_time: departureTimeStation,
+                price: priceStation,
             };
             let newStations = JSON.parse(JSON.stringify(stations));
             newStations.splice(stations.length - 1, 0, station);
             setStations(newStations);
         }
-        setNazivStanice("");
-        setVrijemeDolaskaStanica("");
-        setVrijemePolaskaStanica("");
-        setCijenaStanica(0);
+        setStationName({});
+        setArrivalTimeStation("");
+        setDepartureTimeStation("");
+        setPriceStation(0);
     };
 
     const handleEditClick = (e, index) => {
         e.preventDefault();
         const station = stations[index];
         setEditStationIndex(index);
-        setNazivStanice(station.nazivStanice);
-        setVrijemeDolaskaStanica(station.vrijemeDolaskaStanica);
-        setVrijemePolaskaStanica(station.vrijemePolaskaStanica);
-        setCijenaStanica(station.cijenaStanica);
+        setStationName(station.stationName);
+        setArrivalTimeStation(station.arrivalTimeStation);
+        setDepartureTimeStation(station.departureTimeStation);
+        setPriceStation(station.priceStation);
         setIsEditLine(true);
         setIsModalOpen(true);
     };
@@ -174,19 +200,28 @@ export const AddLine = () => {
         setStations(newStations);
     };
 
-    const handleSetPolaziste = (e) => {
-        setPolaziste(e.target.innerText);
+    const handleSetSource = (e, item) => {
+        setSource(item);
         setPolazistaLista([]);
     };
 
-    const handleSetOdrediste = (e) => {
-        setOdrediste(e.target.innerText);
-        setOdredisteLista([]);
+    const handleSetDestination = (e, item) => {
+        setDestination(item);
+        setDestinationLista([]);
     };
 
-    const handleSetNazivStanice = (e) => {
-        setNazivStanice(e.target.innerText);
+    const handleSetStationName = (e, item) => {
+        setStationName(item);
         setSveStanice([]);
+    };
+
+    const handleSelectDay = (e) => {
+        const { id, checked } = e.target;
+        if (checked) {
+            setSelectedDays([...selectedDays, { day_name: id }]);
+        } else {
+            setSelectedDays(selectedDays.filter((day) => day_name !== id));
+        }
     };
 
     const openStationModal = (e) => {
@@ -194,57 +229,96 @@ export const AddLine = () => {
         setIsModalOpen(true);
     };
 
-    useEffect(() => {
-        const filteredPolazista = polazistaLista.filter((item) =>
-            item.toLowerCase().includes(polaziste.toLowerCase())
-        );
-        setPolazistaLista(filteredPolazista);
-        if (polaziste === "") {
-            setPolazistaLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    const fetchAllStations = async (filter, inputField) => {
+        try {
+            const response = await getFilteredStations(filter);
+            if (inputField === "source") {
+                setPolazistaLista(response);
+            } else if (inputField === "destination") {
+                setDestinationLista(response);
+            } else if (inputField === "stationName") {
+                setSveStanice(response);
+            }
+        } catch (error) {
+            console.log(error);
         }
-    }, [polaziste]);
+    };
+
+    const addLineApi = async (body) => {
+        try {
+            const response = await addLine(body);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleAddLineClick = async (e) => {
+        e.preventDefault();
+        const body = {
+            stations: stations,
+            company_id: user.company_id,
+            days: selectedDays,
+        };
+        await addLineApi(body);
+        navigate("/prevoznik-panel");
+    };
+
+    // useEffect(() => {
+    //     const filteredPolazista = polazistaLista.filter((item) =>
+    //         item.toLowerCase().includes(source.toLowerCase())
+    //     );
+    //     setPolazistaLista(filteredPolazista);
+    //     if (source === "") {
+    //         setPolazistaLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    //     }
+    // }, [source]);
+
+    // useEffect(() => {
+    //     const filtereddestination = destinationLista.filter((item) =>
+    //         item.toLowerCase().includes(destination.toLowerCase())
+    //     );
+    //     setDestinationLista(filtereddestination);
+    //     if (destination === "") {
+    //         setDestinationLista([
+    //             "Podgorica",
+    //             "Niksic",
+    //             "Bar",
+    //             "Budva",
+    //             "Kotor",
+    //         ]);
+    //     }
+    // }, [destination]);
+
+    // useEffect(() => {
+    //     const filteredSveStanice = sveStanice.filter((item) =>
+    //         item.toLowerCase().includes(stationName.toLowerCase())
+    //     );
+    //     setSveStanice(filteredSveStanice);
+    //     if (stationName === "") {
+    //         setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+    //     }
+    // }, [stationName]);
 
     useEffect(() => {
-        const filteredOdrediste = odredisteLista.filter((item) =>
-            item.toLowerCase().includes(odrediste.toLowerCase())
-        );
-        setOdredisteLista(filteredOdrediste);
-        if (odrediste === "") {
-            setOdredisteLista(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        }
-    }, [odrediste]);
-
-    useEffect(() => {
-        const filteredSveStanice = sveStanice.filter((item) =>
-            item.toLowerCase().includes(nazivStanice.toLowerCase())
-        );
-        setSveStanice(filteredSveStanice);
-        if (nazivStanice === "") {
-            setSveStanice(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        }
-    }, [nazivStanice]);
-
-    useEffect(() => {
-        if (
-            !polaziste ||
-            !odrediste ||
-            !vrijemePolaska ||
-            !vrijemeDolaska ||
-            !cijena
-        )
+        if (!source || !destination || !departureTime || !arrivalTime || !price)
             return;
 
         const tempStations = JSON.parse(JSON.stringify(stations));
 
         const startStation = {
-            polaziste,
-            vrijemePolaska,
+            station_id: source.id,
+            address: source.address,
+            city_name: source.city_name,
+            departure_time: departureTime,
         };
 
         const endStation = {
-            odrediste,
-            vrijemeDolaska,
-            cijena,
+            station_id: destination.id,
+            address: destination.address,
+            city_name: destination.city_name,
+            arrival_time: arrivalTime,
+            price: price,
         };
 
         if (tempStations.length === 0) {
@@ -256,37 +330,60 @@ export const AddLine = () => {
         tempStations[tempStations.length - 1] = endStation;
 
         setStations(tempStations);
-    }, [polaziste, odrediste, vrijemePolaska, vrijemeDolaska, cijena]);
+    }, [source, destination, departureTime, arrivalTime, price]);
 
+    // useEffect(() => {
+    //     fetchAllStations("");
+    // }, []);
+
+    useEffect(() => {
+        fetchAllStations(source, "source");
+        console.log("polaziste", source);
+    }, [source]);
+
+    useEffect(() => {
+        fetchAllStations(destination, "destination");
+        console.log("destinacija", destination);
+    }, [destination]);
+
+    useEffect(() => {
+        fetchAllStations(stationName, "stationName");
+    }, [stationName]);
+
+    useEffect(() => {
+        console.log(selectedDays);
+    }, [selectedDays]);
     return (
         <main className="addline-body">
             <h1>Dodaj liniju</h1>
             <div className="addline-forms">
                 <form className="addline-form">
-                    <label htmlFor="polaziste">Polazište:</label>
+                    <label htmlFor="source">Polazište:</label>
                     <div className="add-line-input-container dropdown-container">
                         <input
                             className="addline-input"
                             type="text"
-                            id="polaziste"
-                            name="polaziste"
+                            id="source"
+                            name="source"
                             required
-                            value={polaziste}
+                            value={source.address}
                             onChange={handleChange}
                             style={
-                                polaziste === "" || polazistaLista.length === 0
+                                source === "" || polazistaLista.length === 0
                                     ? { borderRadius: "10px" }
                                     : { borderRadius: "10px 10px 0 0" }
                             }
                         />{" "}
                         <div
-                            id="filter-polaziste-container"
+                            id="filter-source-container"
                             className="dropdown-container"
                         >
-                            {polaziste !== ""
+                            {source !== ""
                                 ? polazistaLista.map((item) => (
                                       <DropDownCard
-                                          onClick={handleSetPolaziste}
+                                          onClick={(e) =>
+                                              handleSetSource(e, item)
+                                          }
                                           item={item}
                                           key={item.item_name}
                                       />
@@ -294,30 +391,33 @@ export const AddLine = () => {
                                 : null}
                         </div>
                     </div>
-                    <label htmlFor="odrediste">Odredište:</label>
+                    <label htmlFor="destination">Odredište:</label>
                     <div className="add-line-input-container">
                         <input
                             className="addline-input"
                             type="text"
-                            id="odrediste"
-                            name="odrediste"
+                            id="destination"
+                            name="destination"
                             required
-                            value={odrediste}
+                            value={destination.address}
                             onChange={handleChange}
                             style={
-                                odrediste === "" || odredisteLista.length === 0
+                                destination === "" ||
+                                destinationLista.length === 0
                                     ? { borderRadius: "10px" }
                                     : { borderRadius: "10px 10px 0 0" }
                             }
                         />{" "}
                         <div
-                            id="filter-odrediste-container"
+                            id="filter-destination-container"
                             className="dropdown-container"
                         >
-                            {odrediste !== ""
-                                ? odredisteLista.map((item) => (
+                            {destination !== ""
+                                ? destinationLista.map((item) => (
                                       <DropDownCard
-                                          onClick={handleSetOdrediste}
+                                          onClick={(e) =>
+                                              handleSetDestination(e, item)
+                                          }
                                           item={item}
                                           key={item.item_name}
                                       />
@@ -325,62 +425,93 @@ export const AddLine = () => {
                                 : null}
                         </div>
                     </div>
-                    <label htmlFor="vrijemePolaska">Vrijeme polaska:</label>
+                    <label htmlFor="departureTime">Vrijeme polaska:</label>
                     <input
                         className="addline-input"
                         type="time"
-                        id="vrijemePolaska"
-                        name="vrijemePolaska"
+                        id="departureTime"
+                        name="departureTime"
                         required
-                        value={vrijemePolaska}
+                        value={departureTime}
                         onChange={handleChange}
                     />
-                    <label htmlFor="vrijemeDolaska">Vrijeme dolaska:</label>
+                    <label htmlFor="arrivalTime">Vrijeme dolaska:</label>
                     <input
                         className="addline-input"
                         type="time"
-                        id="vrijemeDolaska"
-                        name="vrijemeDolaska"
+                        id="arrivalTime"
+                        name="arrivalTime"
                         required
-                        value={vrijemeDolaska}
+                        value={arrivalTime}
                         onChange={handleChange}
                     />
-                    <label htmlFor="cijena">Cijena:</label>
+                    <label htmlFor="price">price:</label>
                     <input
                         className="addline-input"
                         type="number"
-                        id="cijena"
-                        name="cijena"
+                        id="price"
+                        name="price"
                         required
-                        value={cijena}
+                        value={price}
                         onChange={handleChange}
                     />
                     <label htmlFor="dani">Dani vožnje:</label>
                     <div className="days-container">
                         <label htmlFor="monday">Ponedjeljak</label>
-                        <input type="checkbox" id="monday" name="monday" />
+                        <input
+                            type="checkbox"
+                            id="Monday"
+                            name="monday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="tuesday">Utorak</label>
-                        <input type="checkbox" id="tuesday" name="tuesday" />
+                        <input
+                            type="checkbox"
+                            id="Tuesday"
+                            name="tuesday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="wednesday">Srijeda</label>
                         <input
                             type="checkbox"
-                            id="wednesday"
+                            id="Wednesday"
                             name="wednesday"
+                            onChange={handleSelectDay}
                         />
                         <label htmlFor="thursday">Četvrtak</label>
-                        <input type="checkbox" id="thursday" name="thursday" />
+                        <input
+                            type="checkbox"
+                            id="Thursday"
+                            name="thursday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="friday">Petak</label>
-                        <input type="checkbox" id="friday" name="friday" />
+                        <input
+                            type="checkbox"
+                            id="Friday"
+                            name="friday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="saturday">Subota</label>
-                        <input type="checkbox" id="saturday" name="saturday" />
+                        <input
+                            type="checkbox"
+                            id="Saturday"
+                            name="saturday"
+                            onChange={handleSelectDay}
+                        />
                         <label htmlFor="sunday">Nedjelja</label>
-                        <input type="checkbox" id="sunday" name="sunday" />
+                        <input
+                            type="checkbox"
+                            id="Sunday"
+                            name="sunday"
+                            onChange={handleSelectDay}
+                        />
                     </div>
 
                     <button onClick={openStationModal}>
                         <FontAwesomeIcon icon={faCirclePlus} /> Dodaj stanicu
                     </button>
-                    <button type="submit">
+                    <button type="submit" onClick={handleAddLineClick}>
                         <FontAwesomeIcon icon={faCirclePlus} /> Dodaj liniju
                     </button>
                 </form>
@@ -388,13 +519,13 @@ export const AddLine = () => {
             <AddLineStationModal
                 isOpen={isModalOpen}
                 setIsOpen={setIsModalOpen}
-                nazivStanice={nazivStanice}
+                stationName={stationName}
                 handleChange={handleChange}
                 sveStanice={sveStanice}
-                handleSetNazivStanice={handleSetNazivStanice}
-                vrijemeDolaskaStanica={vrijemeDolaskaStanica}
-                vrijemePolaskaStanica={vrijemePolaskaStanica}
-                cijenaStanica={cijenaStanica}
+                handleSetStationName={handleSetStationName}
+                arrivalTimeStation={arrivalTimeStation}
+                departureTimeStation={departureTimeStation}
+                priceStation={priceStation}
                 handleAddStation={handleAddStation}
             />
             <Line

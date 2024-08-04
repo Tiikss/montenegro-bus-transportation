@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./line.css";
 
 export const Line = ({
@@ -15,40 +15,26 @@ export const Line = ({
                     <div class="card" key={index}>
                         <div class="info">
                             <h3 class="title">
-                                {station.station.city_name ||
-                                    station.polaziste ||
-                                    station.odrediste}
+                                {station.city_name
+                                    ? station.city_name
+                                    : station.station.city_name
+                                    ? station.station.city_name
+                                    : ""}
                             </h3>
                             <p>
-                                Naziv Stanice:
-                                {station.station.address ||
-                                    station.polaziste ||
-                                    station.odrediste}
+                                Naziv Stanice:{" "}
+                                {station.address
+                                    ? station.address
+                                    : station.station.address}
                             </p>
                             {station.arrival_time && (
                                 <p>Vrijeme dolaska: {station.arrival_time}</p>
                             )}
-                            {station.vrijemeDolaskaStanica && (
-                                <p>
-                                    Vrijeme dolaska:
-                                    {station.vrijemeDolaskaStanica}
-                                </p>
-                            )}
                             {station.departure_time && (
                                 <p>Vrijeme polaska: {station.departure_time}</p>
                             )}
-                            {station.vrijemePolaskaStanica && (
-                                <p>
-                                    Vrijeme polaska:
-                                    {station.vrijemePolaskaStanica}
-                                </p>
-                            )}
-                            {(station.cijena && (
-                                <p>Cijena: {station.cijena}</p>
-                            )) ||
-                                (station.cijenaStanica && (
-                                    <p>Cijena: {station.cijenaStanica}</p>
-                                ))}
+
+                            {station.price && <p>Cijena: {station.price}</p>}
 
                             {isEdit &&
                                 !isAdmin &&
