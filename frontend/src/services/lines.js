@@ -46,3 +46,21 @@ export const activateLine = async (id, activate) => {
 
     return response.data;
 };
+
+export const getLineById = async (id) => {
+    const response = await axios.get(`${URL}/routes/${id}`, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+
+    return response.data;
+};
+
+export const editLine = async (id, line) => {
+    const response = await axios.put(`${URL}/routes/${id}`, line, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+};

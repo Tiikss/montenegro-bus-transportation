@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./add-line.css";
 import { Line } from "../../components/Line/Line";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { getFilteredStations } from "../../services/stations";
 import { AuthContext } from "../../contexts/AuthContext";
-import { addLine } from "../../services/lines";
+import { addLine, getLineById, editLine } from "../../services/lines";
 
 export const AddLine = () => {
+    const routeId = useParams().id;
     const navigate = useNavigate();
     const [polazistaLista, setPolazistaLista] = useState([
         "Podgorica",
@@ -260,8 +261,31 @@ export const AddLine = () => {
             company_id: user.company_id,
             days: selectedDays,
         };
-        await addLineApi(body);
+        if (routeId !== "0") {
+            await editLine(routeId, body);
+        } else {
+            await addLineApi(body);
+        }
         navigate("/prevoznik-panel");
+    };
+
+    const fetchLineById = async () => {
+        try {
+            const responseArr = await getLineById(routeId);
+            const response = responseArr[0];
+            console.log("eve gi odgovor", response);
+            setSource(response.stations[0].station);
+            setDestination(response.stations[response.stations.length - 1]);
+            setDepartureTime(response.stations[0].departure_time);
+            setArrivalTime(
+                response.stations[response.stations.length - 1].arrival_time
+            );
+            setPrice(response.stations[response.stations.length - 1].price);
+            setStations(response.stations);
+            setSelectedDays(response.days);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // useEffect(() => {
@@ -332,9 +356,12 @@ export const AddLine = () => {
         setStations(tempStations);
     }, [source, destination, departureTime, arrivalTime, price]);
 
-    // useEffect(() => {
-    //     fetchAllStations("");
-    // }, []);
+    useEffect(() => {
+        if (routeId !== 0) {
+            console.log("eve me");
+            fetchLineById();
+        }
+    }, []);
 
     useEffect(() => {
         fetchAllStations(source, "source");
@@ -353,6 +380,7 @@ export const AddLine = () => {
     useEffect(() => {
         console.log(selectedDays);
     }, [selectedDays]);
+
     return (
         <main className="addline-body">
             <h1>Dodaj liniju</h1>
