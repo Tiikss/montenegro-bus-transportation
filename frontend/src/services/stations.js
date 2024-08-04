@@ -56,3 +56,19 @@ export const addStation = async (station) => {
         console.log(error);
     }
 };
+
+export const getStationsFiltered = async (filter) => {
+    try {
+        const response = await axios.get(
+            `${URL}/stations-filtered?search=${filter}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "true",
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
