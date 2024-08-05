@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./home.css";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import slika1 from "../../images/young-girl-bus.jpg";
@@ -21,6 +22,12 @@ export const Home = () => {
         searchTo: "",
         date: new Date().toISOString().split("T")[0],
     });
+    const [inputsSearch, setInputsSearch] = useState({
+        searchFrom: "",
+        searchTo: "",
+        date: new Date().toISOString().split("T")[0],
+    });
+    const navigate = useNavigate();
 
     const handleOpenModal = (title, content) => {
         setCurrentNews({ title, content });
@@ -29,6 +36,12 @@ export const Home = () => {
 
     const handleChange = (e) => {
         setInputs((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+        if (e.target.id === "date") {
+            setInputsSearch((prev) => ({
+                ...prev,
+                [e.target.id]: e.target.value,
+            }));
+        }
     };
 
     const handleCloseModal = () => {
@@ -36,14 +49,40 @@ export const Home = () => {
     };
 
     const handleSetSearch = (e) => {
-        console.log(
-            e.target.parentElement.parentElement.parentElement.childNodes[0]
-        );
         setInputs((prev) => ({
             ...prev,
             [e.target.parentElement.parentElement.parentElement.childNodes[0]
                 .id]: e.target.innerText,
         }));
+        if (
+            e.target.parentElement.parentElement.parentElement.childNodes[0]
+                .id === "searchFrom"
+        ) {
+            const station = stationsFrom.find((station) =>
+                station.address.includes(e.target.innerText)
+            );
+            setInputsSearch((prev) => ({
+                ...prev,
+                [e.target.parentElement.parentElement.parentElement
+                    .childNodes[0].id]: station.city_name,
+            }));
+        } else {
+            const station = stationsTo.find((station) =>
+                station.address.includes(e.target.innerText)
+            );
+            setInputsSearch((prev) => ({
+                ...prev,
+                [e.target.parentElement.parentElement.parentElement
+                    .childNodes[0].id]: station.city_name,
+            }));
+        }
+    };
+
+    const handleNavigate = (e) => {
+        e.preventDefault();
+        navigate(
+            `/red-voznje/${inputsSearch.searchFrom}/${inputsSearch.searchTo}/${inputsSearch.date}`
+        );
     };
 
     const fetchNews = async () => {
@@ -148,7 +187,7 @@ export const Home = () => {
                         defaultValue={new Date().toISOString().split("T")[0]}
                         onChange={handleChange}
                     />
-                    <button>
+                    <button onClick={(e) => handleNavigate(e)}>
                         <FontAwesomeIcon
                             icon={faSearch}
                             style={{ marginRight: "5px" }}
