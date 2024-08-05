@@ -6,7 +6,7 @@ import { TableTimetableHeader } from "./components/TableTimetableHeader/TableTim
 import { TableTimetableRow } from "./components/TableTimetableRow/TableTimetableRow";
 import { TableTimetableContent } from "./components/TableTimetableContent/TableTimetableContent";
 import { getLines, getNumberOfPages } from "../../services/lines";
-import PaginationNumbers from "../PaginationNumbers/PaginationNumbers";
+import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 
 export const TableTimetable = ({
     isEdit,

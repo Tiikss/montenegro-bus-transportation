@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./table-users.css";
 import { getUsersByRole, getNumberOfPagesByRole } from "../../services/users";
 import { UserTableRow } from "./UserTableRow/UserTableRow";
-import PaginationNumbers from "../PaginationNumbers/PaginationNumbers";
+import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 
 export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
     const [users, setUsers] = useState([]);
