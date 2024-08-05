@@ -87,7 +87,7 @@ export const AddLine = () => {
         if (isEditLine) {
             let newStations = JSON.parse(JSON.stringify(stations));
             newStations = newStations.map((station) => {
-                if (station.id === stationName.id) {
+                if (station.station_id === stationName.id) {
                     return {
                         station_id: stationName.id,
                         address: stationName.address,
@@ -172,10 +172,14 @@ export const AddLine = () => {
         e.preventDefault();
         const station = stations[index];
         setEditStationIndex(index);
-        setStationName(station.stationName);
-        setArrivalTimeStation(station.arrivalTimeStation);
-        setDepartureTimeStation(station.departureTimeStation);
-        setPriceStation(station.priceStation);
+        setStationName(station.stationName || station.address);
+        setArrivalTimeStation(
+            station.arrivalTimeStation || station.arrival_time
+        );
+        setDepartureTimeStation(
+            station.departureTimeStation || station.departure_time
+        );
+        setPriceStation(station.priceStation || station.price);
         setIsEditLine(true);
         setIsModalOpen(true);
     };
@@ -234,7 +238,6 @@ export const AddLine = () => {
     const addLineApi = async (body) => {
         try {
             const response = await addLine(body);
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
@@ -259,7 +262,6 @@ export const AddLine = () => {
         try {
             const responseArr = await getLineById(routeId);
             const response = responseArr[0];
-            console.log("eve gi odgovor", response);
             setSource(response.stations[0].station);
             setDestination(
                 response.stations[response.stations.length - 1].station
@@ -269,7 +271,17 @@ export const AddLine = () => {
                 response.stations[response.stations.length - 1].arrival_time
             );
             setPrice(response.stations[response.stations.length - 1].price);
-            setStations(response.stations);
+            const tempStations = response.stations.map((station) => {
+                return {
+                    station_id: station.station.id,
+                    address: station.station.address,
+                    city_name: station.station.city_name,
+                    departure_time: station.departure_time,
+                    arrival_time: station.arrival_time,
+                    price: station.price,
+                };
+            });
+            setStations(tempStations);
             setSelectedDays(response.days);
         } catch (error) {
             console.log(error);
@@ -346,7 +358,6 @@ export const AddLine = () => {
 
     useEffect(() => {
         if (routeId !== 0) {
-            console.log("eve me");
             fetchLineById();
         }
     }, []);
@@ -357,7 +368,6 @@ export const AddLine = () => {
             return;
         }
         fetchAllStations(source, "source");
-        console.log("polaziste", source);
     }, [source]);
 
     useEffect(() => {
@@ -366,7 +376,6 @@ export const AddLine = () => {
             return;
         }
         fetchAllStations(destination, "destination");
-        console.log("destinacija", destination);
     }, [destination]);
 
     useEffect(() => {
@@ -376,10 +385,6 @@ export const AddLine = () => {
         }
         fetchAllStations(stationName, "stationName");
     }, [stationName]);
-
-    useEffect(() => {
-        console.log(selectedDays);
-    }, [selectedDays]);
 
     return (
         <main className="addline-body">
