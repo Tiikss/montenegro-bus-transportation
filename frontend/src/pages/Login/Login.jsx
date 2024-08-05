@@ -9,19 +9,29 @@ export const Login = () => {
     const { login } = useContext(AuthContext);
 
     const [userData, setUserData] = useState({ username: "", password: "" });
-
+    const [error, setError] = useState("");
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
     const handleLoginClick = async (e) => {
         e.preventDefault();
+
+        if (userData.username === "" || userData.password === ""){
+            setError("Morate unijeti korisničko ime i lozinku!");
+        }
+
         try {
-            console.log(userData);
             await login(userData);
             navigate("/");
         } catch (error) {
-            console.error(error);
+            console.log(error);
+            if (error === 404){
+                setError("Korisnik ne postoji!");
+            }
+            else if (error === 401){
+                setError("Korisničko ime ili lozinka nisu ispravni!");
+            }
         }
     };
 
@@ -52,7 +62,8 @@ export const Login = () => {
                         required
                         onChange={handleChange}
                     />
-                    <button type="submit" onClick={handleLoginClick}>
+                    {error && <p className="err" style={{color: "#ba0c0e"}}>{error}</p>}
+                    <button className="btnsty" type="submit" onClick={handleLoginClick}>
                         Prijavi se
                     </button>
                 </form>

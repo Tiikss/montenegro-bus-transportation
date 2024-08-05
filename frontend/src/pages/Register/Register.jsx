@@ -18,6 +18,21 @@ export const Register = () => {
 
     const handleRegisterClick = async (e) => {
         e.preventDefault();
+
+        if (
+            userData.full_name === "" ||
+            userData.username === "" ||
+            userData.email === "" ||
+            userData.password === "" ||
+            userData.confirmPassword === ""
+        ) {
+            setError({
+                title: "Greška",
+                message: "Morate popuniti sva polja!",
+            });
+            return;
+        }
+
         try {
             if (userData.password !== userData.confirmPassword) {
                 setError({
@@ -26,9 +41,16 @@ export const Register = () => {
                 });
                 return;
             }
+            if (userData.password.length < 8) {
+                setError({
+                    title: "Greška",
+                    message: "Lozinka mora imati najmanje 8 karaktera!",
+                });
+                return;
+            }
             const user = {
                 username: userData.username,
-                full_name: userData.username,
+                full_name: userData.full_name,
                 phone_number: "000000000",
                 email: userData.email,
                 password: userData.password,
@@ -36,8 +58,18 @@ export const Register = () => {
             const response = await register(user);
             navigate("/login");
         } catch (error) {
-            console.error(error);
-            setError({ title: "Greška", message: error.response.detail.msg });
+            if (error === 400) {
+                setError({
+                    title: "Greška",
+                    message: "Korisnički email već postoje!",
+                });
+            }
+            else if (error === 409) {
+                setError({
+                    title: "Greška",
+                    message: "Korisnik sa ovim korisničkim imenom već postoji!",
+                });
+            }
         }
     };
 
@@ -51,6 +83,14 @@ export const Register = () => {
                     </p>
                 </div>
                 <form className="register-form">
+                    <label htmlFor="full_name">Ime i prezime:</label>
+                    <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        required
+                        onChange={handleChange}
+                    />
                     <label htmlFor="username">Korisničko ime:</label>
                     <input
                         type="text"
@@ -83,7 +123,7 @@ export const Register = () => {
                         required
                         onChange={handleChange}
                     />
-                    <p>{error.message}</p>
+                    {error.message!=="" && <p style={{color: "#ba0c0e"}}>{error.message}</p>}
                     <button type="submit" onClick={handleRegisterClick}>
                         Registruj se
                     </button>

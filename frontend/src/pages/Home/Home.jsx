@@ -1,51 +1,33 @@
 import React, { useEffect } from "react";
 import "./home.css";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import slika1 from "../../images/young-girl-bus.jpg";
 import { Modal } from "../../components/Modal/Modal";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { useState } from "react";
+import { SingleNewsMain } from "./components/SingleNewsMain/SingleNewsMain";
+import { getNews } from "../../services/news";
+import { getStationsFiltered } from "../../services/stations";
 
 export const Home = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: "", content: "" });
-    const [stations, setStations] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
+    const [news, setNews] = useState([]);
+    const [stationsFrom, setStationsFrom] = useState([]);
+    const [stationsTo, setStationsTo] = useState([]);
     const [inputs, setInputs] = useState({
         searchFrom: "",
         searchTo: "",
+        date: new Date().toISOString().split("T")[0],
     });
-
-    const newsData = [
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content: "Uveden je novi red vožnje za liniju Podgorica - Bar.",
-        },
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!",
-        },
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus vel quasi, molestiae dolores natus earum, similique, magni numquam quae eaque amet veniam ex asperiores maxime deserunt cumque consequuntur aperiam consequatur!",
-        },
-        {
-            title: "Novost",
-            date: "21. jul 2024.",
-            content: "Uveden je novi red vožnje za liniju Podgorica - Bar.",
-        },
-    ];
+    const [inputsSearch, setInputsSearch] = useState({
+        searchFrom: "",
+        searchTo: "",
+        date: new Date().toISOString().split("T")[0],
+    });
+    const navigate = useNavigate();
 
     const handleOpenModal = (title, content) => {
         setCurrentNews({ title, content });
@@ -54,6 +36,12 @@ export const Home = () => {
 
     const handleChange = (e) => {
         setInputs((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+        if (e.target.id === "date") {
+            setInputsSearch((prev) => ({
+                ...prev,
+                [e.target.id]: e.target.value,
+            }));
+        }
     };
 
     const handleCloseModal = () => {
@@ -63,30 +51,77 @@ export const Home = () => {
     const handleSetSearch = (e) => {
         setInputs((prev) => ({
             ...prev,
-            [e.target.parentElement.parentElement.childNodes[0].id]:
-                e.target.innerText,
+            [e.target.parentElement.parentElement.parentElement.childNodes[0]
+                .id]: e.target.innerText,
         }));
-        setStations([]);
+        if (
+            e.target.parentElement.parentElement.parentElement.childNodes[0]
+                .id === "searchFrom"
+        ) {
+            const station = stationsFrom.find((station) =>
+                station.address.includes(e.target.innerText)
+            );
+            setInputsSearch((prev) => ({
+                ...prev,
+                [e.target.parentElement.parentElement.parentElement
+                    .childNodes[0].id]: station.city_name,
+            }));
+        } else {
+            const station = stationsTo.find((station) =>
+                station.address.includes(e.target.innerText)
+            );
+            setInputsSearch((prev) => ({
+                ...prev,
+                [e.target.parentElement.parentElement.parentElement
+                    .childNodes[0].id]: station.city_name,
+            }));
+        }
+    };
+
+    const handleNavigate = (e) => {
+        e.preventDefault();
+        navigate(
+            `/red-voznje/${inputsSearch.searchFrom}/${inputsSearch.searchTo}/${inputsSearch.date}`
+        );
+    };
+
+    const fetchNews = async () => {
+        try {
+            const response = await getNews(1);
+            setNews(response.slice(0, 4));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchStationsFrom = async () => {
+        try {
+            let response = await getStationsFiltered(inputs.searchFrom);
+            setStationsFrom(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchStationsTo = async () => {
+        try {
+            let response = await getStationsFiltered(inputs.searchTo);
+            setStationsTo(response);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
-        const filteredStationsFrom = stations.filter((item) =>
-            item.toLowerCase().includes(inputs.searchFrom.toLowerCase())
-        );
-        setStations(filteredStationsFrom);
-        if (inputs.searchFrom === "") {
-            setStations(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        }
+        fetchNews();
+    }, []);
+
+    useEffect(() => {
+        fetchStationsFrom();
     }, [inputs.searchFrom]);
 
     useEffect(() => {
-        const filteredStationsTo = stations.filter((item) =>
-            item.toLowerCase().includes(inputs.searchTo.toLowerCase())
-        );
-        setStations(filteredStationsTo);
-        if (inputs.searchTo === "") {
-            setStations(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
-        }
+        fetchStationsTo();
     }, [inputs.searchTo]);
 
     return (
@@ -109,11 +144,13 @@ export const Home = () => {
                             onChange={handleChange}
                         />
                         <div className="dropdown-container">
-                            {inputs.searchFrom !== ""
-                                ? stations.map((item) => (
+                            {inputs.searchFrom !== "" &&
+                            stationsFrom.length !== 0 &&
+                            inputs.searchFrom !== stationsFrom[0].address
+                                ? stationsFrom.map((item) => (
                                       <DropDownCard
-                                          item={item}
-                                          key={item}
+                                          item={item.address}
+                                          key={item.id}
                                           onClick={handleSetSearch}
                                       />
                                   ))
@@ -130,11 +167,13 @@ export const Home = () => {
                             onChange={handleChange}
                         />
                         <div className="dropdown-container">
-                            {inputs.searchTo !== ""
-                                ? stations.map((item) => (
+                            {inputs.searchTo !== "" &&
+                            stationsTo.length !== 0 &&
+                            inputs.searchTo !== stationsTo[0].address
+                                ? stationsTo.map((item) => (
                                       <DropDownCard
-                                          item={item}
-                                          key={item}
+                                          item={item.address}
+                                          key={item.id}
                                           onClick={handleSetSearch}
                                       />
                                   ))
@@ -142,8 +181,13 @@ export const Home = () => {
                         </div>
                     </div>
                     <label htmlFor="date">Datum:</label>
-                    <input type="date" id="date" />
-                    <button>
+                    <input
+                        type="date"
+                        id="date"
+                        defaultValue={new Date().toISOString().split("T")[0]}
+                        onChange={handleChange}
+                    />
+                    <button onClick={(e) => handleNavigate(e)}>
                         <FontAwesomeIcon
                             icon={faSearch}
                             style={{ marginRight: "5px" }}
@@ -252,21 +296,12 @@ export const Home = () => {
 
             <div id="pom-div3">
                 <div className="novosti">
-                    {newsData.map((news, index) => (
-                        <div className="novost" key={index}>
-                            <div className="ttl-and-date">
-                                <h1>{news.title}</h1>
-                                <p className="ndate">Objavljeno: {news.date}</p>
-                            </div>
-                            <p>{news.content.substring(0, 100)}...</p>
-                            <button
-                                onClick={() =>
-                                    handleOpenModal(news.title, news.content)
-                                }
-                            >
-                                Pročitaj više
-                            </button>
-                        </div>
+                    {news.map((news, index) => (
+                        <SingleNewsMain
+                            news={news}
+                            key={index}
+                            handleOpenModal={handleOpenModal}
+                        />
                     ))}
                 </div>
             </div>

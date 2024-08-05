@@ -11,6 +11,7 @@ export const getLines = async (isActive, page) => {
             },
         }
     );
+    
     return response.data;
 };
 
@@ -26,12 +27,28 @@ export const getNumberOfPages = async (isActive) => {
     return response.data;
 };
 
+export const getLinesFiltered = async (
+    isActive,
+    page,
+    startCity,
+    endCity,
+    date
+) => {
+    const response = await axios.get(
+        `${URL}/routes_filtered/${page}?is_active=${
+            isActive ? "1" : "-1"
+        }&startCity=${startCity}&endCity=${endCity}&date=${date}`
+    );
+    return response.data;
+};
+
 export const addLine = async (line) => {
     const response = await axios.post(`${URL}/routes`, line, {
         headers: {
             "ngrok-skip-browser-warning": "true",
         },
     });
+    return response.data;
 };
 
 export const activateLine = async (id, activate) => {
@@ -43,7 +60,6 @@ export const activateLine = async (id, activate) => {
             },
         }
     );
-
     return response.data;
 };
 
@@ -63,4 +79,6 @@ export const editLine = async (id, line) => {
             "ngrok-skip-browser-warning": "true",
         },
     });
+
+    return response.data;
 };
