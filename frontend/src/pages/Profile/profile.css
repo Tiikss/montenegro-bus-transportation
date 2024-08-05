@@ -60,3 +60,8 @@ h2 {
 .ticket-card p {
     margin: 5px 0;
 }
+
+#logout-btn {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
