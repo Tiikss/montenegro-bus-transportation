@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteUser, updateUser } from "../../../services/users";
 import { ModalWindow } from "../../ModalWindow/ModalWindow";
+import { DropDownCard } from "../../DropdownCard/DropdownCard";
+import { getCompanies } from "../../../services/companies";
 
 export const UserTableRow = ({
     user,
@@ -18,6 +20,11 @@ export const UserTableRow = ({
     const [selectedRole, setSelectedRole] = useState(role);
     const [isChanged, setIsChanged] = useState(false);
 
+    const [companies, setCompanies] = useState([]);
+    const [inputField, setinputField] = useState({ id: 0, company_name: "" }); // odje treba company_name i id da ide i onda da se salje company_id u body za updateUser
+
+    const [isAddCompanyModalOpen, setIsAddCompanyModalOpen] = useState(false);
+
     const handleDeleteClick = (e) => {
         e.preventDefault();
         setModalData({
@@ -26,6 +33,44 @@ export const UserTableRow = ({
             message: "Da li ste sigurni da zelite da obrisete korisnika?",
         });
         setIsModalOpen(true);
+    };
+
+    const handleChange = (e) => {
+        setinputField({ ...inputField, company_name: e.target.value });
+    };
+
+    const handleClickItem = (company) => {
+        setinputField({ id: company.id, company_name: company.company_name });
+        setCompanies([]);
+    };
+
+    const handleSaveAddCompany = (e) => {
+        e.preventDefault();
+        updateUserFunc(true);
+        setIsAddCompanyModalOpen(false);
+    };
+
+    const fetchCompanies = async () => {
+        try {
+            const response = await getCompanies(inputField.company_name);
+            setCompanies(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const updateUserFunc = async (isSetCompany) => {
+        try {
+            if (!isSetCompany) {
+                const body = { ...user, role_type: selectedRole };
+                await updateUser(user.id, body);
+            } else {
+                const body = { ...user, company_id: inputField.id };
+                await updateUser(user.id, body);
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
     };
 
     useEffect(() => {
@@ -46,14 +91,6 @@ export const UserTableRow = ({
 
     useEffect(() => {
         if (isSaveClicked && isChanged) {
-            const updateUserFunc = async () => {
-                try {
-                    const body = { ...user, role_type: selectedRole };
-                    await updateUser(user.id, body);
-                } catch (error) {
-                    console.error("Error", error);
-                }
-            };
             updateUserFunc();
             setIsChanged(false);
         }
@@ -71,6 +108,10 @@ export const UserTableRow = ({
         }
     }, [selectedRole]);
 
+    useEffect(() => {
+        fetchCompanies();
+    }, [inputField]);
+
     return (
         <>
             <tr key={user.id}>
@@ -79,7 +120,20 @@ export const UserTableRow = ({
                 <td>{user.full_name}</td>
                 <td>{user.email}</td>
                 <td>{user.phone_number}</td>
-                {role === "Driver" && <td>{user.company_id}</td>}
+                {role === "Driver" && (
+                    <td>
+                        {user.company_id ? (
+                            user.company_id
+                        ) : (
+                            <button
+                                className="adminpanel-button"
+                                onClick={(e) => setIsAddCompanyModalOpen(true)}
+                            >
+                                Dodaj kompaniju
+                            </button>
+                        )}
+                    </td>
+                )}
                 <td className="tabela-korisnici-roles">
                     <>
                         <label htmlFor="Driver">Prevoznik</label>
@@ -143,6 +197,56 @@ export const UserTableRow = ({
                     setResponse={setModalResponse}
                 />
             )}
+            <div
+                className={
+                    "modal-container" + (isAddCompanyModalOpen ? "" : " hidden")
+                }
+            >
+                <label htmlFor="source">Izaberite kompaniju:</label>
+                <div className="add-line-input-container dropdown-container">
+                    <input
+                        className="addline-input"
+                        type="text"
+                        id="source"
+                        name="source"
+                        required
+                        value={inputField.company_name}
+                        onChange={handleChange}
+                        style={
+                            inputField.company_name === "" ||
+                            companies.length === 0
+                                ? { borderRadius: "10px" }
+                                : { borderRadius: "10px 10px 0 0" }
+                        }
+                    />{" "}
+                    <div
+                        id="filter-source-container"
+                        className="dropdown-container"
+                    >
+                        {inputField.company_name !== ""
+                            ? companies.map((item) => (
+                                  <DropDownCard
+                                      onClick={(e) => handleClickItem(item)}
+                                      item={item}
+                                      key={item.company_name}
+                                  />
+                              ))
+                            : null}
+                    </div>
+                </div>
+                <button
+                    className="adminpanel-button"
+                    onClick={handleSaveAddCompany}
+                >
+                    Sacuvaj
+                </button>
+            </div>
+            <div
+                className={
+                    "overlay-modal" + (isAddCompanyModalOpen ? "" : " hidden")
+                }
+                onClick={() => setIsAddCompanyModalOpen(false)}
+            ></div>
         </>
     );
 };
