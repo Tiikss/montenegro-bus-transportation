@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
-import PaginationNumbers from "../../components/PaginationNumbers/PaginationNumbers";
+import { PaginationNumbers } from "../../components/PaginationNumbers/PaginationNumbers";
 import { getAllTickets, getNumberOfPages } from "../../services/ticket";
 import { TicketCard } from "./components/TicketCard/TicketCard";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -46,7 +46,9 @@ export const Profile = () => {
                         <p>
                             <strong>Email:</strong> {user.email}
                         </p>
-                        <button className="btnsty" id="logout-btn">Odjavi se</button>
+                        <button className="btnsty" id="logout-btn">
+                            Odjavi se
+                        </button>
                     </div>
                 </div>
 
@@ -63,7 +65,7 @@ export const Profile = () => {
                         setPageId={setCurrentPage}
                         numberOfPages={numberOfPages}
                     />
-            </div>
+                </div>
             </div>
         </main>
     );
