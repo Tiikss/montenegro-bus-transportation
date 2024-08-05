@@ -1,5 +1,5 @@
 .welcome-div {
-    margin-top: 30px;
+    margin-top: -73px;
     background-image: url("../../images/group-buses-driving-along-road-sunset.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -223,8 +223,7 @@
 }
 
 .novosti {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
     gap: 20px;
     color: #ba0c0e;
     margin: 0 auto;
@@ -244,4 +243,8 @@
 .ndate {
     font-size: 0.9em;
     color: #777;
+}
+
+.choose > .add-line-input-container > .dropdown-container > .dropdown-card {
+    font-size: 16px;
 }
