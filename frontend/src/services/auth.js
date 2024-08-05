@@ -18,13 +18,17 @@ export const login = async (user) => {
 };
 
 export const register = async (user) => {
-    console.log(user);
-    const response = await axios.post(`${URL}/signup`, user, {
-        headers: {
-            "ngrok-skip-browser-warning": "true",
-        },
-    });
-    return response.data;
+    try{
+        const response = await axios.post(`${URL}/signup`, user, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        });
+        return response.data;
+    }
+    catch(error){
+        throw error.response.status;
+    }
 };
 
 export const getUser = async () => {

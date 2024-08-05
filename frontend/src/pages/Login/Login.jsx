@@ -23,7 +23,7 @@ export const Login = () => {
 
         try {
             await login(userData);
-            // navigate("/");
+            navigate("/");
         } catch (error) {
             console.log(error);
             if (error === 404){
