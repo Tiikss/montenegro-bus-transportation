@@ -27,6 +27,7 @@
 .button-page--active {
     background-color: #ba0c0e;
     color: #f1f1f1;
+    cursor: pointer;
 }
 
 .icon-page {
@@ -43,6 +44,7 @@
 .icon-page:hover {
     background-color: #d9d9d9;
     color: #ba0c0e;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
