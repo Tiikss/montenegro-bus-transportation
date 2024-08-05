@@ -46,7 +46,7 @@ const router = createBrowserRouter([
                 element: <AdminPanel />,
             },
             {
-                path: "/dodaj-liniju",
+                path: "/dodaj-liniju/:id",
                 element: <AddLine />,
             },
             {
