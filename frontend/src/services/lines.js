@@ -11,6 +11,7 @@ export const getLines = async (isActive, page) => {
             },
         }
     );
+    
     return response.data;
 };
 

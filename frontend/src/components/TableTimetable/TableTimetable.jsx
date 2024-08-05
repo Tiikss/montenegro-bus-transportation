@@ -88,8 +88,10 @@ export const TableTimetable = ({
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
 
+    console.log("act", isActive);
     const fetchLines = async () => {
         try {
+            console.log("fetching lines", currentPage);
             const response = await getLines(isActive, currentPage);
             setLines(response);
         } catch (error) {
