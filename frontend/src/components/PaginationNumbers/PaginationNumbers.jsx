@@ -1,7 +1,11 @@
 import React from "react";
 import "./pagination-numbers.css";
 
-const PaginationNumbers = ({ selectedPageId, numberOfPages, setPageId }) => {
+export const PaginationNumbers = ({
+    selectedPageId,
+    numberOfPages,
+    setPageId,
+}) => {
     const handlePageClick = (e) => {
         setPageId(Number(e.target.innerHTML));
     };
@@ -129,5 +133,3 @@ const PaginationNumbers = ({ selectedPageId, numberOfPages, setPageId }) => {
         </>
     );
 };
-
-export default PaginationNumbers;
