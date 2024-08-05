@@ -34,6 +34,8 @@ export const AuthContextProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         setUserToken("");
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
     };
 
     useEffect(() => {

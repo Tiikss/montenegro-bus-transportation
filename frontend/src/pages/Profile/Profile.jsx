@@ -5,12 +5,19 @@ import { getAllTickets, getNumberOfPages } from "../../services/ticket";
 import { TicketCard } from "./components/TicketCard/TicketCard";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
+    const navigate = useNavigate();
     const [tickets, setTickets] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
 
     useEffect(() => {
         const fetchTicketsData = async () => {
@@ -46,7 +53,11 @@ export const Profile = () => {
                         <p>
                             <strong>Email:</strong> {user.email}
                         </p>
-                        <button className="btnsty" id="logout-btn">
+                        <button
+                            className="btnsty"
+                            id="logout-btn"
+                            onClick={handleLogout}
+                        >
                             Odjavi se
                         </button>
                     </div>
