@@ -3,35 +3,24 @@ import "./profile.css";
 import PaginationNumbers from "../../components/PaginationNumbers/PaginationNumbers";
 import { getAllTickets } from "../../services/ticket";
 import { TicketCard } from "./components/TicketCard/TicketCard";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
 
 export const Profile = () => {
-    const [user, setUser] = useState(null);
     const [tickets, setTickets] = useState([]);
     const [lines, setLines] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            const userData = {
-                name: "Marko Marković",
-                email: "marko.markovic@example.com",
-            };
-            setUser(userData);
-        };
-
         const fetchTicketsData = async () => {
             const response = await getAllTickets(currentPage);
             setTickets(response);
         };
 
-        fetchUserData();
         fetchTicketsData();
     }, []);
-
-    if (!user) {
-        return <p>Učitavanje podataka...</p>;
-    }
 
     const fetchLines = async () => {
         try {
@@ -65,13 +54,17 @@ export const Profile = () => {
         console.log("lajns", lines);
     }, [lines]);
 
+    if (!user) {
+        return <p>Učitavanje podataka...</p>;
+    }
+
     return (
         <main id="profile-body">
             <div className="user-profile-container">
                 <div id="pom-profile">
                     <div className="user-info">
                         <p>
-                            <strong>Ime i prezime:</strong> {user.name}
+                            <strong>Ime i prezime:</strong> {user.full_name}
                         </p>
                         <p>
                             <strong>Email:</strong> {user.email}
@@ -81,7 +74,7 @@ export const Profile = () => {
 
                 <h2>Kupljene karte</h2>
                 <div className="tickets-container">
-                    {currentTickets.map((ticket) => (
+                    {tickets.map((ticket) => (
                         <TicketCard key={ticket.id} ticket={ticket} />
                     ))}
                 </div>
