@@ -14,3 +14,16 @@ export const getAllTickets = async (page) => {
         console.log(error);
     }
 };
+
+export const getNumberOfPages = async () => {
+    try {
+        const response = await axios.get(`${URL}/tickets/count`, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
