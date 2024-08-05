@@ -106,7 +106,7 @@ export const Home = () => {
                         />
                         <div className="dropdown-container">
                             {inputs.searchFrom !== "" &&
-                            stationsFrom &&
+                            stationsFrom.length !== 0 &&
                             inputs.searchFrom !== stationsFrom[0].address
                                 ? stationsFrom.map((item) => (
                                       <DropDownCard
@@ -129,7 +129,7 @@ export const Home = () => {
                         />
                         <div className="dropdown-container">
                             {inputs.searchTo !== "" &&
-                            stationsTo &&
+                            stationsTo.length !== 0 &&
                             inputs.searchTo !== stationsTo[0].address
                                 ? stationsTo.map((item) => (
                                       <DropDownCard
