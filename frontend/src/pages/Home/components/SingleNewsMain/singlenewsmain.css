@@ -16,9 +16,21 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    height: 400px;
+    height: 500px;
     width: 250px;
-    gap: 20px;
+    gap: 24px;
+}
+
+.novost h1 {
+    text-transform: uppercase;
+}
+
+.novost img {
+    background-color: #ba0c0f;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    padding: 8px;
 }
 
 .novost p {
@@ -27,6 +39,7 @@
     -webkit-line-clamp: 8;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    margin-bottom: 0;
 }
 
 .novost button {
