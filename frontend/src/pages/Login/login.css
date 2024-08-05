@@ -59,7 +59,7 @@
     box-sizing: border-box;
 }
   
-.login-form button {
+.btnsty {
     padding: 10px;
     background-color: #ba0c0e;
     color: white;
@@ -72,7 +72,7 @@
     border: 1px solid #ba0c0e;
 }
   
-.login-form button:hover {
+.btnsty:hover {
     color: #ba0c0e;
     background-color: #eee;
     border: 1px solid #ba0c0e;
