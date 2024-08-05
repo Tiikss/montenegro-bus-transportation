@@ -13,32 +13,18 @@ import { addLine, getLineById, editLine } from "../../services/lines";
 export const AddLine = () => {
     const routeId = useParams().id;
     const navigate = useNavigate();
-    const [polazistaLista, setPolazistaLista] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
-    const [destinationLista, setDestinationLista] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
-    const [sveStanice, setSveStanice] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
+    const [polazistaLista, setPolazistaLista] = useState([]);
+    const [destinationLista, setDestinationLista] = useState([]);
+    const [sveStanice, setSveStanice] = useState([]);
 
     const { user } = useContext(AuthContext);
 
     const [allStations, setAllStations] = useState([]);
-
+    const [isEdit, setIsEdit] = useState({
+        source: routeId !== "0",
+        destination: routeId !== "0",
+        station: routeId !== "0",
+    });
     const [stations, setStations] = useState([]);
 
     const [source, setSource] = useState("");
@@ -275,7 +261,9 @@ export const AddLine = () => {
             const response = responseArr[0];
             console.log("eve gi odgovor", response);
             setSource(response.stations[0].station);
-            setDestination(response.stations[response.stations.length - 1]);
+            setDestination(
+                response.stations[response.stations.length - 1].station
+            );
             setDepartureTime(response.stations[0].departure_time);
             setArrivalTime(
                 response.stations[response.stations.length - 1].arrival_time
@@ -364,16 +352,28 @@ export const AddLine = () => {
     }, []);
 
     useEffect(() => {
+        if (isEdit.source) {
+            setIsEdit({ ...isEdit, source: false });
+            return;
+        }
         fetchAllStations(source, "source");
         console.log("polaziste", source);
     }, [source]);
 
     useEffect(() => {
+        if (isEdit.destination) {
+            setIsEdit({ ...isEdit, destination: false });
+            return;
+        }
         fetchAllStations(destination, "destination");
         console.log("destinacija", destination);
     }, [destination]);
 
     useEffect(() => {
+        if (isEdit.station) {
+            setIsEdit({ ...isEdit, station: false });
+            return;
+        }
         fetchAllStations(stationName, "stationName");
     }, [stationName]);
 
@@ -491,6 +491,9 @@ export const AddLine = () => {
                             id="Monday"
                             name="monday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Monday"
+                            )}
                         />
                         <label htmlFor="tuesday">Utorak</label>
                         <input
@@ -498,6 +501,9 @@ export const AddLine = () => {
                             id="Tuesday"
                             name="tuesday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Tuesday"
+                            )}
                         />
                         <label htmlFor="wednesday">Srijeda</label>
                         <input
@@ -505,6 +511,9 @@ export const AddLine = () => {
                             id="Wednesday"
                             name="wednesday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Wednesday"
+                            )}
                         />
                         <label htmlFor="thursday">Četvrtak</label>
                         <input
@@ -512,6 +521,9 @@ export const AddLine = () => {
                             id="Thursday"
                             name="thursday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Thursday"
+                            )}
                         />
                         <label htmlFor="friday">Petak</label>
                         <input
@@ -519,6 +531,9 @@ export const AddLine = () => {
                             id="Friday"
                             name="friday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Friday"
+                            )}
                         />
                         <label htmlFor="saturday">Subota</label>
                         <input
@@ -526,6 +541,9 @@ export const AddLine = () => {
                             id="Saturday"
                             name="saturday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Saturday"
+                            )}
                         />
                         <label htmlFor="sunday">Nedjelja</label>
                         <input
@@ -533,6 +551,9 @@ export const AddLine = () => {
                             id="Sunday"
                             name="sunday"
                             onChange={handleSelectDay}
+                            checked={selectedDays.some(
+                                (day) => day.day_name === "Sunday"
+                            )}
                         />
                     </div>
 
