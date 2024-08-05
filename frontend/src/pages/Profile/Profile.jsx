@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./profile.css";
 import PaginationNumbers from "../../components/PaginationNumbers/PaginationNumbers";
-import { getAllTickets } from "../../services/ticket";
+import { getAllTickets, getNumberOfPages } from "../../services/ticket";
 import { TicketCard } from "./components/TicketCard/TicketCard";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 
 export const Profile = () => {
     const [tickets, setTickets] = useState([]);
-    const [lines, setLines] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
     const { user } = useContext(AuthContext);
@@ -19,40 +18,18 @@ export const Profile = () => {
             setTickets(response);
         };
 
+        fetchNumberOfPages();
         fetchTicketsData();
-    }, []);
-
-    const fetchLines = async () => {
-        try {
-            console.log("fetching lines", currentPage);
-            const response = await getLines(isActive, currentPage);
-            setLines(response);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    }, [currentPage]);
 
     const fetchNumberOfPages = async () => {
         try {
-            const response = await getNumberOfPages(isActive);
+            const response = await getNumberOfPages(1);
             setNumberOfPages(response);
         } catch (error) {
             console.log(error);
         }
     };
-
-    useEffect(() => {
-        fetchLines();
-    }, [currentPage]);
-
-    useEffect(() => {
-        fetchNumberOfPages();
-        fetchLines();
-    }, []);
-
-    useEffect(() => {
-        console.log("lajns", lines);
-    }, [lines]);
 
     if (!user) {
         return <p>Učitavanje podataka...</p>;
