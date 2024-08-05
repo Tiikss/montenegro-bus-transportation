@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
             const { access_token, ...other } = response;
             setUserToken(access_token);
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     };
 

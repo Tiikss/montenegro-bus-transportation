@@ -7,11 +7,7 @@ export const setupInterceptors = () => {
         },
         (error) => {
             console.log("intercepting response");
-            if (error.response.status === 401) {
-                localStorage.removeItem("token");
-                localStorage.removeItem("user");
-                window.location.href = "/login";
-            } else if (error.response.status === 403) {
+            if (error.response.status === 403) {
                 window.location.href = "/";
             }
             return Promise.reject(error);
