@@ -3,10 +3,12 @@ import "./admin-panel.css";
 import { TableUsers } from "../../components/TableUser/TableUsers";
 import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
 import { TableStations } from "../../components/TableStation/TableStations";
+import { activateLine } from "../../services/lines";
 
 export const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
     const [response, setResponse] = useState(null);
+    const [isSaveClicked, setIsSaveClicked] = useState(false);
 
     const handleTabClick = (e) => {
         e.preventDefault();
@@ -14,19 +16,29 @@ export const AdminPanel = () => {
     };
     const handleSaveChanges = (e) => {
         e.preventDefault();
-        console.log("Changes saved");
+        setIsSaveClicked(true);
+    };
+
+    const handleResponseApi = async (id) => {
+        try {
+            await activateLine(id, response.response === "accept");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
         if (response) {
-            if (response === "accept") {
-                console.log("Accepted");
-            } else if (response === "decline") {
-                console.log("Rejected");
-            }
+            handleResponseApi(response.id);
             setResponse(null);
         }
     }, [response]);
+
+    useEffect(() => {
+        if (isSaveClicked) {
+            setIsSaveClicked(false);
+        }
+    }, [isSaveClicked]);
 
     return (
         <main className="adminpanel-body">
@@ -49,11 +61,23 @@ export const AdminPanel = () => {
                 {selectedTab == "korisnici" && (
                     <>
                         <h2>Korisnici</h2>
-                        <TableUsers role="Passenger" isEdit={true} />
+                        <TableUsers
+                            role="Passenger"
+                            isEdit={true}
+                            isSaveClicked={isSaveClicked}
+                        />
                         <h2>Prevoznici</h2>
-                        <TableUsers role="Driver" isEdit={true} />
+                        <TableUsers
+                            role="Driver"
+                            isEdit={true}
+                            isSaveClicked={isSaveClicked}
+                        />
                         <h2>Administratori</h2>
-                        <TableUsers role="Admin" isEdit={true} />
+                        <TableUsers
+                            role="Admin"
+                            isEdit={true}
+                            isSaveClicked={isSaveClicked}
+                        />
                         <button
                             className="adminpanel-button"
                             onClick={handleSaveChanges}

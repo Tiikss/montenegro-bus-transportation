@@ -15,6 +15,22 @@ export const getAllStations = async (page) => {
     }
 };
 
+export const getFilteredStations = async (filter) => {
+    try {
+        const response = await axios.get(
+            `${URL}/stations-filtered?search=${filter}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "true",
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getNumberOfPages = async () => {
     try {
         const response = await axios.get(`${URL}/stations/count`, {

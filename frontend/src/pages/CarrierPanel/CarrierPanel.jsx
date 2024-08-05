@@ -25,7 +25,7 @@ export const CarrierPanel = () => {
     return (
         <main className="prevoznik-body">
             <h1>Ime prevoznika</h1>
-            <Link to="/dodaj-liniju" className="prevoznik-newline-button">
+            <Link to="/dodaj-liniju/0" className="prevoznik-newline-button">
                 Nova linija
             </Link>
             <h2>Aktivne linije</h2>
