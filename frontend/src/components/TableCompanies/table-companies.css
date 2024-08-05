@@ -32,3 +32,40 @@ td {
 .tabela-kompanije tr:hover {
     background-color: #dddddda7;
 }
+
+.add-company-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-company-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.add-company-form input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.add-company-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.add-company-form button:hover {
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+}
