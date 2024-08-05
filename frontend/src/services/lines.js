@@ -4,7 +4,7 @@ const URL = process.env.REACT_APP_API_URL;
 
 export const getLines = async (isActive, page) => {
     const response = await axios.get(
-        `${URL}/routes_paginated/${page}?is_active=${isActive ? "1" : "-1"}`,
+        `${URL}/routes_paginated/${page}?is_active=${isActive ? "1" : "0"}`,
         {
             headers: {
                 "ngrok-skip-browser-warning": "true",
@@ -17,12 +17,27 @@ export const getLines = async (isActive, page) => {
 
 export const getNumberOfPages = async (isActive) => {
     const response = await axios.get(
-        `${URL}/routes_paginated/count?is_active=${isActive ? "1" : "-1"}`,
+        `${URL}/routes_paginated/count?is_active=${isActive ? "1" : "0"}`,
         {
             headers: {
                 "ngrok-skip-browser-warning": "true",
             },
         }
+    );
+    return response.data;
+};
+
+export const getLinesFiltered = async (
+    isActive,
+    page,
+    startCity,
+    endCity,
+    date
+) => {
+    const response = await axios.get(
+        `${URL}/routes_filtered/${page}?is_active=${
+            isActive ? "1" : "-1"
+        }&startCity=${startCity}&endCity=${endCity}&date=${date}`
     );
     return response.data;
 };
@@ -33,6 +48,7 @@ export const addLine = async (line) => {
             "ngrok-skip-browser-warning": "true",
         },
     });
+    return response.data;
 };
 
 export const activateLine = async (id, activate) => {
@@ -44,7 +60,6 @@ export const activateLine = async (id, activate) => {
             },
         }
     );
-
     return response.data;
 };
 
@@ -56,4 +71,14 @@ export const getLineById = async (id) => {
     });
 
     return response.data;
-}
+};
+
+export const editLine = async (id, line) => {
+    const response = await axios.put(`${URL}/routes/${id}`, line, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+        },
+    });
+
+    return response.data;
+};

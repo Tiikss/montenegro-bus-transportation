@@ -46,6 +46,7 @@ export const Profile = () => {
                         <p>
                             <strong>Email:</strong> {user.email}
                         </p>
+                        <button className="btnsty" id="logout-btn">Odjavi se</button>
                     </div>
                 </div>
 

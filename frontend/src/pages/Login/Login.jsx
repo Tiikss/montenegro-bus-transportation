@@ -52,7 +52,7 @@ export const Login = () => {
                         required
                         onChange={handleChange}
                     />
-                    <button type="submit" onClick={handleLoginClick}>
+                    <button className="btnsty" type="submit" onClick={handleLoginClick}>
                         Prijavi se
                     </button>
                 </form>

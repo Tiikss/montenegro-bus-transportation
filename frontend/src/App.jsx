@@ -13,6 +13,7 @@ import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
 import { Profile } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
+import { TimetableFiltered } from "./pages/TimeTableFiltered/TimetableFiltered";
 
 const Layout = () => {
     return (
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
                 element: <Timetable />,
             },
             {
+                path: "/red-voznje/:startCity/:endCity/:date",
+                element: <TimetableFiltered />,
+            },
+            {
                 path: "/prevoznik-panel",
                 element: <CarrierPanel />,
             },
@@ -46,7 +51,7 @@ const router = createBrowserRouter([
                 element: <AdminPanel />,
             },
             {
-                path: "/dodaj-liniju",
+                path: "/dodaj-liniju/:id",
                 element: <AddLine />,
             },
             {
