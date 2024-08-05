@@ -1,0 +1,71 @@
+.tabela-kompanije-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.tabela-kompanije {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-kompanije th,
+td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.tabela-kompanije th {
+    background-color: #ba0c0e;
+    color: #fff;
+}
+
+.tabela-kompanije tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tabela-kompanije tr:hover {
+    background-color: #dddddda7;
+}
+
+.add-company-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-company-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.add-company-form input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.add-company-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.add-company-form button:hover {
+    background-color: #eee;
+    color: #ba0c0e;
+    border: 1px solid #ba0c0e;
+}

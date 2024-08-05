@@ -4,6 +4,7 @@ import { TableUsers } from "../../components/TableUser/TableUsers";
 import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
 import { TableStations } from "../../components/TableStation/TableStations";
 import { activateLine } from "../../services/lines";
+import { TableCompanies } from "../../components/TableCompanies/TableCompanies";
 
 export const AdminPanel = () => {
     const [selectedTab, setSelectedTab] = useState("korisnici");
@@ -54,7 +55,7 @@ export const AdminPanel = () => {
                     Stanice
                 </button>
                 <button className="adminpanel-button" onClick={handleTabClick}>
-                    Obavjestenja
+                    Kompanije
                 </button>
             </div>
             <div className="adminpanel-content">
@@ -107,6 +108,12 @@ export const AdminPanel = () => {
                     <>
                         <h2>Stanice</h2>
                         <TableStations />
+                    </>
+                )}
+                {selectedTab == "kompanije" && (
+                    <>
+                        <h2>Kompanije</h2>
+                        <TableCompanies />
                     </>
                 )}
             </div>

@@ -7,7 +7,7 @@ import {
     addStation,
     getNumberOfPages,
 } from "../../services/stations";
-import PaginationNumbers from "../PaginationNumbers/PaginationNumbers";
+import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 import { DropDownCard } from "../DropdownCard/DropdownCard";
 
 export const TableStations = () => {
