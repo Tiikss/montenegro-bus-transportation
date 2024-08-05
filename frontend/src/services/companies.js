@@ -12,10 +12,14 @@ export const getCompanies = async () => {
 };
 
 export const addCompany = async (company) => {
-    const response = await axios.post(`${URL}/companies`, company, {
-        headers: {
-            "ngrok-skip-browser-warning": "true",
-        },
-    });
-    return response.data;
+    try {
+        const response = await axios.post(`${URL}/companies`, company, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
 };
