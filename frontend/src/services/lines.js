@@ -11,6 +11,7 @@ export const getLines = async (isActive, page) => {
             },
         }
     );
+    
     return response.data;
 };
 
@@ -78,4 +79,6 @@ export const editLine = async (id, line) => {
             "ngrok-skip-browser-warning": "true",
         },
     });
+
+    return response.data;
 };

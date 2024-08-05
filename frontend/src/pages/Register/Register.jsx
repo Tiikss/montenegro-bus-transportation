@@ -51,6 +51,14 @@ export const Register = () => {
                     </p>
                 </div>
                 <form className="register-form">
+                    <label htmlFor="full_name">Ime i prezime:</label>
+                    <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        required
+                        onChange={handleChange}
+                    />
                     <label htmlFor="username">Korisničko ime:</label>
                     <input
                         type="text"

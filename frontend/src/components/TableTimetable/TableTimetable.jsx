@@ -21,6 +21,7 @@ export const TableTimetable = ({
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
 
+    console.log("act", isActive);
     const fetchLines = async () => {
         try {
             if (filter) {
