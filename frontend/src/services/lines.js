@@ -36,8 +36,10 @@ export const getLinesFiltered = async (
     const response = await axios.get(
         `${URL}/routes_filtered/${page}?is_active=${
             isActive ? "1" : "-1"
-        }&startCity=${startCity}&endCity=${endCity}&date=${date}`,
-
+        }&startCity=${startCity}&endCity=${endCity}&date=${date}`
+    );
+    return response.data;
+};
 
 export const addLine = async (line) => {
     const response = await axios.post(`${URL}/routes`, line, {
@@ -45,6 +47,7 @@ export const addLine = async (line) => {
             "ngrok-skip-browser-warning": "true",
         },
     });
+    return response.data;
 };
 
 export const activateLine = async (id, activate) => {
