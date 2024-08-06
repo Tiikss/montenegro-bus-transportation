@@ -121,7 +121,7 @@ export const MapWrapper = ({ stations, isAdmin, setSelectedPoint }) => {
                         }}
                     />
                 ) : null}
-                <DeckGLOverlay layers={layers} />
+                {!isAdmin && <DeckGLOverlay layers={layers} />}
             </Map>
         </APIProvider>
     );

@@ -9,6 +9,8 @@ import {
 } from "../../services/stations";
 import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 import { DropDownCard } from "../DropdownCard/DropdownCard";
+import { getCountries } from "../../services/country";
+import { getCities } from "../../services/city";
 
 export const TableStations = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,22 +22,28 @@ export const TableStations = () => {
     const [selectedPoint, setSelectedPoint] = useState({ lat: 42, lng: 18 });
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
-    const [allCities, setAllCities] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
-    const [allCountries, setAllCountries] = useState([
-        "Crna Gora",
-        "Srbija",
-        "Hrvatska",
-        "Bosna i Hercegovina",
-        "Slovenija",
-    ]);
+    const [allCities, setAllCities] = useState([]);
+    const [allCountries, setAllCountries] = useState([]);
+    const [displayCity, setDisplayCity] = useState("");
+    const [displayCountry, setDisplayCountry] = useState("");
 
-    console.log(inputData);
+    const fetchCities = async () => {
+        try {
+            const response = await getCities();
+            setAllCities(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchCountries = async () => {
+        try {
+            const response = await getCountries();
+            setAllCountries(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleChange = (e) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -87,8 +95,25 @@ export const TableStations = () => {
         }
     };
 
+    const handleSetSearch = (e) => {
+        setInputData((prev) => ({
+            ...prev,
+            [e.target.parentElement.parentElement.childNodes[0].id]:
+                e.target.innerText,
+        }));
+        if (e.target.parentElement.parentElement.childNodes[0].id === "city") {
+            setAllCities([]);
+            setDisplayCity(e.target.innerText);
+        } else {
+            setAllCountries([]);
+            setDisplayCountry(e.target.innerText);
+        }
+    };
+
     useEffect(() => {
         fetchStations();
+        fetchCities();
+        fetchCountries();
     }, []);
 
     useEffect(() => {
@@ -99,42 +124,25 @@ export const TableStations = () => {
         fetchStations();
     }, [currentPage]);
 
-    const handleSetSearch = (e) => {
-        setInputData((prev) => ({
-            ...prev,
-            [e.target.parentElement.parentElement.childNodes[0].id]:
-                e.target.innerText,
-        }));
-        if (e.target.parentElement.parentElement.childNodes[0].id === "city") {
-            setAllCities([]);
-        } else {
-            setAllCountries([]);
-        }
-    };
-
     useEffect(() => {
         const filteredCities = allCities.filter((item) =>
-            item.toLowerCase().includes(inputData.city.toLowerCase())
+            item.city_name.toLowerCase().includes(inputData.city.toLowerCase())
         );
         setAllCities(filteredCities);
         if (inputData.city === "") {
-            setAllCities(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+            setDisplayCity("");
+            fetchCities();
         }
     }, [inputData.city]);
 
     useEffect(() => {
         const filteredCountries = allCountries.filter((item) =>
-            item.toLowerCase().includes(inputData.country.toLowerCase())
+            item.country_name.toLowerCase().includes(inputData.country.toLowerCase())
         );
         setAllCountries(filteredCountries);
         if (inputData.country === "") {
-            setAllCountries([
-                "Crna Gora",
-                "Srbija",
-                "Hrvatska",
-                "Bosna i Hercegovina",
-                "Slovenija",
-            ]);
+            setDisplayCountry("");
+            fetchCountries();
         }
     }, [inputData.country]);
 
@@ -202,7 +210,7 @@ export const TableStations = () => {
 
                 <div className="add-line-input-container">
                     <input
-                        style={{ width: "165px", padding: "5px", borderRadius: "10px" }}
+                        style={{ width: "165px", padding: "5px", borderRadius: allCountries.length > 0 && inputData.country !== "" && displayCountry === "" ? "10px 10px 0 0" : "10px" }}
                         type="text"
                         id="country"
                         name="country"
@@ -224,7 +232,7 @@ export const TableStations = () => {
                 <label htmlFor="station-city">Grad:</label>
                 <div className="add-line-input-container">
                     <input
-                        style={{ width: "165px", padding: "5px", borderRadius: "10px" }}
+                        style={{ width: "165px", padding: "5px", borderRadius: allCities.length > 0 && inputData.city !== "" && displayCity === "" ? "10px 10px 0 0" : "10px" }}
                         type="text"
                         id="city"
                         name="city"

@@ -392,7 +392,7 @@ export const AddLine = () => {
             <div className="addline-forms">
                 <form className="addline-form">
                     <label htmlFor="source">Polazište:</label>
-                    <div className="add-line-input-container dropdown-container">
+                    <div className="add-line-input-container">
                         <input
                             className="addline-input"
                             type="text"
