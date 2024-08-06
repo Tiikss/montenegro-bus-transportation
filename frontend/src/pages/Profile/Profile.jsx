@@ -98,7 +98,11 @@ export const Profile = () => {
                     />
                 </div>
             </div>
-            <EditProfileModal show={showModal} handleClose={handleCloseModal} />
+            <EditProfileModal
+                show={showModal}
+                handleClose={handleCloseModal}
+                user={user}
+            />
         </main>
     );
 };
