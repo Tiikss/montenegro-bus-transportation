@@ -120,12 +120,12 @@ export const News = () => {
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
                 <div className="news-search-container">
-                    <button
+                    {user.role_type === "Admin" && <button
                         className="read-more-btn"
                         onClick={(e) => handleAddNewNews(e)}
                     >
                         Dodaj novost
-                    </button>
+                    </button>}
                     <input
                         type="text"
                         placeholder="Pretraži objave"
