@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import { TableTimetableHeader } from "./components/TableTimetableHeader/TableTimetableHeader";
 import { TableTimetableRow } from "./components/TableTimetableRow/TableTimetableRow";
 import { TableTimetableContent } from "./components/TableTimetableContent/TableTimetableContent";
-import { getLines, getNumberOfPages } from "../../services/lines";
+import {
+    getLines,
+    getLinesFilteredByCity,
+    getNumberOfPages,
+} from "../../services/lines";
 import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 import { getLinesFiltered } from "../../services/lines";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -17,7 +21,7 @@ export const TableTimetable = ({
     handleResponse,
     isActive,
     filter,
-    city
+    city,
 }) => {
     const { user } = useContext(AuthContext);
 
@@ -39,7 +43,11 @@ export const TableTimetable = ({
                 console.log(filter);
                 setLines(response);
             } else {
-                const response = await getLinesFiltered(isActive, currentPage, city);
+                const response = await getLinesFilteredByCity(
+                    isActive,
+                    currentPage,
+                    city
+                );
                 setLines(response);
             }
         } catch (error) {
