@@ -6,7 +6,6 @@ import { deleteNews, getNews, updateNews, addNews } from "../../services/news";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { AddNewsModal } from "./AddNewsModal/AddNewsModal";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext } from "react";
 import { NewsCard } from "./components/NewsCard";
 
 export const News = () => {
@@ -23,7 +22,6 @@ export const News = () => {
     const [deleteModalResponse, setDeleteModalResponse] = useState(false);
     const [selectedNews, setSelectedNews] = useState(null);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const { user } = useContext(AuthContext);
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -141,13 +139,13 @@ export const News = () => {
 
                 {tmpNews
                     ? tmpNews.map((news) => (
-                          <NewsCard 
-                            key={news.id}
-                            news={news}
-                            handleOpenModal={handleOpenModal}
-                            handleDeleteClick={handleDeleteClick}
-                            handleOpenAddModal={handleOpenAddModal}
-                        />
+                          <NewsCard
+                              key={news.id}
+                              news={news}
+                              handleOpenModal={handleOpenModal}
+                              handleDeleteClick={handleDeleteClick}
+                              handleOpenAddModal={handleOpenAddModal}
+                          />
                       ))
                     : null}
 

@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
-export const NewsCard = ({ news, handleDeleteClick, handleOpenAddModal, handleOpenModal }) => {
-
+export const NewsCard = ({
+    news,
+    handleDeleteClick,
+    handleOpenAddModal,
+    handleOpenModal,
+}) => {
+    const { user } = useContext(AuthContext);
     const date = news.created_date.split("T")[0].split("-");
     const currDate = date[2] + "." + date[1] + "." + date[0];
 
     return (
         <div key={news.id} className="news-card">
             <h2 className="news-title">{news.title}</h2>
-            <p className="news-date">
-                Objavljeno: {currDate};
-            </p>
+            <p className="news-date">Objavljeno: {currDate};</p>
             <p className="news-content short-content">
                 {news.content.slice(0, 100)}...
             </p>
@@ -46,9 +50,7 @@ export const NewsCard = ({ news, handleDeleteClick, handleOpenAddModal, handleOp
                         </button>
                         <button
                             className="news-admin-btn"
-                            onClick={() =>
-                                handleOpenAddModal(news)
-                            }
+                            onClick={() => handleOpenAddModal(news)}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -70,4 +72,4 @@ export const NewsCard = ({ news, handleDeleteClick, handleOpenAddModal, handleOp
             </div>
         </div>
     );
-}
+};
