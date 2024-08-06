@@ -70,8 +70,18 @@ export const TableTimetable = ({
 
     const fetchNumberOfPages = async () => {
         try {
-            const response = await getNumberOfPages(isActive);
-            setNumberOfPages(response);
+            if (isCarrier) {
+                const response = await getNumberOfPages(
+                    isActive,
+                    user.company_id
+                );
+                setNumberOfPages(response);
+            } else if (isAdmin) {
+                const response = await getNumberOfPages(isActive);
+                setNumberOfPages(response);
+            } else {
+                /* Nije zavrseno */
+            }
         } catch (error) {
             console.log(error);
         }

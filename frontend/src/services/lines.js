@@ -17,7 +17,7 @@ export const getLines = async (isActive, page, company) => {
     return response.data;
 };
 
-export const getNumberOfPages = async (isActive) => {
+export const getNumberOfPages = async (isActive, company) => {
     const response = await axios.get(
         `${URL}/routes_paginated/count?is_active=${isActive ? "1" : "0"}${
             company ? `&company_id=${company}` : ""
