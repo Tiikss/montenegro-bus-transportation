@@ -122,8 +122,8 @@ export const UserTableRow = ({
                 <td>{user.phone_number}</td>
                 {role === "Driver" && (
                     <td>
-                        {user.company_id ? (
-                            user.company_id
+                        {user.company_name ? (
+                            user.company_name
                         ) : (
                             <button
                                 className="adminpanel-button"
