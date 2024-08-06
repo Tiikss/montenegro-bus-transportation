@@ -13,7 +13,7 @@ export const getNews = async (pageNumber) => {
 
 export const getFilteredNews = async (pageNumber, filter) => {
     const response = await axios.get(
-        `${URL}/news-filtered/${pageNumber}?${filter}`,
+        `${URL}/news-filtered/${pageNumber}?search=${filter}`,
         {
             headers: {
                 "ngrok-skip-browser-warning": "true",
