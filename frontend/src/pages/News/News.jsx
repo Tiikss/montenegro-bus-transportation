@@ -64,10 +64,6 @@ export const News = () => {
     };
 
     useEffect(() => {
-        console.log("umro", currentNews.id);
-    }, [currentNews]);
-
-    useEffect(() => {
         try {
             const fetchData = async () => {
                 const news = await getNews(1);
@@ -99,9 +95,6 @@ export const News = () => {
             console.error(error);
         }
     };
-    useEffect(() => {
-        console.log("umro", currentNews.id);
-    }, [currentNews]);
 
     useEffect(() => {
         fetchNews();
