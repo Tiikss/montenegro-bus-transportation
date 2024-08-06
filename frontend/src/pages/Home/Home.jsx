@@ -124,6 +124,8 @@ export const Home = () => {
         fetchStationsTo();
     }, [inputs.searchTo]);
 
+    console.log(stationsFrom)
+
     return (
         <main className="home-body">
             <div className="welcome-div">

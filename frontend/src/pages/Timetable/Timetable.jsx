@@ -71,7 +71,7 @@ export const Timetable = () => {
                     {city !== ""
                         ? allCities.map((item) => (
                               <DropDownCard
-                                  item={item}
+                                  item={item.city_name}
                                   key={item}
                                   onClick={handleSetSearch}
                               />
