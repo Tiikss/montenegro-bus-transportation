@@ -52,7 +52,7 @@ export const PriceList = () => {
                     {currStation !== "" &&
                         stations.map((station) => (
                             <DropDownCard
-                                item={station}
+                                item={station.address}
                                 key={station}
                                 onClick={handleSetStation}
                             />

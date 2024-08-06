@@ -227,7 +227,7 @@ export const UserTableRow = ({
                             ? companies.map((item) => (
                                   <DropDownCard
                                       onClick={(e) => handleClickItem(item)}
-                                      item={item}
+                                      item={item.company_name}
                                       key={item.company_name}
                                   />
                               ))

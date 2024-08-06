@@ -128,7 +128,7 @@ export const News = () => {
                         {search !== ""
                             ? news.map((item) => (
                                   <DropDownCard
-                                      item={item}
+                                      item={item.title}
                                       key={item}
                                       onClick={handleSetSearch}
                                   />

@@ -213,7 +213,7 @@ export const TableStations = () => {
                         {inputData.country !== ""
                             ? allCountries.map((item) => (
                                   <DropDownCard
-                                      item={item}
+                                      item={item.country_name}
                                       key={item}
                                       onClick={handleSetSearch}
                                   />
@@ -235,7 +235,7 @@ export const TableStations = () => {
                         {inputData.city !== ""
                             ? allCities.map((item) => (
                                   <DropDownCard
-                                      item={item}
+                                      item={item.city_name}
                                       key={item}
                                       onClick={handleSetSearch}
                                   />
