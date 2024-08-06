@@ -53,6 +53,9 @@ export const Profile = () => {
                         <p>
                             <strong>Email:</strong> {user.email}
                         </p>
+                        {user.phone_number != "000000000" && (
+                            <p>Broj telefon: {user.phone_number}</p>
+                        )}
                         <button
                             className="btnsty"
                             id="logout-btn"
