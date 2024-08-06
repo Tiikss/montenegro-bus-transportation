@@ -248,3 +248,70 @@
 .choose > .add-line-input-container > .dropdown-container > .dropdown-card {
     font-size: 16px;
 }
+
+@media screen and (max-width: 768px) {
+    .welcome-div {
+        height: 400px;
+    }
+
+    .welcome-ttl {
+        font-size: 48px;
+    }
+
+    .red-div h1 {
+        font-size: 24px;
+    }
+
+    .choose {
+        padding: 40px;
+        font-size: 18px;
+    }
+
+    .choose label,
+    .choose input,
+    .choose button {
+        width: 250px;
+    }
+
+    #mapa p {
+        font-size: 1.2em;
+    }
+
+    #mapa h1 {
+        font-size: 1.5em;
+    }
+
+    #mapa iframe {
+        height: 300px;
+    }
+
+    #big-div-map {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .contact-div img {
+        width: 250px;
+    }
+
+    #contact-info h1 {
+        font-size: 24px;
+    }
+
+    .contact {
+        width: 400px;
+    }
+
+    #contact-table {
+        font-size: 16px;
+    }
+
+    .novosti {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ttl-and-date h1 {
+        font-size: 24px;
+    }
+}
