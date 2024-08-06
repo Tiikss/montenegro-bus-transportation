@@ -50,8 +50,8 @@ export const AddLineStationModal = ({
                         }
                     />{" "}
                     <div
-                        id="filter-polaziste-container"
-                        className="add-line-filter-container"
+                        id="filter-source-container"
+                        className="add-line-filter-container dropdown-container"
                     >
                         {stationName !== ""
                             ? sveStanice.map((item) => (
