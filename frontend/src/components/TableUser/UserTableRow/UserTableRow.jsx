@@ -114,6 +114,8 @@ export const UserTableRow = ({
         fetchCompanies();
     }, [inputField]);
 
+
+
     return (
         <>
             <tr key={user.id}>
