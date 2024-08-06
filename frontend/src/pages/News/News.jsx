@@ -63,18 +63,6 @@ export const News = () => {
         setIsAddModalOpen(false);
     };
 
-    useEffect(() => {
-        try {
-            const fetchData = async () => {
-                const news = await getNews(1);
-                setTmpNews(news);
-            };
-            fetchData();
-        } catch (error) {
-            console.error(error);
-        }
-    }, []);
-
     const handleDeleteClick = (e, id) => {
         e.preventDefault();
         setIsDeleteModalOpen(true);
@@ -130,7 +118,7 @@ export const News = () => {
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
                 <div className="news-search-container">
-                    {user.role_type === "Admin" && <button
+                    {user?.role_type === "Admin" && <button
                         className="read-more-btn"
                         onClick={(e) => handleAddNewNews(e)}
                     >
