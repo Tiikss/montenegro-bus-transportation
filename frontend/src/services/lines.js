@@ -2,16 +2,18 @@ import axios from "axios";
 
 const URL = process.env.REACT_APP_API_URL;
 
-export const getLines = async (isActive, page) => {
+export const getLines = async (isActive, page, company) => {
     const response = await axios.get(
-        `${URL}/routes_paginated/${page}?is_active=${isActive ? "1" : "0"}`,
+        `${URL}/routes_paginated/${page}?is_active=${isActive ? "1" : "0"}${
+            company ? `&company_id=${company}` : ""
+        }`,
         {
             headers: {
                 "ngrok-skip-browser-warning": "true",
             },
         }
     );
-    
+
     return response.data;
 };
 
