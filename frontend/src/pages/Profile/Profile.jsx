@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { EditProfileModal } from "./components/EditProfileModal/EditProfileModal";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
     const navigate = useNavigate();
@@ -66,13 +67,13 @@ export const Profile = () => {
                         {user.phone_number != "000000000" && (
                             <p>Broj telefon: {user.phone_number}</p>
                         )}
-                        <button
-                            className="btnsty"
+                        <Link
+                            style={{ cursor: "pointer", color: "#ba0c0e", textDecoration: "underline" }}
                             id="modal-btn"
                             onClick={handleOpenModal}
                         >
-                            Broj telefona
-                        </button>
+                            Dodaj broj telefona
+                        </Link>
                         <button
                             className="btnsty"
                             id="logout-btn"
