@@ -18,6 +18,7 @@ export const TableTimetable = ({
     isEdit,
     handleDeleteClick,
     isAdmin,
+    isCarrier,
     handleResponse,
     isActive,
     filter,
@@ -41,6 +42,16 @@ export const TableTimetable = ({
                     filter.date
                 );
                 console.log(filter);
+                setLines(response);
+            } else if (isCarrier) {
+                const response = await getLines(
+                    isActive,
+                    currentPage,
+                    user.company_id
+                );
+                setLines(response);
+            } else if (isAdmin) {
+                const response = await getLines(isActive, currentPage);
                 setLines(response);
             } else {
                 const response = await getLinesFilteredByCity(
