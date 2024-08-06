@@ -186,20 +186,23 @@ export const TableStations = () => {
             </table>
             <form
                 className={"new-station-modal" + (isModalOpen ? "" : " hidden")}
+                style={{height: "100%"}}
             >
-                <h2>Dodaj novu stanicu</h2>
+                <h2 style={{marginBottom: "0px"}}>Dodaj novu stanicu</h2>
                 <label htmlFor="station-name">Ime:</label>
                 <input
+                    style={{ width: "165px", padding: "5px",  borderRadius: "10px" }}
                     type="text"
                     id="station-name"
                     name="station_name"
                     required
                     onChange={handleChange}
                 />
-                <label htmlFor="station-country">Drzava:</label>
+                <label htmlFor="station-country">Država:</label>
 
                 <div className="add-line-input-container">
                     <input
+                        style={{ width: "165px", padding: "5px", borderRadius: "10px" }}
                         type="text"
                         id="country"
                         name="country"
@@ -221,6 +224,7 @@ export const TableStations = () => {
                 <label htmlFor="station-city">Grad:</label>
                 <div className="add-line-input-container">
                     <input
+                        style={{ width: "165px", padding: "5px", borderRadius: "10px" }}
                         type="text"
                         id="city"
                         name="city"
