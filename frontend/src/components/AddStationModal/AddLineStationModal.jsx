@@ -59,7 +59,7 @@ export const AddLineStationModal = ({
                                       onClick={(e) =>
                                           handleSetStationName(e, item)
                                       }
-                                      item={item}
+                                      item={item.address}
                                       key={item.item_name}
                                   />
                               ))

@@ -9,6 +9,7 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
     const [changedUsers, setChangedUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
+    const [refresh, setRefresh] = useState(false);
 
     const fetchUsers = async () => {
         try {
@@ -41,6 +42,13 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
         fetchUsers();
     }, [currentPage]);
 
+    useEffect(() => {
+        if (refresh) {
+            fetchUsers();
+            setRefresh(false);
+        }
+    }, [refresh]);
+
     return (
         <div className="tabela-korisnici-content">
             <table className="tabela-korisnici">
@@ -65,6 +73,7 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
                             changedUsers={changedUsers}
                             setChangedUsers={setChangedUsers}
                             isSaveClicked={isSaveClicked}
+                            setRefresh={setRefresh}
                         />
                     ))}
                 </tbody>

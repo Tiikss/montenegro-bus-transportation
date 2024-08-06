@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./news.css";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { Modal } from "../../components/Modal/Modal";
-import { deleteNews, getNews, updateNews, addNews } from "../../services/news";
+import { PaginationNumbers } from "../../components/PaginationNumbers/PaginationNumbers";
+import { deleteNews, getFilteredNews } from "../../services/news";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { AddNewsModal } from "./AddNewsModal/AddNewsModal";
 import { AuthContext } from "../../contexts/AuthContext";
 import { NewsCard } from "./components/NewsCard";
 
 export const News = () => {
+    const { user } = useContext(AuthContext);
+
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({
@@ -22,6 +25,9 @@ export const News = () => {
     const [deleteModalResponse, setDeleteModalResponse] = useState(false);
     const [selectedNews, setSelectedNews] = useState(null);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numberOfPages, setNumberOfPages] = useState(1);
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -58,10 +64,6 @@ export const News = () => {
     };
 
     useEffect(() => {
-        console.log("umro", currentNews.id);
-    }, [currentNews]);
-
-    useEffect(() => {
         try {
             const fetchData = async () => {
                 const news = await getNews(1);
@@ -85,11 +87,33 @@ export const News = () => {
         setIsAddModalOpen(true);
     };
 
+    const fetchNews = async () => {
+        try {
+            const news = await getFilteredNews(currentPage, search);
+            setTmpNews(news);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchNews();
+    }, [showModal, isAddModalOpen]);
+
+    useEffect(() => {
+        fetchNews();
+    }, []);
+
+    useEffect(() => {
+        fetchNews();
+    }, [search]);
+
     useEffect(() => {
         if (deleteModalResponse) {
             const handleDelete = async () => {
                 try {
                     await deleteNews(selectedNews);
+                    fetchNews();
                 } catch (error) {
                     console.error(error);
                 }
@@ -106,12 +130,12 @@ export const News = () => {
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
                 <div className="news-search-container">
-                    <button
+                    {user.role_type === "Admin" && <button
                         className="read-more-btn"
                         onClick={(e) => handleAddNewNews(e)}
                     >
                         Dodaj novost
-                    </button>
+                    </button>}
                     <input
                         type="text"
                         placeholder="Pretraži objave"
@@ -128,7 +152,7 @@ export const News = () => {
                         {search !== ""
                             ? news.map((item) => (
                                   <DropDownCard
-                                      item={item}
+                                      item={item.title}
                                       key={item}
                                       onClick={handleSetSearch}
                                   />
@@ -175,6 +199,13 @@ export const News = () => {
                     content={currentNews.content}
                     id={currentNews.id}
                     isEdit={currentNews.id !== -1}
+                />
+            </div>
+            <div className="pagination-numbers-container">
+                <PaginationNumbers
+                    selectedPageId={currentPage}
+                    setPageId={setCurrentPage}
+                    numberOfPages={numberOfPages}
                 />
             </div>
         </main>

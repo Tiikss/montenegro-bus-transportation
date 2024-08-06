@@ -13,6 +13,7 @@ export const UserTableRow = ({
     changedUsers,
     setChangedUsers,
     isSaveClicked,
+    setRefresh,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
@@ -68,6 +69,7 @@ export const UserTableRow = ({
                 const body = { ...user, company_id: inputField.id };
                 await updateUser(user.id, body);
             }
+            setRefresh(true);
         } catch (error) {
             console.error("Error", error);
         }
@@ -112,6 +114,8 @@ export const UserTableRow = ({
         fetchCompanies();
     }, [inputField]);
 
+
+
     return (
         <>
             <tr key={user.id}>
@@ -122,8 +126,8 @@ export const UserTableRow = ({
                 <td>{user.phone_number}</td>
                 {role === "Driver" && (
                     <td>
-                        {user.company_id ? (
-                            user.company_id
+                        {user.company_name ? (
+                            user.company_name
                         ) : (
                             <button
                                 className="adminpanel-button"
@@ -227,7 +231,7 @@ export const UserTableRow = ({
                             ? companies.map((item) => (
                                   <DropDownCard
                                       onClick={(e) => handleClickItem(item)}
-                                      item={item}
+                                      item={item.company_name}
                                       key={item.company_name}
                                   />
                               ))

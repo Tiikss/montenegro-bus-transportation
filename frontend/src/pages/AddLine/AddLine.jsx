@@ -417,7 +417,7 @@ export const AddLine = () => {
                                           onClick={(e) =>
                                               handleSetSource(e, item)
                                           }
-                                          item={item}
+                                          item={item.address}
                                           key={item.item_name}
                                       />
                                   ))
@@ -451,7 +451,7 @@ export const AddLine = () => {
                                           onClick={(e) =>
                                               handleSetDestination(e, item)
                                           }
-                                          item={item}
+                                          item={item.address}
                                           key={item.item_name}
                                       />
                                   ))

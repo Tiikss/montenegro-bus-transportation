@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import "../styles/tabela-red-voznje.css";
@@ -8,7 +8,7 @@ import { TableTimetableContent } from "./components/TableTimetableContent/TableT
 import { getLines, getNumberOfPages } from "../../services/lines";
 import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 import { getLinesFiltered } from "../../services/lines";
-
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const TableTimetable = ({
     isEdit,
@@ -19,6 +19,8 @@ export const TableTimetable = ({
     filter,
     city
 }) => {
+    const { user } = useContext(AuthContext);
+
     const [lines, setLines] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
