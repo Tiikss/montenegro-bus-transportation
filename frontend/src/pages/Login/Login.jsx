@@ -17,7 +17,7 @@ export const Login = () => {
     const handleLoginClick = async (e) => {
         e.preventDefault();
 
-        if (userData.username === "" || userData.password === ""){
+        if (userData.username === "" || userData.password === "") {
             setError("Morate unijeti korisničko ime i lozinku!");
         }
 
@@ -26,10 +26,9 @@ export const Login = () => {
             navigate("/");
         } catch (error) {
             console.log(error);
-            if (error === 404){
+            if (error === 404) {
                 setError("Korisnik ne postoji!");
-            }
-            else if (error === 401){
+            } else if (error === 401) {
                 setError("Korisničko ime ili lozinka nisu ispravni!");
             }
         }
@@ -46,7 +45,7 @@ export const Login = () => {
                     </p>
                 </div>
                 <form className="login-form">
-                    <label htmlFor="username">Korisničko ime:</label>
+                    <label htmlFor="username">Korisničko ime ili email:</label>
                     <input
                         type="text"
                         id="username"
@@ -62,8 +61,16 @@ export const Login = () => {
                         required
                         onChange={handleChange}
                     />
-                    {error && <p className="err" style={{color: "#ba0c0e"}}>{error}</p>}
-                    <button className="btnsty" type="submit" onClick={handleLoginClick}>
+                    {error && (
+                        <p className="err" style={{ color: "#ba0c0e" }}>
+                            {error}
+                        </p>
+                    )}
+                    <button
+                        className="btnsty"
+                        type="submit"
+                        onClick={handleLoginClick}
+                    >
                         Prijavi se
                     </button>
                 </form>
