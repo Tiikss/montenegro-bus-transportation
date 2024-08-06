@@ -65,14 +65,14 @@ export const Profile = () => {
                             <strong>Email:</strong> {user.email}
                         </p>
                         {user.phone_number != "000000000" && (
-                            <p>Broj telefon: {user.phone_number}</p>
+                            <p><strong>Broj telefon:</strong> {user.phone_number}</p>
                         )}
                         <Link
                             style={{ cursor: "pointer", color: "#ba0c0e", textDecoration: "underline" }}
                             id="modal-btn"
                             onClick={handleOpenModal}
                         >
-                            Dodaj broj telefona
+                            {user.phone_number == "000000000" ? "Dodaj broj telefona" : "Izmijeni broj telefona"}
                         </Link>
                         <button
                             className="btnsty"
