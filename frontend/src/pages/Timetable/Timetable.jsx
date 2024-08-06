@@ -2,16 +2,11 @@ import { useState, useEffect } from "react";
 import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import "./timetable.css";
+import { getCities } from "../../services/city";
 
 export const Timetable = () => {
     const [city, setCity] = useState("");
-    const [allCities, setAllCities] = useState([
-        "Podgorica",
-        "Niksic",
-        "Bar",
-        "Budva",
-        "Kotor",
-    ]);
+    const [allCities, setAllCities] = useState([]);
     const [displayCity, setDisplayCity] = useState("");
 
     const handleChange = (e) => {
@@ -24,31 +19,30 @@ export const Timetable = () => {
         setAllCities([]);
     };
 
-    const handleClick = (e) => {
-        const content = e.target.parentElement.parentElement.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.padding = "0 24px";
-            content.style.maxHeight = null;
-            content.style.marginBottom = "0";
-            content.style.border = "none";
-        } else {
-            content.style.border = "1px solid #e0e0e0";
-            content.style.marginBottom = "25px";
-            content.style.padding = "40px 24px";
-            content.style.maxHeight =
-                content.childNodes[0].childNodes[0].scrollHeight + 40 + "px";
+    const fetchCities = async () => {
+        try {
+            const response = await getCities();
+            setAllCities(response);
+        } catch (error) {
+            console.log(error);
         }
-    };
+    }
+
+    useEffect(() => {
+        fetchCities();
+    }, []);
 
     useEffect(() => {
         const filteredStations = allCities.filter((station) =>
-            station.toLowerCase().includes(city.toLowerCase())
+            station.city_name.toLowerCase().includes(city.toLowerCase())
         );
         setAllCities(filteredStations);
         if (city === "") {
-            setAllCities(["Podgorica", "Niksic", "Bar", "Budva", "Kotor"]);
+            fetchCities();
         }
     }, [city]);
+
+
 
     return (
         <div className="red-voznje-content">
@@ -71,7 +65,7 @@ export const Timetable = () => {
                     {city !== ""
                         ? allCities.map((item) => (
                               <DropDownCard
-                                  item={item}
+                                  item={item.city_name}
                                   key={item}
                                   onClick={handleSetSearch}
                               />
