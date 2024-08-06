@@ -6,9 +6,11 @@ import { TicketCard } from "./components/TicketCard/TicketCard";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { EditProfileModal } from "./components/EditProfileModal/EditProfileModal";
 
 export const Profile = () => {
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
     const [tickets, setTickets] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
@@ -17,6 +19,14 @@ export const Profile = () => {
     const handleLogout = () => {
         logout();
         navigate("/");
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const handleOpenModal = () => {
+        setShowModal(true);
     };
 
     useEffect(() => {
@@ -58,6 +68,13 @@ export const Profile = () => {
                         )}
                         <button
                             className="btnsty"
+                            id="modal-btn"
+                            onClick={handleOpenModal}
+                        >
+                            Broj telefona
+                        </button>
+                        <button
+                            className="btnsty"
                             id="logout-btn"
                             onClick={handleLogout}
                         >
@@ -81,6 +98,7 @@ export const Profile = () => {
                     />
                 </div>
             </div>
+            <EditProfileModal show={showModal} handleClose={handleCloseModal} />
         </main>
     );
 };
