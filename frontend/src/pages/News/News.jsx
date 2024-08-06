@@ -12,7 +12,7 @@ import { NewsCard } from "./components/NewsCard";
 export const News = () => {
     const { user } = useContext(AuthContext);
 
-    const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
+    const [news, setNews] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({
         id: -1,
@@ -38,14 +38,18 @@ export const News = () => {
         setNews([]);
     };
 
-    useEffect(() => {
-        const filteredNews = news.filter((item) =>
-            item.toLowerCase().includes(search.toLowerCase())
-        );
-        setNews(filteredNews);
-        if (search === "") {
-            setNews(["Naslov1", "Naslov2", "Naslov3"]);
+    const fetchFilteredNews = async () => {
+        try {
+            const response = await getFilteredNews(currentPage, search);
+            setNews(response);
+        } catch (error) {
+            console.error(error);
         }
+    };
+
+
+    useEffect(() => {
+        fetchFilteredNews();
     }, [search]);
 
     const handleOpenModal = (news) => {
@@ -142,11 +146,6 @@ export const News = () => {
                         id="search-news"
                         value={search}
                         onChange={handleChangeSearch}
-                        style={
-                            search === "" || news.length === 0
-                                ? { borderRadius: "10px" }
-                                : { borderRadius: "10px 10px 0 0" }
-                        }
                     />
                     <div className="dropdown-container">
                         {search !== ""
