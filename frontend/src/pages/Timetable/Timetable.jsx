@@ -42,8 +42,6 @@ export const Timetable = () => {
         }
     }, [city]);
 
-
-
     return (
         <div className="red-voznje-content">
             <h1>Red vožnje</h1>
@@ -74,7 +72,7 @@ export const Timetable = () => {
                 </div>
             </div>
             {displayCity === "" ? null : (<><h2>Polasci sa stanice {displayCity}</h2>
-            <TableTimetable isEdit={false} /></>)}
+            <TableTimetable isEdit={false} city={displayCity}/></>)}
         </div>
     );
 };

@@ -17,6 +17,7 @@ export const TableTimetable = ({
     handleResponse,
     isActive,
     filter,
+    city
 }) => {
     const [lines, setLines] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -36,7 +37,7 @@ export const TableTimetable = ({
                 console.log(filter);
                 setLines(response);
             } else {
-                const response = await getLines(isActive, currentPage);
+                const response = await getLinesFiltered(isActive, currentPage, city);
                 setLines(response);
             }
         } catch (error) {
