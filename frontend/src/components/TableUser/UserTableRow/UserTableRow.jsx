@@ -13,6 +13,7 @@ export const UserTableRow = ({
     changedUsers,
     setChangedUsers,
     isSaveClicked,
+    setRefresh,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
@@ -68,6 +69,7 @@ export const UserTableRow = ({
                 const body = { ...user, company_id: inputField.id };
                 await updateUser(user.id, body);
             }
+            setRefresh(true);
         } catch (error) {
             console.error("Error", error);
         }
