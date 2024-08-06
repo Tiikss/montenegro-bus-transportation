@@ -5,6 +5,8 @@ import { Modal } from "../../components/Modal/Modal";
 import { deleteNews, getNews, updateNews, addNews } from "../../services/news";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { AddNewsModal } from "./AddNewsModal/AddNewsModal";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
 
 export const News = () => {
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
@@ -20,6 +22,7 @@ export const News = () => {
     const [deleteModalResponse, setDeleteModalResponse] = useState(false);
     const [selectedNews, setSelectedNews] = useState(null);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const { user } = useContext(AuthContext);
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -70,8 +73,6 @@ export const News = () => {
             console.error(error);
         }
     }, []);
-
-    const isAdmin = true;
 
     const handleDeleteClick = (e, id) => {
         e.preventDefault();
@@ -154,7 +155,7 @@ export const News = () => {
                                   >
                                       Pročitaj više
                                   </button>
-                                  {isAdmin ? (
+                                  {user && user.role_type === "Admin" ? (
                                       <div>
                                           <button
                                               className="news-admin-btn"
