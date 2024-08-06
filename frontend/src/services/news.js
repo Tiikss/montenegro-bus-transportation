@@ -11,6 +11,18 @@ export const getNews = async (pageNumber) => {
     return response.data;
 };
 
+export const getFilteredNews = async (pageNumber, filter) => {
+    const response = await axios.get(
+        `${URL}/news-filtered/${pageNumber}?${filter}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
+    );
+    return response.data;
+};
+
 export const deleteNews = async (id) => {
     const response = await axios.delete(`${URL}/news/${id}`, {
         headers: {
