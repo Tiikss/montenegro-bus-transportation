@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateUser } from "../../../../services/users";
 
-export const EditProfileModal = ({ show, handleClose, user }) => {
+export const EditProfileModal = ({ show, handleClose, user, setUser }) => {
     const [input, setInput] = useState(
         user.phone_number == "000000000" ? null : user.phone_number
     );
     const [error, setError] = useState(null);
+    const [changed, setChanged] = useState(false);
 
     const handleInputChange = (event) => {
         setInput(event.target.value);
@@ -33,11 +34,18 @@ export const EditProfileModal = ({ show, handleClose, user }) => {
 
         setError(null);
 
-        user.phone_number = input;
+        setUser({ ...user, phone_number: input });
 
-        updateUserFunc();
-        window.location.reload();
+        setChanged(true);
     };
+
+    useEffect(() => {
+        if (changed) {
+            updateUserFunc();
+            handleClose();
+            setChanged(false);
+        }
+    }, [changed]);
 
     if (!show) {
         return null;
@@ -45,15 +53,23 @@ export const EditProfileModal = ({ show, handleClose, user }) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content" style={{padding: "20px"}}>
-                <div className="modal-header" style={{height: "50px", marginBottom: "20px"}}>
+            <div className="modal-content" style={{ padding: "20px" }}>
+                <div
+                    className="modal-header"
+                    style={{ height: "50px", marginBottom: "20px" }}
+                >
                     <h1>Broj telefona</h1>
                     <button onClick={handleClose} className="close-button">
                         ×
                     </button>
                 </div>
                 <input
-                    style={{ width: "100%", marginBottom: "20px", padding: "15px", borderRadius: "10px" }}
+                    style={{
+                        width: "100%",
+                        marginBottom: "20px",
+                        padding: "15px",
+                        borderRadius: "10px",
+                    }}
                     type="number"
                     placeholder="Unesite broj telefona:"
                     value={input}
@@ -61,7 +77,7 @@ export const EditProfileModal = ({ show, handleClose, user }) => {
                 />
                 {error && <p className="error-message">{error}</p>}
                 <button
-                style={{marginBottom: "10px"}}
+                    style={{ marginBottom: "10px" }}
                     className="btnsty"
                     id="save-btn"
                     onClick={(e) => handleClick(e)}

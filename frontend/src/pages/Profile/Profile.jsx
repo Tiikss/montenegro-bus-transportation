@@ -15,7 +15,7 @@ export const Profile = () => {
     const [tickets, setTickets] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
-    const { user, logout } = useContext(AuthContext);
+    const { user, setUser, logout } = useContext(AuthContext);
 
     const handleLogout = () => {
         logout();
@@ -65,14 +65,23 @@ export const Profile = () => {
                             <strong>Email:</strong> {user.email}
                         </p>
                         {user.phone_number != "000000000" && (
-                            <p><strong>Broj telefon:</strong> {user.phone_number}</p>
+                            <p>
+                                <strong>Broj telefon:</strong>{" "}
+                                {user.phone_number}
+                            </p>
                         )}
                         <Link
-                            style={{ cursor: "pointer", color: "#ba0c0e", textDecoration: "underline" }}
+                            style={{
+                                cursor: "pointer",
+                                color: "#ba0c0e",
+                                textDecoration: "underline",
+                            }}
                             id="modal-btn"
                             onClick={handleOpenModal}
                         >
-                            {user.phone_number == "000000000" ? "Dodaj broj telefona" : "Izmijeni broj telefona"}
+                            {user.phone_number == "000000000"
+                                ? "Dodaj broj telefona"
+                                : "Izmijeni broj telefona"}
                         </Link>
                         <button
                             className="btnsty"
@@ -103,6 +112,7 @@ export const Profile = () => {
                 show={showModal}
                 handleClose={handleCloseModal}
                 user={user}
+                setUser={setUser}
             />
         </main>
     );
