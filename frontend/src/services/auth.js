@@ -19,7 +19,7 @@ export const login = async (user) => {
 
 export const register = async (user) => {
     try{
-        const response = await axios.post(`${URL}/signup`, user, {
+        const response = await axios.post(`${URL}/signup/`, user, {
             headers: {
                 "ngrok-skip-browser-warning": "true",
             },
