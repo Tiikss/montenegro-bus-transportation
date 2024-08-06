@@ -73,8 +73,8 @@ export const Timetable = () => {
                         : null}
                 </div>
             </div>
-            <h2>Polasci sa stanice {displayCity}</h2>
-            <TableTimetable isEdit={false} />
+            {displayCity === "" ? null : (<><h2>Polasci sa stanice {displayCity}</h2>
+            <TableTimetable isEdit={false} /></>)}
         </div>
     );
 };
