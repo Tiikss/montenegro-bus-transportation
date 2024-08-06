@@ -42,6 +42,19 @@ export const getLinesFiltered = async (
     return response.data;
 };
 
+export const getLinesFilteredByCity = async (
+    isActive,
+    page,
+    city
+) => {
+    const response = await axios.get(
+        `${URL}/routes_filtered/${page}?is_active=${
+            isActive ? "1" : "-1"
+        }&startCity=${city}`
+    );
+    return response.data;
+};
+
 export const addLine = async (line) => {
     const response = await axios.post(`${URL}/routes`, line, {
         headers: {
