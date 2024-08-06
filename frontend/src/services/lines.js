@@ -38,21 +38,27 @@ export const getLinesFiltered = async (
 ) => {
     const response = await axios.get(
         `${URL}/routes_filtered/${page}?is_active=${
-            isActive ? "1" : "-1"
-        }&startCity=${startCity}&endCity=${endCity}&date=${date}`
+            isActive ? "1" : "0"
+        }&startCity=${startCity}&endCity=${endCity}&date=${date}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
     );
     return response.data;
 };
 
-export const getLinesFilteredByCity = async (
-    isActive,
-    page,
-    city
-) => {
+export const getLinesFilteredByCity = async (isActive, page, city) => {
     const response = await axios.get(
         `${URL}/routes_filtered/${page}?is_active=${
-            isActive ? "1" : "-1"
-        }&startCity=${city}`
+            isActive ? "1" : "0"
+        }&startCity=${city}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
     );
     return response.data;
 };
