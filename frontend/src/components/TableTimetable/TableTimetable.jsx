@@ -17,6 +17,7 @@ export const TableTimetable = ({
     handleResponse,
     isActive,
     filter,
+    city
 }) => {
     const { user } = useContext(AuthContext);
 
@@ -38,11 +39,7 @@ export const TableTimetable = ({
                 console.log(filter);
                 setLines(response);
             } else {
-                const response = await getLines(
-                    isActive,
-                    currentPage,
-                    user.company_id
-                );
+                const response = await getLinesFiltered(isActive, currentPage, city);
                 setLines(response);
             }
         } catch (error) {
