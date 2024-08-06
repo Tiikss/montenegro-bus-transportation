@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./news.css";
 import { DropDownCard } from "../../components/DropdownCard/DropdownCard";
 import { Modal } from "../../components/Modal/Modal";
 import { deleteNews, getNews, updateNews, addNews } from "../../services/news";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { AddNewsModal } from "./AddNewsModal/AddNewsModal";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const News = () => {
+    const { user } = useContext(AuthContext);
+
     const [news, setNews] = useState(["Naslov1", "Naslov2", "Naslov3"]);
     const [showModal, setShowModal] = useState(false);
     const [currentNews, setCurrentNews] = useState({
@@ -70,8 +73,6 @@ export const News = () => {
             console.error(error);
         }
     }, []);
-
-    const isAdmin = true;
 
     const handleDeleteClick = (e, id) => {
         e.preventDefault();
@@ -154,7 +155,7 @@ export const News = () => {
                                   >
                                       Pročitaj više
                                   </button>
-                                  {isAdmin ? (
+                                  {user.role_type === "Admin" ? (
                                       <div>
                                           <button
                                               className="news-admin-btn"
