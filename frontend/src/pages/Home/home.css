@@ -364,8 +364,18 @@
     }
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 643px){
     .contact-div img{
         display: none;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #contact-info{
+        width: 250px;
+    }
+
+    .red-div{
+        width: 95%;
     }
 }
