@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTicket } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, { useContext} from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../contexts/AuthContext";
 import { TicketReservation } from "../../../TicketReservation/TicketReservation";
 
 export const TableTimetableRow = ({
@@ -11,7 +12,9 @@ export const TableTimetableRow = ({
     isAdmin,
     handleResponse,
     routeId,
+    date
 }) => {
+    const  { user } = useContext(AuthContext);
     const handleClick = (e) => {
         const content =
             e.target.parentElement.parentElement.nextElementSibling
@@ -213,7 +216,8 @@ export const TableTimetableRow = ({
                             </>
                         )}
                     </div>
-                ) : (
+                ) : (null)}
+                {user ? (
                     <div className="col col-9">
                         <FontAwesomeIcon
                             icon={faTicket}
@@ -221,9 +225,10 @@ export const TableTimetableRow = ({
                             onClick={handleTicketClick}
                         />
                     </div>
-                )}
+                ):null}
             </li>
-            <TicketReservation />
+            {user && <TicketReservation filterDate={date} price={departure.stations[departure.stations.length - 1].price} company_id={departure.company_id} route_id={departure.route_id}/>}
+            
         </>
     );
 };

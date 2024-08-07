@@ -123,6 +123,7 @@ export const TableTimetable = ({
                                   handleDeleteClick={handleDeleteClick}
                                   handleResponse={handleResponse}
                                   routeId={line.route_id}
+                                  date={filter ? filter.date : null}
                               />
                               <TableTimetableContent
                                   departure={line}
