@@ -24,9 +24,9 @@ export const Navbar = () => {
                     <Link to={"/news"}>
                         <li>Novosti</li>
                     </Link>
-                    <Link to={"/cjenovnik"}>
+                    {/* <Link to={"/cjenovnik"}>
                         <li>Cjenovnik</li>
-                    </Link>
+                    </Link> */}
                     {user && user.role_type === "Admin" && (
                         <Link to={"/admin-panel"}>
                             <li>Admin panel</li>

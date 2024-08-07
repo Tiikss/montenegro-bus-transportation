@@ -7,7 +7,7 @@ import { Timetable } from "./pages/Timetable/Timetable";
 import { CarrierPanel } from "./pages/CarrierPanel/CarrierPanel";
 import { AddLine } from "./pages/AddLine/AddLine";
 import { News } from "./pages/News/News";
-import { PriceList } from "./pages/PriceList/PriceList";
+// import { PriceList } from "./pages/PriceList/PriceList";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
@@ -58,10 +58,10 @@ const router = createBrowserRouter([
                 path: "/news",
                 element: <News />,
             },
-            {
-                path: "/cjenovnik",
-                element: <PriceList />,
-            },
+            // {
+            //     path: "/cjenovnik",
+            //     element: <PriceList />,
+            // },
             {
                 path: "/onama",
                 element: <AboutUs />,
