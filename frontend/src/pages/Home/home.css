@@ -163,11 +163,18 @@
 }
 
 #pom-div2 {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin-top: 20px;
+}
+
+#contact-info{
+    width: 500px;
 }
 
 #contact-info h1 {
@@ -224,6 +231,8 @@
 
 .novosti {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     color: #ba0c0e;
     margin: 0 auto;
@@ -247,6 +256,12 @@
 
 .choose > .add-line-input-container > .dropdown-container > .dropdown-card {
     font-size: 16px;
+}
+
+@media screen and (max-width: 1024px){
+    .contact-div img {
+        width: 250px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -313,5 +328,44 @@
 
     .ttl-and-date h1 {
         font-size: 24px;
+    }
+
+    .contact{
+        width: 100%;
+    }
+
+    #contact-info{
+        width: 300px;
+    }
+
+    #contact-table th, #contact-table td {
+        display: block;
+        width: 100%;
+    }
+
+    #contact-table thead{
+        display: none;
+    }
+
+    #contact-div tr{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    #contact-div td{
+        display: block;
+        text-align: center;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-overflow: ellipsis;
+    }
+}
+
+@media screen and (max-width: 425px){
+    .contact-div img{
+        display: none;
     }
 }
