@@ -1,9 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { postTicket} from "../../services/ticket";
+import { postTicket } from "../../services/ticket";
 import "./ticket-reservation.css";
 
-export const TicketReservation = ( {filterDate, price, route_id, company_id} ) => {
+export const TicketReservation = ({
+    filterDate,
+    price,
+    route_id,
+    company_id,
+}) => {
     const { user } = useContext(AuthContext);
 
     const handleModalClose = () => {
@@ -14,43 +19,44 @@ export const TicketReservation = ( {filterDate, price, route_id, company_id} ) =
         document.body.style.overflowY = "scroll";
     };
 
-    const handleClick = async (e) =>{
+    const handleClick = async (e) => {
         e.preventDefault();
-        const currentDate = new Date()
-        let dayInd
-        if(filterDate){
+        const currentDate = new Date();
+        let dayInd;
+        if (filterDate) {
             dayInd = new Date(filterDate).getDay();
-        }else{
+        } else {
             dayInd = currentDate.getDay();
         }
         let day;
         switch (dayInd) {
             case 0:
-            day = "Sunday";
-            break;
+                day = "Sunday";
+                break;
             case 1:
-            day = "Monday";
-            break;
+                day = "Monday";
+                break;
             case 2:
-            day = "Tuesday";
-            break;
+                day = "Tuesday";
+                break;
             case 3:
-            day = "Wednesday";
-            break;
+                day = "Wednesday";
+                break;
             case 4:
-            day = "Thursday";
-            break;
+                day = "Thursday";
+                break;
             case 5:
-            day = "Friday";
-            break;
+                day = "Friday";
+                break;
             case 6:
-            day = "Saturday";
-            break;
+                day = "Saturday";
+                break;
             default:
-            day = "";
-            break;
+                day = "";
+                break;
         }
-        const date = new Date().toLocaleString().split(',')[0].split('/').reverse().join('-');
+        const date = new Date().toISOString().split("T")[0];
+
         await postTicket({
             price: price,
             departure_date_time: filterDate ? filterDate : date,
@@ -59,7 +65,7 @@ export const TicketReservation = ( {filterDate, price, route_id, company_id} ) =
             route_id: route_id,
         });
         window.location.reload();
-    }
+    };
 
     return (
         <>
@@ -75,23 +81,41 @@ export const TicketReservation = ( {filterDate, price, route_id, company_id} ) =
                     <div className="ticket-reservation-info-container">
                         <div className="ticket-reservation-info">
                             <div>
-                                <h2>Ime i prezime:</h2><input className="addline-input" type="text" value={user.full_name} readOnly="readonly" />
+                                <h2>Ime i prezime:</h2>
+                                <input
+                                    className="addline-input"
+                                    type="text"
+                                    value={user.full_name}
+                                    readOnly="readonly"
+                                />
                             </div>
                             <div>
                                 <h2>Email:</h2>
-                                <input className="addline-input" type="email" value={user.email} readOnly="readonly" />
+                                <input
+                                    className="addline-input"
+                                    type="email"
+                                    value={user.email}
+                                    readOnly="readonly"
+                                />
                             </div>
                             <div>
                                 <h2>Broj telefona:</h2>
-                                <input className="addline-input" type="text" value={user.phone_number} readOnly="readonly" />
+                                <input
+                                    className="addline-input"
+                                    type="text"
+                                    value={user.phone_number}
+                                    readOnly="readonly"
+                                />
                             </div>
                             <div>
-                                <button className="btnsty" onClick={handleClick}>
+                                <button
+                                    className="btnsty"
+                                    onClick={handleClick}
+                                >
                                     Rezerviši
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
