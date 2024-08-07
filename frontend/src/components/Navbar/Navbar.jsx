@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import "./navbar.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 // import logo from "../images/buslogo2.png"
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const Navbar = () => {
     const { user } = useContext(AuthContext);
+    const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
+
+    const handleBurgerClick = () => {
+        setOpenBurgerMenu(!openBurgerMenu);
+    };
 
     return (
         <main>
@@ -48,6 +53,90 @@ export const Navbar = () => {
                         </Link>
                     )}
                 </ul>
+                <div className="menu-bar-responsive">
+                    <h1>Autobuski prevoz Crne Gore</h1>
+
+                    <input
+                        id="burger"
+                        type="checkbox"
+                        checked={openBurgerMenu}
+                        onChange={handleBurgerClick}
+                    />
+
+                    <label for="burger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to={"/"} onClick={handleBurgerClick}>
+                                    Početna
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={"/onama"} onClick={handleBurgerClick}>
+                                    O nama
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to={"/red-voznje"}
+                                    onClick={handleBurgerClick}
+                                >
+                                    Red vožnje
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={"/news"} onClick={handleBurgerClick}>
+                                    Novosti
+                                </Link>
+                            </li>
+                            {user && user.role_type === "Admin" && (
+                                <li>
+                                    <Link
+                                        to={"/admin-panel"}
+                                        onClick={handleBurgerClick}
+                                    >
+                                        Admin panel
+                                    </Link>
+                                </li>
+                            )}
+                            {user && user.role_type === "Driver" && (
+                                <li>
+                                    <Link
+                                        to={"/prevoznik-panel"}
+                                        onClick={handleBurgerClick}
+                                    >
+                                        Prevoznik panel
+                                    </Link>
+                                </li>
+                            )}
+                            {!user && (
+                                <li>
+                                    <Link
+                                        to={"/login"}
+                                        onClick={handleBurgerClick}
+                                    >
+                                        Prijavi se
+                                    </Link>
+                                </li>
+                            )}
+                            {user && (
+                                <li>
+                                    <Link
+                                        to={"/profil"}
+                                        onClick={handleBurgerClick}
+                                    >
+                                        {user.username}
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </main>
     );
