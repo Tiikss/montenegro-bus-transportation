@@ -58,8 +58,12 @@
 
 .ticket-reservation-info-container {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.ticket-reservation-info-container div{
+    width: 100%;
 }
 
 .ticket-reservation-info {
