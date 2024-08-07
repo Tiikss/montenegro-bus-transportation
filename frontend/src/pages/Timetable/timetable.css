@@ -20,6 +20,7 @@
     width: 80%;
     text-align: center;
     margin: 40px auto;
+    min-height: 100vh;
 }
 
 .red-voznje-content h2 {
@@ -284,4 +285,13 @@
 
 .admin-icon:hover {
     stroke: #ba0c0e;
+}
+
+@media screen and (max-width: 460px){
+    .choose-city-container {
+        width: 100%;
+    }
+    #cityTable {
+        width: 100%;
+    }
 }
