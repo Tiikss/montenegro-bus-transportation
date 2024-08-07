@@ -12,6 +12,7 @@ export const TableTimetableRow = ({
     isAdmin,
     handleResponse,
     routeId,
+    date
 }) => {
     const  { user } = useContext(AuthContext);
     const handleClick = (e) => {
@@ -226,7 +227,7 @@ export const TableTimetableRow = ({
                     </div>
                 ):null}
             </li>
-            {user && <TicketReservation />}
+            {user && <TicketReservation filterDate={date} price={departure.stations[departure.stations.length - 1].price} company_id={departure.company_id} route_id={departure.route_id}/>}
             
         </>
     );
