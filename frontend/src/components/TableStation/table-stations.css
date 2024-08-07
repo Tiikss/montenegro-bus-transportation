@@ -62,3 +62,30 @@ td {
 .hidden {
     display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .tabela-stanice {
+        width: 95%;
+    }
+
+    .tabela-stanice thead{
+        display: none;
+    }
+
+    .tabela-stanice tr{
+        padding: 16px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .tabela-stanice td{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+}
