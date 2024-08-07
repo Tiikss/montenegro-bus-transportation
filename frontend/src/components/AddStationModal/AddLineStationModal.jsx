@@ -34,7 +34,7 @@ export const AddLineStationModal = ({
             <form className={"addstation-form" + (isOpen ? "" : " hidden")}>
                 <label htmlFor="prevoznik">Stanica:</label>
                 <label htmlFor="stationName">Naziv stanice:</label>
-                <div className="add-line-input-container">
+                <div className="station-name-filter-container">
                     <input
                         className="addline-input"
                         type="text"

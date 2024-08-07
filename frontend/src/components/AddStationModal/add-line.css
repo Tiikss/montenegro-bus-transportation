@@ -60,6 +60,11 @@
     position: relative;
 }
 
+.station-name-filter-container{
+    position: relative;
+    width: 100%;
+}
+
 #station-modal {
     background-color: #fff;
     padding: 20px;
