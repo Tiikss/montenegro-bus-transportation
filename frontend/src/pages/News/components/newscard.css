@@ -1,0 +1,9 @@
+@media screen and (max-width: 630px){
+    .news-card {
+        width: 95%;
+    }
+
+    #search-news{
+        width: 95%;
+    }
+}
