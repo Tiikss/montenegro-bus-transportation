@@ -14,6 +14,7 @@ import { Register } from "./pages/Register/Register";
 import { Profile } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 import { TimetableFiltered } from "./pages/TimeTableFiltered/TimetableFiltered";
+import { AuthenticatedRoute } from "./components/AuthenticatedRoute/AuthenticatedRoute";
 
 const Layout = () => {
     return (
@@ -43,18 +44,6 @@ const router = createBrowserRouter([
                 element: <TimetableFiltered />,
             },
             {
-                path: "/prevoznik-panel",
-                element: <CarrierPanel />,
-            },
-            {
-                path: "/admin-panel",
-                element: <AdminPanel />,
-            },
-            {
-                path: "/dodaj-liniju/:id",
-                element: <AddLine />,
-            },
-            {
                 path: "/news",
                 element: <News />,
             },
@@ -75,8 +64,38 @@ const router = createBrowserRouter([
                 element: <Register />,
             },
             {
-                path: "/profil",
-                element: <Profile />,
+                path: "/",
+                element: <AuthenticatedRoute role="Passenger" />,
+                children: [
+                    {
+                        path: "/profil",
+                        element: <Profile />,
+                    },
+                ],
+            },
+            {
+                path: "/",
+                element: <AuthenticatedRoute role="Driver" />,
+                children: [
+                    {
+                        path: "/prevoznik-panel",
+                        element: <CarrierPanel />,
+                    },
+                    {
+                        path: "/dodaj-liniju/:id",
+                        element: <AddLine />,
+                    },
+                ],
+            },
+            {
+                path: "/",
+                element: <AuthenticatedRoute role="Admin" />,
+                children: [
+                    {
+                        path: "/admin-panel",
+                        element: <AdminPanel />,
+                    },
+                ],
             },
         ],
     },
