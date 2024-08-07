@@ -17,9 +17,25 @@ export const getLines = async (isActive, page, company) => {
     return response.data;
 };
 
-export const getNumberOfPages = async (isActive) => {
+export const getNumberOfPages = async (isActive, company) => {
     const response = await axios.get(
-        `${URL}/routes_paginated/count?is_active=${isActive ? "1" : "0"}`,
+        `${URL}/routes_paginated/count?is_active=${isActive ? "1" : "0"}${
+            company ? `&company_id=${company}` : ""
+        }`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
+    );
+    return response.data;
+};
+
+export const getNumberOfPagesFiltered = async (startCity, endCity, date) => {
+    const response = await axios.get(
+        `${URL}/routes_filtered/count?${
+            startCity ? `&startCity=${startCity}` : ""
+        }${endCity ? `&endCity=${endCity}` : ""}${date ? `&date=${date}` : ""}`,
         {
             headers: {
                 "ngrok-skip-browser-warning": "true",
@@ -37,22 +53,28 @@ export const getLinesFiltered = async (
     date
 ) => {
     const response = await axios.get(
-        `${URL}/routes_filtered/${page}?is_active=${
-            isActive ? "1" : "-1"
-        }&startCity=${startCity}&endCity=${endCity}&date=${date}`
+        `${URL}/routes_filtered/${page}?is_active=${isActive ? "1" : "0"}${
+            startCity ? `&startCity=${startCity}` : ""
+        }${endCity ? `&endCity=${endCity}` : ""}${date ? `&date=${date}` : ""}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
     );
     return response.data;
 };
 
-export const getLinesFilteredByCity = async (
-    isActive,
-    page,
-    city
-) => {
+export const getLinesFilteredByCity = async (isActive, page, city) => {
     const response = await axios.get(
         `${URL}/routes_filtered/${page}?is_active=${
-            isActive ? "1" : "-1"
-        }&startCity=${city}`
+            isActive ? "1" : "0"
+        }&startCity=${city}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
     );
     return response.data;
 };

@@ -39,6 +39,47 @@ export const TableTimetableRow = ({
         document.body.style.overflow = "hidden";
     };
 
+    const calculateRouteDuration = (departure, arrival) => {
+        let departureDate, arrivalDate;
+        if (Number(departure.split(":")[0]) > Number(arrival.split(":")[0])) {
+            departureDate = new Date(
+                2024,
+                1,
+                2,
+                Number(departure.split(":")[0]),
+                Number(departure.split(":")[1])
+            );
+            arrivalDate = new Date(
+                2024,
+                1,
+                3,
+                Number(arrival.split(":")[0]),
+                Number(arrival.split(":")[1])
+            );
+        } else {
+            departureDate = new Date(
+                2024,
+                1,
+                2,
+                Number(departure.split(":")[0]),
+                Number(departure.split(":")[1])
+            );
+            arrivalDate = new Date(
+                2024,
+                1,
+                2,
+                Number(arrival.split(":")[0]),
+                Number(arrival.split(":")[1])
+            );
+        }
+        const departureTime = departureDate.getTime();
+        const arrivalTime = arrivalDate.getTime();
+        const diff = arrivalTime - departureTime;
+        const hours = Math.floor(diff / 1000 / 60 / 60);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        return `${hours}h ${minutes}m`;
+    };
+
     return (
         <>
             <li className="red-voznje-table-row red-voznje-row-hover">
@@ -57,7 +98,13 @@ export const TableTimetableRow = ({
                 <div className="col col-3">
                     {departure.stations[0].departure_time}
                 </div>
-                <div className="col col-4">{"13h"}</div>
+                <div className="col col-4">
+                    {calculateRouteDuration(
+                        departure.stations[0].departure_time,
+                        departure.stations[departure.stations.length - 1]
+                            .arrival_time
+                    )}
+                </div>
                 <div className="col col-5">
                     {
                         departure.stations[departure.stations.length - 1]
@@ -67,7 +114,10 @@ export const TableTimetableRow = ({
                 {!isEdit && (
                     <div className="col col-6">{departure.company_name}</div>
                 )}
-                <div className="col col-7">{"300e"}</div>
+                <div className="col col-7">
+                    {departure.stations[departure.stations.length - 1].price +
+                        "€"}
+                </div>
                 <div className="col col-8">
                     <input
                         type="checkbox"

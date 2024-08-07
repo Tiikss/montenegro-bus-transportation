@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { TableTimetableHeader } from "./components/TableTimetableHeader/TableTimetableHeader";
 import { TableTimetableRow } from "./components/TableTimetableRow/TableTimetableRow";
 import { TableTimetableContent } from "./components/TableTimetableContent/TableTimetableContent";
-import { getLines, getNumberOfPages } from "../../services/lines";
+import {
+    getLines,
+    getLinesFilteredByCity,
+    getNumberOfPages,
+    getNumberOfPagesFiltered,
+} from "../../services/lines";
 import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 import { getLinesFiltered } from "../../services/lines";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -14,10 +19,11 @@ export const TableTimetable = ({
     isEdit,
     handleDeleteClick,
     isAdmin,
+    isCarrier,
     handleResponse,
     isActive,
     filter,
-    city
+    city,
 }) => {
     const { user } = useContext(AuthContext);
 
@@ -38,8 +44,22 @@ export const TableTimetable = ({
                 );
                 console.log(filter);
                 setLines(response);
-            } else {
-                const response = await getLinesFiltered(isActive, currentPage, city);
+            } else if (isCarrier) {
+                const response = await getLines(
+                    isActive,
+                    currentPage,
+                    user.company_id
+                );
+                setLines(response);
+            } else if (isAdmin) {
+                const response = await getLines(isActive, currentPage);
+                setLines(response);
+            } else if (city) {
+                const response = await getLinesFilteredByCity(
+                    isActive,
+                    currentPage,
+                    city
+                );
                 setLines(response);
             }
         } catch (error) {
@@ -51,8 +71,26 @@ export const TableTimetable = ({
 
     const fetchNumberOfPages = async () => {
         try {
-            const response = await getNumberOfPages(isActive);
-            setNumberOfPages(response);
+            if (isCarrier) {
+                const response = await getNumberOfPages(
+                    isActive,
+                    user.company_id
+                );
+                setNumberOfPages(response);
+            } else if (isAdmin) {
+                const response = await getNumberOfPages(isActive);
+                setNumberOfPages(response);
+            } else if (city) {
+                const response = await getNumberOfPagesFiltered(city);
+                setNumberOfPages(response);
+            } else if (filter) {
+                const response = await getNumberOfPagesFiltered(
+                    filter.start,
+                    filter.end,
+                    filter.date
+                );
+                setNumberOfPages(response);
+            }
         } catch (error) {
             console.log(error);
         }

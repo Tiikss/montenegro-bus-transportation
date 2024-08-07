@@ -33,12 +33,14 @@ export const CarrierPanel = () => {
                 isEdit={true}
                 handleDeleteClick={handleDeleteClick}
                 isActive={true}
+                isCarrier={true}
             />
             <h2>Linije na cekanju</h2>
             <TableTimetable
                 isEdit={true}
                 handleDeleteClick={handleDeleteClick}
                 isActive={false}
+                isCarrier={true}
             />
             {isModalOpen && (
                 <ModalWindow
