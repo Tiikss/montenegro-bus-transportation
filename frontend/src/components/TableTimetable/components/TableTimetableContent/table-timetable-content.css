@@ -12,3 +12,14 @@
     align-items: center;
     gap: 20px;
 }
+
+@media screen and (max-width: 768px) {
+    .table-row-description {
+        gap: 20px;
+    }
+
+    .table-line-container {
+        gap: 10px;
+        flex-direction: column;
+    }
+}

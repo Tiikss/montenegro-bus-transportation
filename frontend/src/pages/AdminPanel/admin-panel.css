@@ -42,3 +42,10 @@
     align-items: center;
     gap: 30px;
 }
+
+@media screen and (max-width: 478px) {
+    .adminpanel-buttons{
+        flex-direction: column;
+        gap: 10px;
+    }
+}

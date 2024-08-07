@@ -23,6 +23,7 @@ export const UserTableRow = ({
 
     const [companies, setCompanies] = useState([]);
     const [inputField, setinputField] = useState({ id: 0, company_name: "" }); // odje treba company_name i id da ide i onda da se salje company_id u body za updateUser
+    const [companyInput, setCompanyInput] = useState("");
 
     const [isAddCompanyModalOpen, setIsAddCompanyModalOpen] = useState(false);
 
@@ -37,11 +38,12 @@ export const UserTableRow = ({
     };
 
     const handleChange = (e) => {
-        setinputField({ ...inputField, company_name: e.target.value });
+        setCompanyInput(e.target.value);
     };
 
     const handleClickItem = (company) => {
         setinputField({ id: company.id, company_name: company.company_name });
+        setCompanyInput(company.company_name);
         setCompanies([]);
     };
 
@@ -53,7 +55,7 @@ export const UserTableRow = ({
 
     const fetchCompanies = async () => {
         try {
-            const response = await getCompanies(inputField.company_name);
+            const response = await getCompanies(companyInput);
             setCompanies(response);
         } catch (error) {
             console.log(error);
@@ -112,9 +114,7 @@ export const UserTableRow = ({
 
     useEffect(() => {
         fetchCompanies();
-    }, [inputField]);
-
-
+    }, [companyInput]);
 
     return (
         <>
@@ -127,11 +127,25 @@ export const UserTableRow = ({
                 {role === "Driver" && (
                     <td>
                         {user.company_name ? (
-                            user.company_name
+                            <Link
+                                style={{ color: "black" }}
+                                onClick={(e) => {
+                                    setIsAddCompanyModalOpen(true);
+                                    setinputField({
+                                        id: user.company_id,
+                                        company_name: user.company_name,
+                                    });
+                                    setCompanyInput(user.company_name);
+                                }}
+                            >
+                                {user.company_name}
+                            </Link>
                         ) : (
                             <button
                                 className="adminpanel-button"
-                                onClick={(e) => setIsAddCompanyModalOpen(true)}
+                                onClick={(e) => {
+                                    setIsAddCompanyModalOpen(true);
+                                }}
                             >
                                 Dodaj kompaniju
                             </button>
@@ -207,18 +221,17 @@ export const UserTableRow = ({
                 }
             >
                 <label htmlFor="source">Izaberite kompaniju:</label>
-                <div className="add-line-input-container dropdown-container">
+                <div className="add-line-input-container">
                     <input
                         className="addline-input"
                         type="text"
                         id="source"
                         name="source"
                         required
-                        value={inputField.company_name}
+                        value={companyInput}
                         onChange={handleChange}
                         style={
-                            inputField.company_name === "" ||
-                            companies.length === 0
+                            companyInput === "" || companies.length === 0
                                 ? { borderRadius: "10px" }
                                 : { borderRadius: "10px 10px 0 0" }
                         }
@@ -227,7 +240,7 @@ export const UserTableRow = ({
                         id="filter-source-container"
                         className="dropdown-container"
                     >
-                        {inputField.company_name !== ""
+                        {companyInput !== "" && companies.length > 0
                             ? companies.map((item) => (
                                   <DropDownCard
                                       onClick={(e) => handleClickItem(item)}

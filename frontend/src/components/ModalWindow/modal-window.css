@@ -53,3 +53,14 @@
     color: #ba0c0e;
     border: 1px solid #ba0c0e;
 }
+
+@media screen and (max-width: 768px) {
+    .modal-container {
+        width: 90%;
+        padding: 16px;
+    }
+
+    .modal-button {
+        font-size: 14px;
+    }
+}

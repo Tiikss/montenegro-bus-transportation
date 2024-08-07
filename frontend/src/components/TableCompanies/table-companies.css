@@ -69,3 +69,23 @@ td {
     color: #ba0c0e;
     border: 1px solid #ba0c0e;
 }
+
+@media screen and (max-width: 768px) {
+    .tabela-kompanije-content {
+        gap: 10px;
+    }
+
+    .tabela-kompanije th,
+    .tabela-kompanije td {
+        padding: 10px;
+    }
+
+    .add-company-form input {
+        padding: 8px;
+    }
+
+    .add-company-form button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

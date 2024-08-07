@@ -27,3 +27,16 @@ export const getNumberOfPages = async () => {
         console.log(error);
     }
 }
+
+export const postTicket = async (ticket) => {
+    try {
+        const response = await axios.post(`${URL}/tickets`, ticket, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

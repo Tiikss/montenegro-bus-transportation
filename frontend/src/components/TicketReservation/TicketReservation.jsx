@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { postTicket} from "../../services/ticket";
 import "./ticket-reservation.css";
 
-export const TicketReservation = () => {
+export const TicketReservation = ( {filterDate, price, route_id, company_id} ) => {
+    const { user } = useContext(AuthContext);
+
     const handleModalClose = () => {
         document
             .getElementById("ticket-reservation-modal")
@@ -8,6 +13,53 @@ export const TicketReservation = () => {
         document.getElementById("overlay").classList.add("hidden");
         document.body.style.overflowY = "scroll";
     };
+
+    const handleClick = async (e) =>{
+        e.preventDefault();
+        const currentDate = new Date()
+        let dayInd
+        if(filterDate){
+            dayInd = new Date(filterDate).getDay();
+        }else{
+            dayInd = currentDate.getDay();
+        }
+        let day;
+        switch (dayInd) {
+            case 0:
+            day = "Sunday";
+            break;
+            case 1:
+            day = "Monday";
+            break;
+            case 2:
+            day = "Tuesday";
+            break;
+            case 3:
+            day = "Wednesday";
+            break;
+            case 4:
+            day = "Thursday";
+            break;
+            case 5:
+            day = "Friday";
+            break;
+            case 6:
+            day = "Saturday";
+            break;
+            default:
+            day = "";
+            break;
+        }
+        const date = new Date().toLocaleString().split(',')[0].split('/').reverse().join('-');
+        await postTicket({
+            price: price,
+            departure_date_time: filterDate ? filterDate : date,
+            company_id: company_id,
+            day_name: day,
+            route_id: route_id,
+        });
+        window.location.reload();
+    }
 
     return (
         <>
@@ -23,51 +75,23 @@ export const TicketReservation = () => {
                     <div className="ticket-reservation-info-container">
                         <div className="ticket-reservation-info">
                             <div>
-                                <h2>Ime i prezime:</h2>
-                                <input type="text" />
+                                <h2>Ime i prezime:</h2><input className="addline-input" type="text" value={user.full_name} readOnly="readonly" />
                             </div>
                             <div>
                                 <h2>Email:</h2>
-                                <input type="email" />
+                                <input className="addline-input" type="email" value={user.email} readOnly="readonly" />
                             </div>
                             <div>
-                                <h2>Izaberite sjedište</h2>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div className="ticket-reservation-info">
-                            <div>
-                                <h2>Način plaćanja:</h2>
-                                <label htmlFor="card">Kartica:</label>
-                                <input
-                                    type="radio"
-                                    name="payment"
-                                    value="card"
-                                />
-                                <label htmlFor="in-person">Uživo:</label>
-                                <input
-                                    type="radio"
-                                    name="payment"
-                                    value="in-person"
-                                />
+                                <h2>Broj telefona:</h2>
+                                <input className="addline-input" type="text" value={user.phone_number} readOnly="readonly" />
                             </div>
                             <div>
-                                <h2>Finalni podaci:</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Libero asperiores sapiente
-                                    excepturi voluptate suscipit ratione nobis
-                                    quas illum adipisci unde iure debitis, quod,
-                                    quam veritatis impedit quaerat. Molestias,
-                                    minima ex?
-                                </p>
-                            </div>
-                            <div>
-                                <button onClick={handleModalClose}>
+                                <button className="btnsty" onClick={handleClick}>
                                     Rezerviši
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

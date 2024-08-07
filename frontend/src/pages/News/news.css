@@ -120,3 +120,48 @@ h1 {
     border: none;
     background-color: white;
 }
+
+@media screen and (max-width: 600px) {
+    .news-container {
+        max-width: 100%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .news-card {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .news-title {
+        font-size: 1.2em;
+    }
+
+    .news-date {
+        font-size: 0.8em;
+    }
+
+    .news-content {
+        font-size: 0.9em;
+    }
+
+    .read-more-btn {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+
+    #search-news {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .pn-cards {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .news-search-container {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

@@ -84,3 +84,21 @@
     text-align: center;
 }
   
+@media screen and (max-width: 600px) {
+    #login-body {
+        height: auto;
+    }
+
+    .login-container {
+        width: 90%;
+        margin-bottom: 40px;
+    }
+
+    #loginttl {
+        margin-bottom: 20px;
+    }
+
+    .btnsty {
+        margin-bottom: 20px;
+    }
+}
