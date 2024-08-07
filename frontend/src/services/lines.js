@@ -31,6 +31,20 @@ export const getNumberOfPages = async (isActive, company) => {
     return response.data;
 };
 
+export const getNumberOfPagesFiltered = async (startCity, endCity, date) => {
+    const response = await axios.get(
+        `${URL}/routes_filtered/count?${
+            startCity ? `&startCity=${startCity}` : ""
+        }${endCity ? `&endCity=${endCity}` : ""}${date ? `&date=${date}` : ""}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+        }
+    );
+    return response.data;
+};
+
 export const getLinesFiltered = async (
     isActive,
     page,
@@ -39,9 +53,9 @@ export const getLinesFiltered = async (
     date
 ) => {
     const response = await axios.get(
-        `${URL}/routes_filtered/${page}?is_active=${
-            isActive ? "1" : "0"
-        }&startCity=${startCity}&endCity=${endCity}&date=${date}`,
+        `${URL}/routes_filtered/${page}?is_active=${isActive ? "1" : "0"}${
+            startCity ? `&startCity=${startCity}` : ""
+        }${endCity ? `&endCity=${endCity}` : ""}${date ? `&date=${date}` : ""}`,
         {
             headers: {
                 "ngrok-skip-browser-warning": "true",

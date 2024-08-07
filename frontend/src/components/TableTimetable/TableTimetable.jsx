@@ -9,6 +9,7 @@ import {
     getLines,
     getLinesFilteredByCity,
     getNumberOfPages,
+    getNumberOfPagesFiltered,
 } from "../../services/lines";
 import { PaginationNumbers } from "../PaginationNumbers/PaginationNumbers";
 import { getLinesFiltered } from "../../services/lines";
@@ -53,7 +54,7 @@ export const TableTimetable = ({
             } else if (isAdmin) {
                 const response = await getLines(isActive, currentPage);
                 setLines(response);
-            } else {
+            } else if (city) {
                 const response = await getLinesFilteredByCity(
                     isActive,
                     currentPage,
@@ -79,8 +80,16 @@ export const TableTimetable = ({
             } else if (isAdmin) {
                 const response = await getNumberOfPages(isActive);
                 setNumberOfPages(response);
-            } else {
-                /* Nije zavrseno */
+            } else if (city) {
+                const response = await getNumberOfPagesFiltered(city);
+                setNumberOfPages(response);
+            } else if (filter) {
+                const response = await getNumberOfPagesFiltered(
+                    filter.start,
+                    filter.end,
+                    filter.date
+                );
+                setNumberOfPages(response);
             }
         } catch (error) {
             console.log(error);
