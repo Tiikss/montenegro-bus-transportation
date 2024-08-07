@@ -65,3 +65,14 @@ h2 {
     margin-top: 20px;
     margin-bottom: 0;
 }
+
+@media screen and (max-width:425px) {
+    .user-info{
+        width: 95%;
+    }
+
+    .user-info p {
+        white-space: wrap;
+    }
+
+}

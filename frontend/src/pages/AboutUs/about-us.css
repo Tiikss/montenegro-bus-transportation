@@ -36,3 +36,36 @@ p {
 .contact-section p {
     line-height: 1.8;
 }
+
+@media screen and (max-width: 768px) {
+    #o-nama-body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .about-section,
+    .mission-vision-section,
+    .history-section,
+    .team-section,
+    .contact-section {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .ush2 {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+
+    .contact-section p {
+        line-height: 1.5;
+    }
+}
