@@ -65,3 +65,9 @@
         width: 200px;
     }
 }
+
+@media screen and (max-width: 375px) {
+    .info-footer img {
+        width: 150px;
+    }
+}
