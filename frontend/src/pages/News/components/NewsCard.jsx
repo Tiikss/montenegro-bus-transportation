@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import "./newscard.css";
 
 export const NewsCard = ({
     news,

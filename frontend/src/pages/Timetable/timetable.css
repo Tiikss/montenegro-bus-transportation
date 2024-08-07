@@ -20,6 +20,7 @@
     width: 80%;
     text-align: center;
     margin: 40px auto;
+    min-height: 100vh;
 }
 
 .red-voznje-content h2 {
@@ -103,13 +104,6 @@
         .col {
             display: flex;
             padding: 10px 0;
-            &:before {
-                color: #6c7a89;
-                padding-right: 10px;
-                content: attr(data-label);
-                flex-basis: 50%;
-                text-align: right;
-            }
         }
     }
 }
@@ -284,4 +278,13 @@
 
 .admin-icon:hover {
     stroke: #ba0c0e;
+}
+
+@media screen and (max-width: 460px) {
+    .choose-city-container {
+        width: 100%;
+    }
+    #cityTable {
+        width: 100%;
+    }
 }

@@ -70,3 +70,17 @@
     width: 32px;
     height: 32px;
 }
+
+@media screen and (max-width: 768px) {
+    .timeline {
+        width: 250px;
+    }
+
+    .card {
+        margin: 0 0 10px 10px;
+    }
+
+    .title::before {
+        left: -29px;
+    }
+}

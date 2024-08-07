@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import "../styles/tabela-red-voznje.css";
+import "./table-timetable.css";
 import { TableTimetableHeader } from "./components/TableTimetableHeader/TableTimetableHeader";
 import { TableTimetableRow } from "./components/TableTimetableRow/TableTimetableRow";
 import { TableTimetableContent } from "./components/TableTimetableContent/TableTimetableContent";

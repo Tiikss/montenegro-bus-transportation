@@ -46,3 +46,28 @@
     align-items: center;
     font-size: 16px;
 }
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+        padding: 40px;
+    }
+
+    .info-footer,
+    .footer-icn-div {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .info-footer img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .info-footer img {
+        width: 150px;
+    }
+}
