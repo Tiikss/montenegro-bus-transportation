@@ -64,6 +64,12 @@ export const Login = () => {
                     {error && (
                         <p className="err" style={{ color: "#ba0c0e" }}>
                             {error}
+                            <br />
+                            {error.includes("lozinka") && (
+                                <Link to="/promjena-lozinke">
+                                    Zaboravili ste lozinku?
+                                </Link>
+                            )}
                         </p>
                     )}
                     <button
