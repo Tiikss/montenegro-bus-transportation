@@ -94,7 +94,6 @@ export const TableTimetableRow = ({
                             .station.address
                     }
                 </div>
-                <div className="col col-2">{0}</div>
                 <div className="col col-3">
                     {departure.stations[0].departure_time}
                 </div>
