@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Footer } from "./components/Footer/Footer";
@@ -7,7 +8,6 @@ import { Timetable } from "./pages/Timetable/Timetable";
 import { CarrierPanel } from "./pages/CarrierPanel/CarrierPanel";
 import { AddLine } from "./pages/AddLine/AddLine";
 import { News } from "./pages/News/News";
-// import { PriceList } from "./pages/PriceList/PriceList";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
@@ -16,83 +16,92 @@ import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 import { TimetableFiltered } from "./pages/TimeTableFiltered/TimetableFiltered";
 import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
 
-const Layout = () => {
+const Layout = ({ theme, toggleTheme }) => {
     return (
         <>
-            <Navbar />
+            <Navbar toggleTheme={toggleTheme} theme={theme} />
             <Outlet />
             <Footer />
         </>
     );
 };
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Layout />,
-        children: [
-            {
-                path: "/",
-                element: <Home />,
-            },
-            {
-                path: "/red-voznje",
-                element: <Timetable />,
-            },
-            {
-                path: "/red-voznje/:startCity/:endCity/:date",
-                element: <TimetableFiltered />,
-            },
-            {
-                path: "/prevoznik-panel",
-                element: <CarrierPanel />,
-            },
-            {
-                path: "/admin-panel",
-                element: <AdminPanel />,
-            },
-            {
-                path: "/dodaj-liniju/:id",
-                element: <AddLine />,
-            },
-            {
-                path: "/news",
-                element: <News />,
-            },
-            // {
-            //     path: "/cjenovnik",
-            //     element: <PriceList />,
-            // },
-            {
-                path: "/onama",
-                element: <AboutUs />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/register",
-                element: <Register />,
-            },
-            {
-                path: "/profil",
-                element: <Profile />,
-            },
-        ],
-    },
-    {
-        path: "/promjena-lozinke",
-        element: <ChangePassword />,
-    },
-]);
-
 function App() {
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+    useEffect(() => {
+        document.body.className = theme;
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(theme === "light" ? "dark" : "light");
+    };
+
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <Layout theme={theme} toggleTheme={toggleTheme} />, 
+            children: [
+                {
+                    path: "/",
+                    element: <Home />,
+                },
+                {
+                    path: "/red-voznje",
+                    element: <Timetable />,
+                },
+                {
+                    path: "/red-voznje/:startCity/:endCity/:date",
+                    element: <TimetableFiltered />,
+                },
+                {
+                    path: "/prevoznik-panel",
+                    element: <CarrierPanel />,
+                },
+                {
+                    path: "/admin-panel",
+                    element: <AdminPanel />,
+                },
+                {
+                    path: "/dodaj-liniju/:id",
+                    element: <AddLine />,
+                },
+                {
+                    path: "/news",
+                    element: <News />,
+                },
+                // {
+                //     path: "/cjenovnik",
+                //     element: <PriceList />,
+                // },
+                {
+                    path: "/onama",
+                    element: <AboutUs />,
+                },
+                {
+                    path: "/login",
+                    element: <Login />,
+                },
+                {
+                    path: "/register",
+                    element: <Register />,
+                },
+                {
+                    path: "/profil",
+                    element: <Profile />,
+                },
+            ],
+        },
+        {
+            path: "/promjena-lozinke",
+            element: <ChangePassword />,
+        },
+    ]);
+
     return (
-        <div className="app">
-            <div className="container">
-                <RouterProvider router={router} />
-            </div>
+        <div className={`app ${theme}`}>
+            <RouterProvider router={router} />
         </div>
     );
 }

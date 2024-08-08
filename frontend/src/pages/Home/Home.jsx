@@ -28,6 +28,7 @@ export const Home = () => {
         date: new Date().toISOString().split("T")[0],
     });
     const navigate = useNavigate();
+    const value = localStorage.getItem('theme');
 
     const handleOpenModal = (title, content) => {
         setCurrentNews({ title, content });
@@ -136,7 +137,7 @@ export const Home = () => {
                 <h1>Red vožnje</h1>
 
                 <div className="choose">
-                    <label htmlFor="beginning">Od:</label>
+                    {value==='light' ? <label htmlFor="beginning" style={{color: "black"}}>Od:</label> : <label htmlFor="beginning" style={{color: "white"}}>Od:</label>}
                     <div className="add-line-input-container">
                         <input
                             type="text"
@@ -159,7 +160,7 @@ export const Home = () => {
                                 : null}
                         </div>
                     </div>
-                    <label htmlFor="end">Do:</label>
+                    {value==='light' ? <label htmlFor="end" style={{color: "black"}}>Do:</label> : <label htmlFor="end" style={{color: "white"}}>Do:</label>}
                     <div className="add-line-input-container">
                         <input
                             type="text"
@@ -182,7 +183,7 @@ export const Home = () => {
                                 : null}
                         </div>
                     </div>
-                    <label htmlFor="date">Datum:</label>
+                    {value==='light' ? <label htmlFor="date" style={{color: "black"}}>Datum:</label> : <label htmlFor="date" style={{color: "white"}}>Datum:</label>}
                     <input
                         type="date"
                         id="date"
@@ -261,7 +262,7 @@ export const Home = () => {
                     <div id="contact-info">
                         <h1>Kontakt</h1>
                         <div className="contact">
-                            <table id="contact-table">
+                            <table id="contact-table" style={{marginRight: "50px"}}>
                                 <thead>
                                     <tr>
                                         <th>Stanica</th>
