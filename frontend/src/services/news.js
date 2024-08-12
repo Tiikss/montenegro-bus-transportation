@@ -45,6 +45,8 @@ export const addNews = async (news) => {
     const response = await axios.post(`${URL}/news`, news, {
         headers: {
             "ngrok-skip-browser-warning": "true",
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
         },
     });
     return response.data;
