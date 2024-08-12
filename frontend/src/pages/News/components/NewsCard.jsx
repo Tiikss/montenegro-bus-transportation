@@ -14,6 +14,9 @@ export const NewsCard = ({
 
     return (
         <div key={news.id} className="news-card">
+            {news.image && (
+                <img src={news.image} alt="news" className="news-image" />
+            )}
             <h2 className="news-title">{news.title}</h2>
             <p className="news-date">Objavljeno: {currDate};</p>
             <p className="news-content short-content">
