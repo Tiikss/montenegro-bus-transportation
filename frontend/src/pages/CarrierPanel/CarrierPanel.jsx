@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./carrier-panel.css";
 import { TableTimetable } from "../../components/TableTimetable/TableTimetable";
 import { ModalWindow } from "../../components/ModalWindow/ModalWindow";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const CarrierPanel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const [modalResponse, setModalResponse] = useState(false);
+    const { user } = useContext(AuthContext);
 
     const handleDeleteClick = (e) => {
         e.preventDefault();
@@ -24,7 +26,7 @@ export const CarrierPanel = () => {
 
     return (
         <main className="prevoznik-body">
-            <h1>Ime prevoznika</h1>
+            <h1>{user.company_name ? user.company_name : "Ime Prevoznika"}</h1>
             <Link to="/dodaj-liniju/0" className="prevoznik-newline-button">
                 Nova linija
             </Link>
