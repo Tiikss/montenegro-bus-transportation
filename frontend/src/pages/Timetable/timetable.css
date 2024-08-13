@@ -20,7 +20,7 @@
     width: 80%;
     text-align: center;
     margin: 40px auto;
-    min-height: 100vh;
+    flex: 1 1 auto;
 }
 
 .red-voznje-content h2 {

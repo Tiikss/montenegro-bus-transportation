@@ -13,6 +13,12 @@ body {
     font-family: sans-serif;
 }
 
+.container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 input {
     border: 1px solid #ccc;
 }

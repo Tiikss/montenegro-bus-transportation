@@ -1,6 +1,6 @@
 #profile-body {
     padding: 20px;
-    min-height: 100vh;
+    flex: 1 1 auto;
 }
 
 .user-profile-container {
