@@ -36,6 +36,7 @@ function App() {
 
     const toggleTheme = () => {
         setTheme(theme === "light" ? "dark" : "light");
+        window.location.reload();
     };
 
     const router = createBrowserRouter([

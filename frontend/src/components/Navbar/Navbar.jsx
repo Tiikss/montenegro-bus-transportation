@@ -32,7 +32,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
                     {user && (
                         <Link to="/profil"><li>{user.username}</li></Link>
                     )}
-                    <li className="tgthbtn">
+                    <li className="tgthbtn" onClick={toggleTheme}>
                         <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
                     </li>
                 </ul>
