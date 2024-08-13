@@ -3,6 +3,7 @@
     height: 300px;
     border-radius: 8px;
     object-fit: cover;
+    margin-bottom: 16px;
 }
 
 .news-image--logo {
@@ -11,6 +12,7 @@
     height: 300px;
     border-radius: 10px;
     padding: 8px;
+    margin-bottom: 16px;
 }
 
 @media screen and (max-width: 630px) {
