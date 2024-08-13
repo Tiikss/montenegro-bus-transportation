@@ -15,6 +15,7 @@ import { Profile } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 import { TimetableFiltered } from "./pages/TimeTableFiltered/TimetableFiltered";
 import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
+import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
 const Layout = () => {
     return (
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
     {
         path: "/promjena-lozinke",
         element: <ChangePassword />,
+    },
+    {
+        path: "*",
+        element: <PageNotFound />,
     },
 ]);
 
