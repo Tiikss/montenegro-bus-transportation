@@ -1,12 +1,17 @@
 import React from "react";
 import "./about-us.css";
 
+const value = localStorage.getItem('theme');
+const borderColor = value === 'light' ? '#00000033' : '#9e9e9e33';
+const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+const txtColor = value === 'light' ? '#000000' : '#f9f9f9';
+
 export const AboutUs = () => {
     return (
         <main id="o-nama-body">
             <h1>O nama</h1>
 
-            <section className="about-section">
+            <section className="about-section" style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                 <h2 className="ush2">Naša priča</h2>
                 <p>
                     Autobuski prevoz Crne Gore osnovan je sa ciljem pružanja
@@ -16,7 +21,7 @@ export const AboutUs = () => {
                 </p>
             </section>
 
-            <section className="mission-vision-section">
+            <section className="mission-vision-section" style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                 <h2 className="ush2">Misija i vizija</h2>
                 <p>
                     Naša misija je da obezbijedimo visokokvalitetan autobuski
@@ -26,7 +31,7 @@ export const AboutUs = () => {
                 </p>
             </section>
 
-            <section className="history-section">
+            <section className="history-section" style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                 <h2 className="ush2">Istorija</h2>
                 <p>
                     Počeli smo sa radom 1990. godine sa nekoliko autobusa, a
@@ -36,7 +41,7 @@ export const AboutUs = () => {
                 </p>
             </section>
 
-            <section className="team-section">
+            <section className="team-section" style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                 <h2 className="ush2">Naš tim</h2>
                 <p>
                     Naš tim se sastoji od iskusnih profesionalaca koji su
@@ -46,7 +51,7 @@ export const AboutUs = () => {
                 </p>
             </section>
 
-            <section className="contact-section">
+            <section className="contact-section" style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                 <h2 className="ush2">Kontakt</h2>
                 <p>
                     Adresa: Trg Golootočkih žrtava 1, Podgorica, Crna Gora{" "}
