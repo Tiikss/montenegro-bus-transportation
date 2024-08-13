@@ -137,17 +137,6 @@ export const News = () => {
                         value={search}
                         onChange={handleChangeSearch}
                     />
-                    <div className="dropdown-container">
-                        {search !== ""
-                            ? news.map((item) => (
-                                  <DropDownCard
-                                      item={item.title}
-                                      key={item}
-                                      onClick={handleSetSearch}
-                                  />
-                              ))
-                            : null}
-                    </div>
                 </div>
 
                 {tmpNews
