@@ -273,7 +273,7 @@
 .admin-icon {
     width: 40px;
     height: 40px;
-    stroke: #1e2235;
+    /* stroke: #1e2235; */
 }
 
 .admin-icon:hover {

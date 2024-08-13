@@ -49,6 +49,10 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
         }
     }, [refresh]);
 
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+
     return (
         <div className="tabela-korisnici-content">
             <table className="tabela-korisnici">
@@ -64,7 +68,7 @@ export const TableUsers = ({ role, isEdit, isSaveClicked }) => {
                         {isEdit && <th>Izbrisi</th>}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                     {users.map((user) => (
                         <UserTableRow
                             user={user}

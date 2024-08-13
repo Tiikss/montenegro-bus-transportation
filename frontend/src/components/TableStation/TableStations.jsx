@@ -26,6 +26,9 @@ export const TableStations = () => {
     const [allCountries, setAllCountries] = useState([]);
     const [displayCity, setDisplayCity] = useState("");
     const [displayCountry, setDisplayCountry] = useState("");
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
 
     const fetchCities = async () => {
         try {
@@ -164,7 +167,7 @@ export const TableStations = () => {
                         <th>Izbrisi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                     {stations.map(
                         (
                             station,

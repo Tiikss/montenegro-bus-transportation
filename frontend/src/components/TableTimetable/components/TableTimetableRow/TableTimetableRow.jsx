@@ -15,6 +15,8 @@ export const TableTimetableRow = ({
     date,
 }) => {
     const { user } = useContext(AuthContext);
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
     const handleClick = (e) => {
         const content =
             e.target.parentElement.parentElement.nextElementSibling
@@ -83,9 +85,19 @@ export const TableTimetableRow = ({
         return `${hours}h ${minutes}m`;
     };
 
+    const onMouseOver = (e) => {
+        const content = e.target.style;
+        content.color = txtColor;
+    }
+
+    const onMouseOut = (e) => {
+        const content = e.target.style;
+        content.color = '#000000';
+    }
+
     return (
         <>
-            <li className="red-voznje-table-row red-voznje-row-hover">
+            <li className="red-voznje-table-row red-voznje-row-hover" onMouseOver={e => onMouseOver(e)} onMouseLeave={e => onMouseOut(e)}>
                 {isEdit && (
                     <div className="col col-0">
                         {departure.stations[0].station.address}
@@ -173,6 +185,7 @@ export const TableTimetableRow = ({
                                             id: routeId,
                                         })
                                     }
+                                    style={{color: 'black'}}
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +209,7 @@ export const TableTimetableRow = ({
                                             id: routeId,
                                         })
                                     }
+                                    style={{color: 'black'}}
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -222,6 +236,7 @@ export const TableTimetableRow = ({
                             icon={faTicket}
                             className="red-voznje-icons"
                             onClick={handleTicketClick}
+                            style={{color: `${txtColor}`}}
                         />
                     </div>
                 ) : null}
