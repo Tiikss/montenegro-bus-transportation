@@ -6,6 +6,7 @@ import { useState } from "react";
 export const TicketCard = ({ ticket }) => {
     const [line, setLine] = useState(null);
     const [date, setDate] = useState(null);
+    const value = localStorage.getItem('theme');
 
     const fetchLine = async () => {
         const response = await getLineById(ticket.route_id);
@@ -24,8 +25,11 @@ export const TicketCard = ({ ticket }) => {
 
     console.log(line);
 
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+    const txtColor = value === 'light' ? 'black' : 'white';
+
     return (
-        <div key={ticket.id} className="ticket-card">
+        <div key={ticket.id} className="ticket-card" style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
             <h3>{line[0].stations[0].station.city_name} - {line[0].stations[line[0].stations.length-1].station.city_name}</h3>
             <p>
                 <strong>Datum:</strong> {date}

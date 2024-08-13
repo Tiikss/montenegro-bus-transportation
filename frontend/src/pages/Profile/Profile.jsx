@@ -16,6 +16,7 @@ export const Profile = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
     const { user, setUser, logout } = useContext(AuthContext);
+    const value = localStorage.getItem('theme');
 
     const handleLogout = () => {
         logout();
@@ -53,11 +54,15 @@ export const Profile = () => {
         return <p>Učitavanje podataka...</p>;
     }
 
+    const boxShadow = value === 'light' ? '0px 4px 6px #00000033' : '0px 4px 6px #9e9e9e33';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+    const txtColor = value === 'light' ? 'black' : 'white';
+
     return (
         <main id="profile-body">
             <div className="user-profile-container">
                 <div id="pom-profile">
-                    <div className="user-info">
+                    <div className="user-info" style={{boxShadow: `${boxShadow}`, backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                         <p>
                             <strong>Ime i prezime:</strong> {user.full_name}
                         </p>
