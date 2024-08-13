@@ -1,6 +1,6 @@
 import React from "react";
 import "./addnewsmodal.css";
-import { updateNews, addNews } from "../../../services/news";
+import { updateNews, addNews, addNewsImage } from "../../../services/news";
 
 export const AddNewsModal = ({
     id,
@@ -28,12 +28,24 @@ export const AddNewsModal = ({
     const handleUpdateNews = async (e) => {
         e.preventDefault();
         console.log(file);
-        const image = new FormData();
-        image.append("image", file);
-        if (isEdit) await updateNews(id, { title, content });
-        else await addNews({ title, image: image, content });
-        setTitle({ id: -1, title: "", content: "" });
+
+        let newsId;
+        if (isEdit) {
+            const response = await updateNews(id, { title, content });
+            newsId = response.id;
+        } else {
+            const response = await addNews({ title, content });
+            newsId = response.id;
+        }
+
         handleClose();
+        if (file) {
+            const image = new FormData();
+            image.append("image", file);
+            const response = await addNewsImage(newsId, image);
+        }
+
+        setTitle({ id: -1, title: "", content: "" });
     };
 
     const handleChangeFile = (e) => {
