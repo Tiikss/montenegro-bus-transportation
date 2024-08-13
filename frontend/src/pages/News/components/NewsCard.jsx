@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import logo from "../../../images/logo-crop.png";
 import { AuthContext } from "../../../contexts/AuthContext";
 import "./newscard.css";
 
@@ -15,13 +16,9 @@ export const NewsCard = ({
     return (
         <div key={news.id} className="news-card">
             <img
-                src={
-                    news.image
-                        ? news.image
-                        : "../../../../../../images/logo-crop.jpg"
-                }
+                src={news.image ? news.image : logo}
                 alt="news"
-                className="news-image"
+                className={news.image ? "news-image" : "news-image--logo"}
             />
 
             <h2 className="news-title">{news.title}</h2>
