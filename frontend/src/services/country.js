@@ -9,4 +9,4 @@ export const getCountries = async () => {
         },
     });
     return response.data;
-}
+};
