@@ -4,7 +4,7 @@ Welcome to the Montenegro Bus Transportation website! This project provides a co
 
 ## Status
 
-The frontend is currently live at apcg.vercel.app
+The frontend is currently live at `apcg.vercel.app`
 
 ## Features
 
@@ -30,7 +30,7 @@ To run this project locally, follow these steps:
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/Tiikss/montenegro-bus-transportation
+    git clone `https://github.com/Tiikss/montenegro-bus-transportation`
     cd frontend
     ```
 
