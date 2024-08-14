@@ -48,7 +48,8 @@
     }
 
     .red-voznje-row-hover:hover {
-        background-color: #ba0c0f40;
+        background-color: #ba0c0f;
+        color: white;
     }
 
     .col {
@@ -276,8 +277,20 @@
     /* stroke: #1e2235; */
 }
 
-.admin-icon:hover {
-    stroke: #ba0c0e;
+.acdic-icn {
+    color: #1e2235;    
+}
+
+.acdic-icn:hover {
+    color: #ffffff;
+}
+
+#tick {
+    color: #1e2235;
+}
+
+#tick:hover {
+    color: #ffffff;
 }
 
 @media screen and (max-width: 460px) {
