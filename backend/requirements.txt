@@ -1,0 +1,12 @@
+fastapi
+sqlalchemy
+mysql-connector-python
+pydantic
+uvicorn
+alembic
+pyjwt
+passlib[bcrypt]
+cloudinary
+python-slugify
+sib-api-v3-sdk
+python-multipart
