@@ -180,6 +180,10 @@
     color: black;
 }
 
+.tgthbtn:hover .theme-toggle-button .dark-mode-icn {
+    color: black;
+}
+
 @media screen and (max-width: 768px) {
     .menu-bar {
         display: none;

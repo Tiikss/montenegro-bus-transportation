@@ -13,7 +13,7 @@ body {
     font-family: sans-serif;
 }
 
-.container{
+.app{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
