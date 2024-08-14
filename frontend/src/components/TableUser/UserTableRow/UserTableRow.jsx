@@ -189,7 +189,7 @@ export const UserTableRow = ({
                 </td>
                 {isEdit && (
                     <td>
-                        <Link onClick={(e) => handleDeleteClick(e, user.id)} style={{color: `${txtColor}`}}>
+                        <Link onClick={(e) => handleDeleteClick(e, user.id)}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -197,6 +197,7 @@ export const UserTableRow = ({
                                 strokeWidth={2.1}
                                 stroke="currentColor"
                                 className="admin-icon"
+                                id="delicn"
                             >
                                 <path
                                     strokeLinecap="round"

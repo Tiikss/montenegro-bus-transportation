@@ -299,6 +299,18 @@
     color: #ffffff;
 }
 
+#delicn {
+    color: #1e2235;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+#delicn:hover {
+    color: #ffffff;
+    background-color: #1e2235;
+}
+
 @media screen and (max-width: 460px) {
     .choose-city-container {
         width: 100%;
