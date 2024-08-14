@@ -1,0 +1,33 @@
+name: Deploy to DigitalOcean Droplet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 207.154.253.148 >> ~/.ssh/known_hosts
+
+      - name: Deploy to Droplet
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no deployuser@207.154.253.148 << 'EOF'
+            cd /apps
+            source venv/bin/activate
+            cd app_repo/APbackend
+            git pull origin main
+            pip install -r requirements.txt
+            alembic upgrade head
+            sudo systemctl restart ap.service
+          EOF
