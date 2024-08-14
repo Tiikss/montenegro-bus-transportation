@@ -196,6 +196,7 @@
     border-collapse: collapse;
     width: 100%;
     font-size: 18px;
+    margin-right: 50px;
 }
 
 #contact-table th {
@@ -208,10 +209,6 @@
 #contact-table td {
     border: 1px solid #ddd;
     padding: 8px;
-}
-
-#contact-table tr:nth-child(even) {
-    background-color: #f2f2f2;
 }
 
 #contact-table tr:hover {
@@ -365,6 +362,14 @@
 }
 
 @media screen and (max-width: 643px){
+    #contact-info{
+        padding: 24px;;
+    }
+
+    #contact-table{
+        margin-right: 0;
+    }
+    
     .contact-div img{
         display: none;
     }

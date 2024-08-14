@@ -8,7 +8,7 @@ function ThemeToggle({ theme, toggleTheme, hamburger }) {
   return (
     <button onClick={toggleTheme} className='theme-toggle-button'>
       {!hamburger ? (theme === 'light' ? <FontAwesomeIcon icon={faMoon} className='dark-mode-icn'/> : <FontAwesomeIcon icon={faSun} className='dark-mode-icn' />)
-        :theme === 'light' ? <FontAwesomeIcon icon={faMoon} className='dark-mode-icn' style={{color:"black"}}/> : <FontAwesomeIcon icon={faSun} className='dark-mode-icn' style={{color:"black"}}/>
+        :theme === 'light' ? <FontAwesomeIcon icon={faMoon} className='dark-mode-icn' style={{color:"black"}}/> : <FontAwesomeIcon icon={faSun} className='dark-mode-icn' style={{color:"white"}}/>
         }
     </button>
   );

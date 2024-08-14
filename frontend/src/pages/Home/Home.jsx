@@ -266,7 +266,7 @@ export const Home = () => {
                     <div id="contact-info">
                         <h1>Kontakt</h1>
                         <div className="contact">
-                            <table id="contact-table" style={{marginRight: "50px"}}>
+                            <table id="contact-table">
                                 <thead>
                                     <tr>
                                         <th>Stanica</th>
