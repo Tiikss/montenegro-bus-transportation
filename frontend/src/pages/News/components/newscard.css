@@ -1,3 +1,21 @@
+#newicn {
+    width: 35px;
+    color: #1e2235;
+    background-color: #ffffff;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#newicn:hover {
+    color: #ffffff;
+    background-color: #1e2235;
+}
+
+#dugme {
+    background-color: transparent;
+}
+
 @media screen and (max-width: 630px){
     .news-card {
         width: 95%;

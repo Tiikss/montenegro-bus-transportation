@@ -36,6 +36,7 @@ export const NewsCard = ({
                     <div>
                         <button
                             className="news-admin-btn"
+                            id="dugme"
                             onClick={(e) => {
                                 handleDeleteClick(e, news.id);
                             }}
@@ -47,6 +48,7 @@ export const NewsCard = ({
                                 strokeWidth={2.1}
                                 stroke="currentColor"
                                 className="admin-icon"
+                                id="newicn"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -57,6 +59,7 @@ export const NewsCard = ({
                         </button>
                         <button
                             className="news-admin-btn"
+                            id="dugme"
                             onClick={() => handleOpenAddModal(news)}
                         >
                             <svg
@@ -66,6 +69,7 @@ export const NewsCard = ({
                                 strokeWidth={2.1}
                                 stroke="currentColor"
                                 className="admin-icon"
+                                id="newicn"
                             >
                                 <path
                                     strokeLinecap="round"
