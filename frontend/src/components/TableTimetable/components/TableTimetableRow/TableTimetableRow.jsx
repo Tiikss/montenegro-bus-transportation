@@ -15,6 +15,8 @@ export const TableTimetableRow = ({
     date,
 }) => {
     const { user } = useContext(AuthContext);
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
     const handleClick = (e) => {
         const content =
             e.target.parentElement.parentElement.nextElementSibling
@@ -131,7 +133,7 @@ export const TableTimetableRow = ({
                     <div className="col col-9">
                         {!isAdmin ? (
                             <>
-                                <Link to={`/dodaj-liniju/${routeId}`}>
+                                <Link to={`/dodaj-liniju/${routeId}`} className="plus">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -147,7 +149,7 @@ export const TableTimetableRow = ({
                                         />
                                     </svg>
                                 </Link>
-                                <Link onClick={handleDeleteClick}>
+                                <Link onClick={handleDeleteClick} className="plus">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -173,6 +175,7 @@ export const TableTimetableRow = ({
                                             id: routeId,
                                         })
                                     }
+                                    className="acdic-icn"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +199,7 @@ export const TableTimetableRow = ({
                                             id: routeId,
                                         })
                                     }
+                                    className="acdic-icn"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -222,6 +226,7 @@ export const TableTimetableRow = ({
                             icon={faTicket}
                             className="red-voznje-icons"
                             onClick={handleTicketClick}
+                            id="tick"
                         />
                     </div>
                 ) : null}

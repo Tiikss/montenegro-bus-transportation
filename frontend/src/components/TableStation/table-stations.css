@@ -16,12 +16,8 @@ td {
     color: #fff;
 }
 
-.tabela-stanice tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
 .tabela-stanice tr:hover {
-    background-color: #dddddda7;
+    background-color: #dddddd42;
 }
 
 .tabela-stanice-roles {

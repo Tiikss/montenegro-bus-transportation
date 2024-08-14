@@ -12,6 +12,10 @@ export const TableCompanies = () => {
 
     const [companyName, setCompanyName] = useState("");
 
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+
     const fetchCompanies = async () => {
         try {
             const response = await getCompanies();
@@ -57,7 +61,7 @@ export const TableCompanies = () => {
                             <th>Naziv kompanije</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{backgroundColor: `${bckColor}`, color: `${txtColor}`}}>
                         {companies.map((company) => (
                             <tr key={company.id}>
                                 <td>{company.id}</td>

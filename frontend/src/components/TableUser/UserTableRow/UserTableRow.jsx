@@ -116,6 +116,9 @@ export const UserTableRow = ({
         fetchCompanies();
     }, [companyInput]);
 
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
+
     return (
         <>
             <tr key={user.id}>
@@ -128,7 +131,7 @@ export const UserTableRow = ({
                     <td>
                         {user.company_name ? (
                             <Link
-                                style={{ color: "black" }}
+                                style={{ color: `${txtColor}` }}
                                 onClick={(e) => {
                                     setIsAddCompanyModalOpen(true);
                                     setinputField({
@@ -194,6 +197,7 @@ export const UserTableRow = ({
                                 strokeWidth={2.1}
                                 stroke="currentColor"
                                 className="admin-icon"
+                                id="delicn"
                             >
                                 <path
                                     strokeLinecap="round"

@@ -25,12 +25,8 @@ td {
     color: #fff;
 }
 
-.tabela-korisnici tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
 .tabela-korisnici tr:hover {
-    background-color: #dddddda7;
+    background-color: #dddddd42;
 }
 
 .tabela-korisnici-roles {

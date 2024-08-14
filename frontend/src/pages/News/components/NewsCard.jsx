@@ -12,18 +12,25 @@ export const NewsCard = ({
     const { user } = useContext(AuthContext);
     const date = news.created_date.split("T")[0].split("-");
     const currDate = date[2] + "." + date[1] + "." + date[0];
+    const value = localStorage.getItem('theme');
+
+    const borderColor = value === 'light' ? '#00000033' : '#9e9e9e33';
+    const boxShadow = value === 'light' ? '0px 4px 6px #00000033' : '0px 4px 6px #9e9e9e33';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+    const txtColor = value === 'light' ? 'black' : 'white';
 
     return (
-        <div key={news.id} className="news-card">
+        <div key={news.id} className="news-card" style={{boxShadow: `${boxShadow}`, backgroundColor: `${bckColor}`, border: `1px solid ${borderColor}`}}>
+
             <img
                 src={news.image ? news.image : logo}
                 alt="news"
                 className={news.image ? "news-image" : "news-image--logo"}
             />
-
+            
             <h2 className="news-title">{news.title}</h2>
             <p className="news-date">Objavljeno: {currDate};</p>
-            <p className="news-content short-content">
+            <p className="news-content short-content" style={{color: `${txtColor}`}}>
                 {news.content.slice(0, 100)}...
             </p>
             <div className="news-btn-div">
@@ -37,6 +44,7 @@ export const NewsCard = ({
                     <div>
                         <button
                             className="news-admin-btn"
+                            id="dugme"
                             onClick={(e) => {
                                 handleDeleteClick(e, news.id);
                             }}
@@ -48,6 +56,7 @@ export const NewsCard = ({
                                 strokeWidth={2.1}
                                 stroke="currentColor"
                                 className="admin-icon"
+                                id="newicn"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -58,6 +67,7 @@ export const NewsCard = ({
                         </button>
                         <button
                             className="news-admin-btn"
+                            id="dugme"
                             onClick={() => handleOpenAddModal(news)}
                         >
                             <svg
@@ -67,6 +77,7 @@ export const NewsCard = ({
                                 strokeWidth={2.1}
                                 stroke="currentColor"
                                 className="admin-icon"
+                                id="newicn"
                             >
                                 <path
                                     strokeLinecap="round"

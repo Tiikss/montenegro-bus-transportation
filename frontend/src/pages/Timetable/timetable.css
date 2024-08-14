@@ -48,7 +48,8 @@
     }
 
     .red-voznje-row-hover:hover {
-        background-color: #ba0c0f40;
+        background-color: #ba0c0f;
+        color: white;
     }
 
     .col {
@@ -273,11 +274,41 @@
 .admin-icon {
     width: 40px;
     height: 40px;
-    stroke: #1e2235;
+    cursor: pointer;
+    color: #1e2235;
+    /* stroke: #1e2235; */
 }
 
 .admin-icon:hover {
-    stroke: #ba0c0e;
+    color: #ffffff;
+}
+
+.acdic-icn {
+    color: #1e2235;    
+}
+
+.acdic-icn:hover {
+    color: #ffffff;
+}
+
+#tick {
+    color: #1e2235;
+}
+
+#tick:hover {
+    color: #ffffff;
+}
+
+#delicn {
+    color: #1e2235;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+#delicn:hover {
+    color: #ffffff;
+    background-color: #1e2235;
 }
 
 @media screen and (max-width: 460px) {

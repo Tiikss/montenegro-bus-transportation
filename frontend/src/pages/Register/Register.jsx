@@ -10,6 +10,7 @@ export const Register = () => {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState({ title: "", message: "" });
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const value = localStorage.getItem('theme');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -73,17 +74,24 @@ export const Register = () => {
         }
     };
 
+    const boxShadow = value === 'light' ? '0px 4px 6px #00000033' : '0px 4px 6px #9e9e9e33';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+    const txtColor = value === 'light' ? 'black' : 'white';
+
     return (
         <main id="register-body">
-            <div className="register-container">
+            <div className="register-container" style={{boxShadow: `${boxShadow}`, backgroundColor: `${bckColor}`}}>
                 <div id="loginttl">
                     <h1 id="login-h1">Registruj se</h1>
-                    <p>
+                    {value==='light' ? <p style={{color: 'black'}}>
                         Imaš nalog? <Link to={"/login"}>Prijavi se sada!</Link>
-                    </p>
+                    </p> :
+                    <p style={{color: 'white'}}>
+                        Imaš nalog? <Link to={"/login"}>Prijavi se sada!</Link>
+                    </p>}
                 </div>
                 <form className="register-form">
-                    <label htmlFor="full_name">Ime i prezime:</label>
+                    <label htmlFor="full_name" style={{color: `${txtColor}`}}>Ime i prezime:</label>
                     <input
                         type="text"
                         id="full_name"
@@ -91,7 +99,7 @@ export const Register = () => {
                         required
                         onChange={handleChange}
                     />
-                    <label htmlFor="username">Korisničko ime:</label>
+                    <label htmlFor="username" style={{color: `${txtColor}`}}>Korisničko ime:</label>
                     <input
                         type="text"
                         id="username"
@@ -99,7 +107,7 @@ export const Register = () => {
                         required
                         onChange={handleChange}
                     />
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email" style={{color: `${txtColor}`}}>Email:</label>
                     <input
                         type="email"
                         id="email"
@@ -107,7 +115,7 @@ export const Register = () => {
                         required
                         onChange={handleChange}
                     />
-                    <label htmlFor="password">Lozinka:</label>
+                    <label htmlFor="password" style={{color: `${txtColor}`}}>Lozinka:</label>
                     <input
                         type="password"
                         id="password"
@@ -115,7 +123,7 @@ export const Register = () => {
                         required
                         onChange={handleChange}
                     />
-                    <label htmlFor="confirm-password">Potvrda lozinke:</label>
+                    <label htmlFor="confirm-password" style={{color: `${txtColor}`}}>Potvrda lozinke:</label>
                     <input
                         type="password"
                         id="confirm-password"

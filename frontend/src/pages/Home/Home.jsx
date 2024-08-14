@@ -28,6 +28,7 @@ export const Home = () => {
         date: new Date().toISOString().split("T")[0],
     });
     const navigate = useNavigate();
+    const value = localStorage.getItem('theme');
 
     const handleOpenModal = (title, content) => {
         setCurrentNews({ title, content });
@@ -126,6 +127,10 @@ export const Home = () => {
 
     console.log(stationsFrom)
 
+    const borderColor = value === 'light' ? '#00000033' : '#9e9e9e33';
+    const boxShadow = value === 'light' ? '5px 5px 5px #00000033' : '5px 5px 5px #9e9e9e33';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+
     return (
         <main className="home-body">
             <div className="welcome-div">
@@ -135,8 +140,8 @@ export const Home = () => {
             <div className="red-div">
                 <h1>Red vožnje</h1>
 
-                <div className="choose">
-                    <label htmlFor="beginning">Od:</label>
+                <div className="choose" style={{border: `1px solid ${borderColor}`, boxShadow: `${boxShadow}`}}>
+                    {value==='light' ? <label htmlFor="beginning" style={{color: "black"}}>Od:</label> : <label htmlFor="beginning" style={{color: "white"}}>Od:</label>}
                     <div className="add-line-input-container">
                         <input
                             type="text"
@@ -159,7 +164,7 @@ export const Home = () => {
                                 : null}
                         </div>
                     </div>
-                    <label htmlFor="end">Do:</label>
+                    {value==='light' ? <label htmlFor="end" style={{color: "black"}}>Do:</label> : <label htmlFor="end" style={{color: "white"}}>Do:</label>}
                     <div className="add-line-input-container">
                         <input
                             type="text"
@@ -182,7 +187,7 @@ export const Home = () => {
                                 : null}
                         </div>
                     </div>
-                    <label htmlFor="date">Datum:</label>
+                    {value==='light' ? <label htmlFor="date" style={{color: "black"}}>Datum:</label> : <label htmlFor="date" style={{color: "white"}}>Datum:</label>}
                     <input
                         type="date"
                         id="date"
@@ -200,7 +205,7 @@ export const Home = () => {
             </div>
 
             <div id="pom-div">
-                <div id="mapa">
+                <div id="mapa" style={{backgroundColor: `${bckColor}`, boxShadow: `${boxShadow}`, border: `1px solid ${borderColor}`}}>
                     <h1>Gdje se nalazimo?</h1>
 
                     <div id="big-div-map">
@@ -256,12 +261,12 @@ export const Home = () => {
             </div>
 
             <div id="pom-div2">
-                <div className="contact-div">
+                <div className="contact-div" style={{border: `1px solid ${borderColor}`}}>
                     <img src={slika1} alt="Slika djevojke u autobusu" />
                     <div id="contact-info">
                         <h1>Kontakt</h1>
                         <div className="contact">
-                            <table id="contact-table">
+                            <table id="contact-table" style={{marginRight: "50px"}}>
                                 <thead>
                                     <tr>
                                         <th>Stanica</th>

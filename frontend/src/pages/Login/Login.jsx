@@ -13,6 +13,7 @@ export const Login = () => {
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
+    const value = localStorage.getItem('theme');
 
     const handleLoginClick = async (e) => {
         e.preventDefault();
@@ -34,18 +35,25 @@ export const Login = () => {
         }
     };
 
+    const boxShadow = value === 'light' ? '0px 4px 6px #00000033' : '0px 4px 6px #9e9e9e33';
+    const bckColor = value === 'light' ? '#f9f9f9' : '#121212';
+
     return (
         <main id="login-body">
-            <div className="login-container">
+            <div className="login-container" style={{boxShadow: `${boxShadow}`, backgroundColor: `${bckColor}`}}>
                 <div id="loginttl">
                     <h1 id="login-h1">Prijavi se</h1>
-                    <p>
+                    {value==='light' ? <p style={{color: 'black'}}>
                         Nemaš nalog?{" "}
                         <Link to={"/register"}>Registruj se sada!</Link>
-                    </p>
+                    </p> :
+                    <p style={{color: 'white'}}>
+                        Nemaš nalog?{" "}
+                        <Link to={"/register"}>Registruj se sada!</Link>
+                    </p>}
                 </div>
                 <form className="login-form">
-                    <label htmlFor="username">Korisničko ime ili email:</label>
+                    {value==='light' ? <label htmlFor="username" style={{color: 'black'}}>Korisničko ime ili email:</label> : <label htmlFor="username" style={{color: 'white'}}>Korisničko ime ili email:</label>}
                     <input
                         type="text"
                         id="username"
@@ -53,7 +61,7 @@ export const Login = () => {
                         required
                         onChange={handleChange}
                     />
-                    <label htmlFor="password">Lozinka:</label>
+                    {value==='light' ? <label htmlFor="password" style={{color: 'black'}}>Lozinka:</label> : <label htmlFor="password" style={{color: 'white'}}>Lozinka:</label>}
                     <input
                         type="password"
                         id="password"
