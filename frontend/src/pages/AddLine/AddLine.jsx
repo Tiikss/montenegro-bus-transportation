@@ -386,10 +386,13 @@ export const AddLine = () => {
         fetchAllStations(stationName, "stationName");
     }, [stationName]);
 
+    const value = localStorage.getItem('theme');
+    const txtColor = value === 'light' ? 'black' : 'white';
+
     return (
         <main className="addline-body">
             <h1>Dodaj liniju</h1>
-            <div className="addline-forms">
+            <div className="addline-forms" style={{color: `${txtColorx}`}}>
                 <form className="addline-form">
                     <label htmlFor="source">Polazište:</label>
                     <div className="add-line-input-container">

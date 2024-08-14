@@ -274,7 +274,13 @@
 .admin-icon {
     width: 40px;
     height: 40px;
+    cursor: pointer;
+    color: #1e2235;
     /* stroke: #1e2235; */
+}
+
+.admin-icon:hover {
+    color: #ffffff;
 }
 
 .acdic-icn {
