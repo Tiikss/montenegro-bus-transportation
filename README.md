@@ -2,11 +2,13 @@
 
 Welcome to the Montenegro Bus Transportation website! This project provides a comprehensive platform for browsing bus timetables in Montenegro and reserving tickets online. The website is built using React and offers a user-friendly interface for travelers to plan their journeys across the country.
 
-## Status
+## Frontend
+
+### Status
 
 The frontend is currently live at `apcg.vercel.app`
 
-## Features
+### Features
 
 -   **Bus Timetables**: View the latest bus schedules for various routes across Montenegro.
 -   **Ticket Reservation**: Securely reserve bus tickets online.
@@ -15,7 +17,7 @@ The frontend is currently live at `apcg.vercel.app`
 -   **Search Functionality**: Easily search for routes and schedules.
 -   **Real-time Updates**: Receive the latest updates on bus availability and schedules.
 
-## Tech Stack
+### Tech Stack
 
 -   **Frontend**: React, HTML, CSS, JavaScript
 -   **Routing**: React Router DOM
@@ -23,14 +25,14 @@ The frontend is currently live at `apcg.vercel.app`
 -   **HTTP Client**: Axios for API calls
 -   **Version Control**: Git & GitHub
 
-## Installation
+### Installation
 
 To run this project locally, follow these steps:
 
 1. **Clone the repository**:
 
     ```bash
-    git clone `https://github.com/Tiikss/montenegro-bus-transportation`
+    git clone https://github.com/Tiikss/montenegro-bus-transportation
     cd frontend
     ```
 
@@ -47,3 +49,7 @@ To run this project locally, follow these steps:
     ```
 
     The website will be available at `http://localhost:5173`.
+
+## Backend
+
+All details about backend at `https://github.com/zacinC/APbackend`
