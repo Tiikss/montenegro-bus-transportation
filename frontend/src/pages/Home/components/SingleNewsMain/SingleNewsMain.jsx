@@ -11,7 +11,11 @@ export const SingleNewsMain = ({ news, handleOpenModal }) => {
     const currDate = date[2] + "." + date[1] + "." + date[0];
     return (
         <div className="novost" style={{border: `1px solid ${borderColor}`, boxShadow: `${boxShadow}`, backgroundColor: `${bckColor}`}}>
-            <img src={logo} alt="logo" />
+            <img
+                src={news.image ? news.image : logo}
+                alt="logo"
+                className={news.image ? "home-news-img" : "home-news-img--logo"}
+            />
             <div className="ttl-and-date">
                 <h1>{news.title}</h1>
                 <p className="ndate">Objavljeno: {currDate}</p>

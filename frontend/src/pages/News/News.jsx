@@ -19,6 +19,7 @@ export const News = () => {
         title: "",
         content: "",
     });
+    const [file, setFile] = useState(null);
     const [search, setSearch] = useState("");
     const [tmpNews, setTmpNews] = useState([]);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -46,7 +47,6 @@ export const News = () => {
             console.error(error);
         }
     };
-
 
     useEffect(() => {
         fetchFilteredNews();
@@ -122,12 +122,14 @@ export const News = () => {
             <h1>Najnovije objave</h1>
             <div className="pn-cards">
                 <div className="news-search-container">
-                    {user?.role_type === "Admin" && <button
-                        className="read-more-btn"
-                        onClick={(e) => handleAddNewNews(e)}
-                    >
-                        Dodaj novost
-                    </button>}
+                    {user?.role_type === "Admin" && (
+                        <button
+                            className="read-more-btn"
+                            onClick={(e) => handleAddNewNews(e)}
+                        >
+                            Dodaj novost
+                        </button>
+                    )}
                     <input
                         type="text"
                         placeholder="Pretraži objave"
@@ -135,17 +137,6 @@ export const News = () => {
                         value={search}
                         onChange={handleChangeSearch}
                     />
-                    <div className="dropdown-container">
-                        {search !== ""
-                            ? news.map((item) => (
-                                  <DropDownCard
-                                      item={item.title}
-                                      key={item}
-                                      onClick={handleSetSearch}
-                                  />
-                              ))
-                            : null}
-                    </div>
                 </div>
 
                 {tmpNews
@@ -186,6 +177,8 @@ export const News = () => {
                     content={currentNews.content}
                     id={currentNews.id}
                     isEdit={currentNews.id !== -1}
+                    file={file}
+                    setFile={setFile}
                 />
             </div>
             <div className="pagination-numbers-container">

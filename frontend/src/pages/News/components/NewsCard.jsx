@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import logo from "../../../images/logo-crop.png";
 import { AuthContext } from "../../../contexts/AuthContext";
 import "./newscard.css";
 
@@ -20,6 +21,13 @@ export const NewsCard = ({
 
     return (
         <div key={news.id} className="news-card" style={{boxShadow: `${boxShadow}`, backgroundColor: `${bckColor}`, border: `1px solid ${borderColor}`}}>
+
+            <img
+                src={news.image ? news.image : logo}
+                alt="news"
+                className={news.image ? "news-image" : "news-image--logo"}
+            />
+            
             <h2 className="news-title">{news.title}</h2>
             <p className="news-date">Objavljeno: {currDate};</p>
             <p className="news-content short-content" style={{color: `${txtColor}`}}>

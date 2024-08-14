@@ -49,3 +49,14 @@ export const addNews = async (news) => {
     });
     return response.data;
 };
+
+export const addNewsImage = async (id, image) => {
+    const response = await axios.put(`${URL}/news/uploadimg/${id}`, image, {
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+        },
+    });
+    return response.data;
+};

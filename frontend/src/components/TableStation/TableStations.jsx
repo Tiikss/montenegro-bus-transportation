@@ -32,7 +32,7 @@ export const TableStations = () => {
 
     const fetchCities = async () => {
         try {
-            const response = await getCities();
+            const response = await getCities(inputData.city);
             setAllCities(response);
         } catch (error) {
             console.log(error);
@@ -46,7 +46,7 @@ export const TableStations = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const handleChange = (e) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -59,11 +59,12 @@ export const TableStations = () => {
 
     const handleAddStationApi = async (e) => {
         e.preventDefault();
+        console.log("ulazni podaci: ", inputData);
         await addStation({
             phone_number: "123456789",
             address: inputData.station_name,
-            city_name: inputData.station_city,
-            country_name: inputData.station_country,
+            city_name: inputData.city,
+            country_name: inputData.country,
             latitude: selectedPoint.lat.toFixed(7),
             longitude: selectedPoint.lng.toFixed(7),
         });
@@ -105,11 +106,11 @@ export const TableStations = () => {
                 e.target.innerText,
         }));
         if (e.target.parentElement.parentElement.childNodes[0].id === "city") {
-            setAllCities([]);
             setDisplayCity(e.target.innerText);
+            setAllCities([]);
         } else {
-            setAllCountries([]);
             setDisplayCountry(e.target.innerText);
+            setAllCountries([]);
         }
     };
 
@@ -128,10 +129,7 @@ export const TableStations = () => {
     }, [currentPage]);
 
     useEffect(() => {
-        const filteredCities = allCities.filter((item) =>
-            item.city_name.toLowerCase().includes(inputData.city.toLowerCase())
-        );
-        setAllCities(filteredCities);
+        fetchCities();
         if (inputData.city === "") {
             setDisplayCity("");
             fetchCities();
@@ -140,7 +138,9 @@ export const TableStations = () => {
 
     useEffect(() => {
         const filteredCountries = allCountries.filter((item) =>
-            item.country_name.toLowerCase().includes(inputData.country.toLowerCase())
+            item.country_name
+                .toLowerCase()
+                .includes(inputData.country.toLowerCase())
         );
         setAllCountries(filteredCountries);
         if (inputData.country === "") {
@@ -197,12 +197,16 @@ export const TableStations = () => {
             </table>
             <form
                 className={"new-station-modal" + (isModalOpen ? "" : " hidden")}
-                style={{height: "100%"}}
+                style={{ height: "100%" }}
             >
-                <h2 style={{marginBottom: "0px"}}>Dodaj novu stanicu</h2>
+                <h2 style={{ marginBottom: "0px" }}>Dodaj novu stanicu</h2>
                 <label htmlFor="station-name">Ime:</label>
                 <input
-                    style={{ width: "165px", padding: "5px",  borderRadius: "10px" }}
+                    style={{
+                        width: "165px",
+                        padding: "5px",
+                        borderRadius: "10px",
+                    }}
                     type="text"
                     id="station-name"
                     name="station_name"
@@ -213,7 +217,16 @@ export const TableStations = () => {
 
                 <div className="add-line-input-container">
                     <input
-                        style={{ width: "165px", padding: "5px", borderRadius: allCountries.length > 0 && inputData.country !== "" && displayCountry === "" ? "10px 10px 0 0" : "10px" }}
+                        style={{
+                            width: "165px",
+                            padding: "5px",
+                            borderRadius:
+                                allCountries.length > 0 &&
+                                inputData.country !== "" &&
+                                displayCountry === ""
+                                    ? "10px 10px 0 0"
+                                    : "10px",
+                        }}
                         type="text"
                         id="country"
                         name="country"
@@ -235,7 +248,16 @@ export const TableStations = () => {
                 <label htmlFor="station-city">Grad:</label>
                 <div className="add-line-input-container">
                     <input
-                        style={{ width: "165px", padding: "5px", borderRadius: allCities.length > 0 && inputData.city !== "" && displayCity === "" ? "10px 10px 0 0" : "10px" }}
+                        style={{
+                            width: "165px",
+                            padding: "5px",
+                            borderRadius:
+                                allCities.length > 0 &&
+                                inputData.city !== "" &&
+                                displayCity === ""
+                                    ? "10px 10px 0 0"
+                                    : "10px",
+                        }}
                         type="text"
                         id="city"
                         name="city"
@@ -254,7 +276,11 @@ export const TableStations = () => {
                             : null}
                     </div>
                 </div>
-                <MapWrapper stations={[]} isAdmin={true} />
+                <MapWrapper
+                    stations={[]}
+                    isAdmin={true}
+                    setSelectedPoint={setSelectedPoint}
+                />
 
                 {/* Odje treba opcija da se sa mape bira lokacija i da se stavi */}
                 <button
