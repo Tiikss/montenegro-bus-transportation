@@ -1,0 +1,13 @@
+# cache files
+__pycache__
+
+# editor files
+.vscode
+
+# venv
+venv
+
+
+# private config files
+settings.json
+settings.py
